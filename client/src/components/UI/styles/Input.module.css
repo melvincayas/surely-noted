@@ -1,0 +1,19 @@
+.label {
+	margin-bottom: 0.5em;
+	width: 80%;
+}
+
+.input {
+	width: 80%;
+	font-size: 1em;
+	padding: 0;
+	height: 1.5em;
+}
+
+.display {
+	margin-bottom: 1.25em;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

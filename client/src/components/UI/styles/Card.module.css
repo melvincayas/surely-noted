@@ -1,0 +1,22 @@
+.card {
+	background-color: #fff;
+	width: 90%;
+	max-width: 600px;
+	margin: 0 auto;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #a3a0a0;
+	margin-bottom: 2em;
+	border: 1px solid #ccc;
+}
+
+.header {
+	background-color: pink;
+	border-radius: 10px 10px 0 0;
+	margin: 0;
+	margin-bottom: 0.5em;
+	padding: 0.25em;
+}
+
+.content {
+	padding: 0.25em;
+}
