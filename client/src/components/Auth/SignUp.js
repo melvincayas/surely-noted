@@ -5,7 +5,7 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
-import classes from "./SignUp.module.css";
+import classes from "./Forms.module.css";
 
 const defaultUser = {
 	name: "",
@@ -49,7 +49,7 @@ const userReducer = (state, action) => {
 	}
 };
 
-const SignUp = () => {
+const SignUp = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [isError, setIsError] = useState(null);
@@ -112,13 +112,25 @@ const SignUp = () => {
 		const result = await response.json();
 
 		if (result.response.type === "success") {
-			userCtx.isLoggedInHandler(result.response.user);
+			userCtx.isLoggedInHandler(
+				result.response.user,
+				result.response.session_id
+			);
 		} else {
 			setIsError({
 				message: result.response.message,
 			});
 		}
 	};
+
+	const context = (
+		<p className={classes.context}>
+			Have an account?{" "}
+			<a href="#" onClick={props.formHandler}>
+				Log In
+			</a>
+		</p>
+	);
 
 	return (
 		<React.Fragment>
@@ -173,6 +185,7 @@ const SignUp = () => {
 						</Button>
 					</div>
 				</form>
+				{context}
 			</Card>
 		</React.Fragment>
 	);

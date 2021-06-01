@@ -11,15 +11,6 @@ const Navbar = () => {
 				To-Do
 			</a>
 			<ul className={classes.list}>
-				<li>
-					<a href="#">Home</a>
-				</li>
-				<li>
-					<a href="#">Sign Up</a>
-				</li>
-				<li>
-					<a href="#">Log In</a>
-				</li>
 				{userCtx.isLoggedIn && (
 					<li>
 						<a href="#" onClick={userCtx.logOutHandler}>

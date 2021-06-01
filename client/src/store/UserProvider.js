@@ -7,7 +7,7 @@ const UserProvider = props => {
 	const [userData, setUserData] = useState(null);
 
 	useEffect(() => {
-		if (localStorage.getItem("isLoggedIn") === "1") {
+		if (localStorage.getItem("session_id")) {
 			setIsLoggedIn(true);
 		}
 
@@ -16,8 +16,8 @@ const UserProvider = props => {
 		};
 	}, []);
 
-	const isLoggedInHandler = user => {
-		localStorage.setItem("isLoggedIn", 1);
+	const isLoggedInHandler = (user, session) => {
+		localStorage.setItem("session_id", session);
 		setIsLoggedIn(true);
 		setUserData(user);
 	};
@@ -33,7 +33,7 @@ const UserProvider = props => {
 		const result = await response.json();
 
 		if (result.response.type === "success") {
-			localStorage.removeItem("isLoggedIn");
+			localStorage.removeItem("session_id");
 			setIsLoggedIn(false);
 			setUserData(null);
 		}

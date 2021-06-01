@@ -20,6 +20,10 @@
 	width: 81%;
 }
 
+.context {
+	text-align: center;
+}
+
 @media all and (max-width: 575px) {
 	.card {
 		width: 90%;
