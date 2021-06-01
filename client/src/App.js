@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import Form from "./components/UserInput/Form";
 import List from "./components/List/List";
-import SignUp from "./components/Auth/SignUp";
 import Navbar from "./components/Navbar/Navbar";
+import Auth from "./components/Auth/Auth";
+import { UserContext } from "./store/UserProvider";
 
 function App() {
 	const [list, setList] = useState([]);
+
+	const userCtx = useContext(UserContext);
 
 	const formHandler = todos => {
 		setList(prevList => [...prevList, todos]);
@@ -19,9 +22,11 @@ function App() {
 	return (
 		<div className="App">
 			<Navbar />
-			<SignUp />
-			<Form liftState={formHandler} />
-			<List liftRemove={removeHandler} todos={list} />
+			<main>
+				{!userCtx.isLoggedIn && <Auth />}
+				{userCtx.isLoggedIn && <Form liftState={formHandler} />}
+				{userCtx.isLoggedIn && <List liftRemove={removeHandler} todos={list} />}
+			</main>
 		</div>
 	);
 }

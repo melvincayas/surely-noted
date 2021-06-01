@@ -1,6 +1,12 @@
 .label {
 	margin-bottom: 0.5em;
 	width: 80%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.feedback {
+	color: green;
 }
 
 .input {

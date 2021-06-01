@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect, useContext } from "react";
+import React, { useReducer, useState, useContext } from "react";
 import { UserContext } from "../../store/UserProvider";
 import ReactDOM from "react-dom";
 import Card from "../UI/Card";
@@ -8,70 +8,32 @@ import Input from "../UI/Input";
 import classes from "./SignUp.module.css";
 
 const defaultUser = {
-	name: "",
-	nameValid: false,
 	email: "",
-	emailValid: false,
 	password: "",
-	passwordValid: false,
-	passwordCheck: "",
-	passwordCheckValid: false,
 };
 
 const userReducer = (state, action) => {
-	if (action.type === "NAME_INPUT") {
-		return {
-			...state,
-			name: action.name,
-			nameValid: action.name.length > 0 && action.name.trim() !== "",
-		};
-	}
 	if (action.type === "EMAIL_INPUT") {
 		return {
 			...state,
 			email: action.email,
-			emailValid: action.email.includes("@"),
 		};
 	}
 	if (action.type === "PASSWORD_INPUT") {
 		return {
 			...state,
 			password: action.password,
-			passwordValid: action.password.length >= 6,
 		};
 	}
-	if (action.type === "PASSWORDCHECK_INPUT") {
-		return {
-			...state,
-			passwordCheck: action.passwordCheck,
-			passwordCheckValid: action.passwordCheck === state.password,
-		};
-	}
+
+	return defaultUser;
 };
 
 const SignUp = () => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
-	const [formIsValid, setFormIsValid] = useState(false);
 	const [isError, setIsError] = useState(null);
 
 	const userCtx = useContext(UserContext);
-
-	useEffect(() => {
-		setFormIsValid(
-			user.nameValid &&
-				user.emailValid &&
-				user.passwordValid & user.passwordCheckValid
-		);
-	}, [
-		user.nameValid,
-		user.emailValid,
-		user.passwordValid,
-		user.passwordCheckValid,
-	]);
-
-	const nameChangeHandler = event => {
-		dispatchUser({ type: "NAME_INPUT", name: event.target.value });
-	};
 
 	const emailChangeHandler = event => {
 		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
@@ -81,13 +43,6 @@ const SignUp = () => {
 		dispatchUser({ type: "PASSWORD_INPUT", password: event.target.value });
 	};
 
-	const passwordCheckChangeHandler = event => {
-		dispatchUser({
-			type: "PASSWORDCHECK_INPUT",
-			passwordCheck: event.target.value,
-		});
-	};
-
 	const errorHandler = () => {
 		setIsError(null);
 	};
@@ -95,15 +50,14 @@ const SignUp = () => {
 	const formHandler = async event => {
 		event.preventDefault();
 
-		const person = {
-			name: user.name,
+		const request = {
 			email: user.email,
 			password: user.password,
 		};
 
-		const response = await fetch("/register", {
+		const response = await fetch("/login", {
 			method: "POST",
-			body: JSON.stringify(person),
+			body: JSON.stringify(request),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -131,16 +85,8 @@ const SignUp = () => {
 					/>,
 					document.getElementById("modal")
 				)}
-			<Card className={classes.card} header="Register">
+			<Card className={classes.card} header="Log In">
 				<form className={classes.form} onSubmit={formHandler} method="POST">
-					<Input
-						onChangeHandler={nameChangeHandler}
-						inputValid={user.nameValid}
-						label="Name"
-						id="name"
-						name="name"
-						type="text"
-					/>
 					<Input
 						onChangeHandler={emailChangeHandler}
 						inputValid={user.emailValid}
@@ -156,21 +102,9 @@ const SignUp = () => {
 						id="password"
 						name="password"
 						type="password"
-						placeholder={"Must be at least 6 characters"}
-					/>
-					<Input
-						onChangeHandler={passwordCheckChangeHandler}
-						inputValid={user.passwordCheckValid}
-						label="Repeat Password"
-						id="passwordCheck"
-						name="passwordCheck"
-						type="password"
-						placeholder={"Must match password"}
 					/>
 					<div className={classes.container}>
-						<Button className={classes.button} isValid={!formIsValid}>
-							Register
-						</Button>
+						<Button className={classes.button}>Log In</Button>
 					</div>
 				</form>
 			</Card>
