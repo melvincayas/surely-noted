@@ -1,9 +1,8 @@
 import React, { useReducer, useState, useEffect, useContext } from "react";
 import { UserContext } from "../../store/UserProvider";
-import ReactDOM from "react-dom";
+import { ErrorContext } from "../../store/ErrorProvider";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
-import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 
@@ -52,9 +51,9 @@ const userReducer = (state, action) => {
 const SignUp = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const [formIsValid, setFormIsValid] = useState(false);
-	const [isError, setIsError] = useState(null);
 
 	const userCtx = useContext(UserContext);
+	const errCtx = useContext(ErrorContext);
 
 	useEffect(() => {
 		setFormIsValid(
@@ -88,10 +87,6 @@ const SignUp = props => {
 		});
 	};
 
-	const errorHandler = () => {
-		setIsError(null);
-	};
-
 	const formHandler = async event => {
 		event.preventDefault();
 
@@ -117,7 +112,7 @@ const SignUp = props => {
 				result.response.session_id
 			);
 		} else {
-			setIsError({
+			errCtx.setIsError({
 				message: result.response.message,
 			});
 		}
@@ -133,61 +128,50 @@ const SignUp = props => {
 	);
 
 	return (
-		<React.Fragment>
-			{isError &&
-				ReactDOM.createPortal(
-					<Modal
-						header={"Error"}
-						errorHandler={errorHandler}
-						message={isError.message}
-					/>,
-					document.getElementById("modal")
-				)}
-			<Card className={classes.card} header="Register">
-				<form className={classes.form} onSubmit={formHandler} method="POST">
-					<Input
-						onChangeHandler={nameChangeHandler}
-						inputValid={user.nameValid}
-						label="Name"
-						id="name"
-						name="name"
-						type="text"
-					/>
-					<Input
-						onChangeHandler={emailChangeHandler}
-						inputValid={user.emailValid}
-						label="Email"
-						id="email"
-						name="email"
-						type="email"
-					/>
-					<Input
-						onChangeHandler={passwordChangeHandler}
-						inputValid={user.passwordValid}
-						label="Password"
-						id="password"
-						name="password"
-						type="password"
-						placeholder={"Must be at least 6 characters"}
-					/>
-					<Input
-						onChangeHandler={passwordCheckChangeHandler}
-						inputValid={user.passwordCheckValid}
-						label="Repeat Password"
-						id="passwordCheck"
-						name="passwordCheck"
-						type="password"
-						placeholder={"Must match password"}
-					/>
-					<div className={classes.container}>
-						<Button className={classes.button} isValid={!formIsValid}>
-							Register
-						</Button>
-					</div>
-				</form>
-				{context}
-			</Card>
-		</React.Fragment>
+		<Card className={classes.card} header="Register">
+			<form className={classes.form} onSubmit={formHandler} method="POST">
+				<Input
+					onChangeHandler={nameChangeHandler}
+					inputValid={user.nameValid}
+					label="Name"
+					id="name"
+					name="name"
+					type="text"
+				/>
+				<Input
+					onChangeHandler={emailChangeHandler}
+					inputValid={user.emailValid}
+					label="Email"
+					id="email"
+					name="email"
+					type="email"
+				/>
+				<Input
+					onChangeHandler={passwordChangeHandler}
+					inputValid={user.passwordValid}
+					label="Password"
+					id="password"
+					name="password"
+					type="password"
+					placeholder={"Must be at least 6 characters"}
+				/>
+				<Input
+					onChangeHandler={passwordCheckChangeHandler}
+					inputValid={user.passwordCheckValid}
+					label="Repeat Password"
+					id="passwordCheck"
+					name="passwordCheck"
+					type="password"
+					placeholder={"Must match password"}
+				/>
+				<div className={classes.container}>
+					<Button className={classes.button} isValid={!formIsValid}>
+						Register
+					</Button>
+				</div>
+			</form>
+			{context}
+		</Card>
 	);
 };
 

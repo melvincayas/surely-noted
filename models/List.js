@@ -38,3 +38,5 @@ const listSchema = new Schema({
 		},
 	],
 });
+
+module.exports = mongoose.model("List", listSchema);

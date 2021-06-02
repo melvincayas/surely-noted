@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import "./App.css";
-import Form from "./components/UserInput/Form";
-import List from "./components/List/List";
 import Navbar from "./components/Navbar/Navbar";
 import Auth from "./components/Auth/Auth";
+import ClientView from "./components/ClientView/ClientView";
 import { UserContext } from "./store/UserProvider";
+import ListProvider from "./store/ListProvider";
 
 function App() {
 	const [list, setList] = useState([]);
@@ -24,8 +24,15 @@ function App() {
 			<Navbar />
 			<main>
 				{!userCtx.isLoggedIn && <Auth />}
-				{userCtx.isLoggedIn && <Form liftState={formHandler} />}
-				{userCtx.isLoggedIn && <List liftRemove={removeHandler} todos={list} />}
+				<ListProvider>
+					{userCtx.isLoggedIn && (
+						<ClientView
+							todos={list}
+							formHandler={formHandler}
+							removeHandler={removeHandler}
+						/>
+					)}
+				</ListProvider>
 			</main>
 		</div>
 	);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Card from "../UI/Card";
-import Button from "../UI/Button";
+import Card from "../../UI/Card";
+import Button from "../../UI/Button";
 import classes from "./Form.module.css";
-import Modal from "../UI/Modal";
+import Modal from "../../UI/InfoModal";
 
 const Form = props => {
 	const [input, setInput] = useState("");

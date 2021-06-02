@@ -27,8 +27,6 @@ userSchema.plugin(passportLocalMongoose, {
 	usernameLowerCase: true,
 	errorMessages: {
 		UserExistsError: "A user with the given e-mail is already registered!",
-		IncorrectPasswordError: "Username or password is incorrect.",
-		IncorrectUsernameError: "Username or password is incorrect.",
 	},
 });
 

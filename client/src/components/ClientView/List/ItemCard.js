@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./styles/ItemCard.module.css";
-import Button from "../UI/Button";
+import Button from "../../UI/Button";
 
 const ItemCard = ({ id, item, liftRemove }) => {
 	const [toRemove, setToRemove] = useState(id);

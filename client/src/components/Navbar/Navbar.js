@@ -8,17 +8,17 @@ const Navbar = () => {
 	return (
 		<nav className={classes.navbar}>
 			<a className={classes.brand} href="#">
-				To-Do
+				WriteOff
 			</a>
-			<ul className={classes.list}>
-				{userCtx.isLoggedIn && (
+			{userCtx.isLoggedIn && (
+				<ul className={classes.list}>
 					<li>
 						<a href="#" onClick={userCtx.logOutHandler}>
 							Log Out
 						</a>
 					</li>
-				)}
-			</ul>
+				</ul>
+			)}
 		</nav>
 	);
 };

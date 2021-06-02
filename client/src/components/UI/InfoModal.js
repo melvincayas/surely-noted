@@ -3,7 +3,7 @@ import Card from "./Card";
 import Button from "./Button";
 import classes from "./styles/Modal.module.css";
 
-const Modal = props => {
+const InfoModal = props => {
 	return (
 		<div onClick={props.errorHandler} className={classes.backdrop}>
 			<Card header={props.header} className={classes.container}>
@@ -16,4 +16,4 @@ const Modal = props => {
 	);
 };
 
-export default Modal;
+export default InfoModal;

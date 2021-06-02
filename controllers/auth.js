@@ -1,19 +1,6 @@
 const User = require("../models/User");
 const passport = require("passport");
-
-const serverError = {
-	response: {
-		type: "error",
-		message: "Something went wrong on our end. Please try again.",
-	},
-};
-
-const invalidUser = {
-	response: {
-		type: "error",
-		message: "Username and/or password is invalid.",
-	},
-};
+const ErrorHandler = require("../public/utilities/ErrorHandler");
 
 module.exports.register = async (req, res, next) => {
 	const { name, email, password } = req.body;
@@ -21,24 +8,19 @@ module.exports.register = async (req, res, next) => {
 		const newUser = new User({ email, name });
 		await User.register(newUser, password, async function (err, user) {
 			if (err) {
-				return res.status(400).json({
-					response: {
-						type: "error",
-						message: err.message,
-					},
-				});
+				return next(new ErrorHandler(err.status, err.message));
 			}
 			await user.save();
 			req.login(user, err => {
-				if (err) return next(err);
-				req.session.user = user;
+				if (err) return next(new ErrorHandler(err.status, err.message));
+				req.session.user_id = user._id;
 				res.status(200).json({
 					response: { type: "success", user, session_id: req.sessionID },
 				});
 			});
 		});
 	} catch (err) {
-		res.status(500).json(serverError);
+		next(new ErrorHandler(err.status, err.message));
 	}
 };
 
@@ -46,21 +28,23 @@ module.exports.login = async (req, res, next) => {
 	try {
 		passport.authenticate("local", function (err, user, info) {
 			if (err) {
-				return res.status(500).json(serverError);
+				return next(new ErrorHandler(err.status, err.message));
 			}
 			if (!user) {
-				return res.status(401).json(invalidUser);
+				return next(
+					new ErrorHandler(401, "Username and/or password is invalid.")
+				);
 			}
 			req.login(user, err => {
-				if (err) return next(err);
-				req.session.user = user;
+				if (err) return next(new ErrorHandler(err.status, err.message));
+				req.session.user_id = user._id;
 				res.status(200).json({
 					response: { type: "success", user, session_id: req.sessionID },
 				});
 			});
 		})(req, res, next);
 	} catch (err) {
-		res.status(500).json(serverError);
+		next(new ErrorHandler(err.status, err.message));
 	}
 };
 
