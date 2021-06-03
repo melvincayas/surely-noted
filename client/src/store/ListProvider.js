@@ -6,17 +6,15 @@ export const ListContext = React.createContext();
 const ListProvider = props => {
 	const [lists, setLists] = useState(null);
 
-	const userCtx = useContext(UserContext);
+	const {
+		userData: { isLoggedIn },
+	} = useContext(UserContext);
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {
 			loadLists();
 		}
-
-		return () => {
-			setLists(null);
-		};
-	}, [userCtx.isLoggedIn]);
+	}, [isLoggedIn]);
 
 	const loadLists = async () => {
 		const response = await fetch("/list/onload");

@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const listSchema = new Schema({
 	title: {
 		type: String,
-		required: true,
+		required: [true, "Please enter a title for your list."],
 	},
 	category: {
 		type: String,

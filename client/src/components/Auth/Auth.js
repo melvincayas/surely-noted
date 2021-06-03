@@ -6,7 +6,7 @@ const Auth = () => {
 	const [registered, setIsRegistered] = useState(true);
 
 	const formHandler = () => {
-		setIsRegistered(!registered);
+		setIsRegistered(prevState => !prevState);
 	};
 
 	return (

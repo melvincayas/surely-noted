@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use("/", authRoutes);
+app.use("/user", authRoutes);
 app.use("/list", listRoutes);
 
 app.use((err, req, res, next) => {

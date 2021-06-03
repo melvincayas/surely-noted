@@ -26,6 +26,8 @@ module.exports.newList = async (req, res, next) => {
 			creator: user,
 			shared: user,
 		});
+		user.lists.push(newList);
+		await user.save();
 		await newList.save();
 
 		return res.status(200).json({ response: { type: "success", newList } });

@@ -52,8 +52,8 @@ const SignUp = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const [formIsValid, setFormIsValid] = useState(false);
 
-	const userCtx = useContext(UserContext);
-	const errCtx = useContext(ErrorContext);
+	const { isLoggedInHandler } = useContext(UserContext);
+	const { setIsError } = useContext(ErrorContext);
 
 	useEffect(() => {
 		setFormIsValid(
@@ -96,7 +96,7 @@ const SignUp = props => {
 			password: user.password,
 		};
 
-		const response = await fetch("/register", {
+		const result = await fetch("/register", {
 			method: "POST",
 			body: JSON.stringify(person),
 			headers: {
@@ -104,16 +104,13 @@ const SignUp = props => {
 			},
 		}).catch(err => console.log("Error in Register fetch", err));
 
-		const result = await response.json();
+		const { response } = await result.json();
 
-		if (result.response.type === "success") {
-			userCtx.isLoggedInHandler(
-				result.response.user,
-				result.response.session_id
-			);
+		if (response.type === "success") {
+			isLoggedInHandler(response.user, response.session_id);
 		} else {
-			errCtx.setIsError({
-				message: result.response.message,
+			setIsError({
+				message: response.message,
 			});
 		}
 	};

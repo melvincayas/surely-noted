@@ -64,7 +64,6 @@ const NewList = props => {
 		});
 
 		const result = await response.json();
-		console.log(result);
 
 		if (result.response.type === "success") {
 			listCtx.newListHandler(result.response.newList);

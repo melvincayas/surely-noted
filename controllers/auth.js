@@ -24,6 +24,18 @@ module.exports.register = async (req, res, next) => {
 	}
 };
 
+module.exports.onLoad = async (req, res, next) => {
+	try {
+		const { user_id } = req.session;
+		const user = await User.findOne({ _id: user_id });
+		res
+			.status(200)
+			.json({ response: { type: "success", user, session_id: req.sessionID } });
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};
+
 module.exports.login = async (req, res, next) => {
 	try {
 		passport.authenticate("local", function (err, user, info) {

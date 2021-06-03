@@ -4,7 +4,7 @@ import classes from "./styles/Input.module.css";
 const Input = props => {
 	return (
 		<div className={classes.display}>
-			<label className={classes.label} for={props.id}>
+			<label className={classes.label} htmlFor={props.id}>
 				{props.label}
 				{props.inputValid && <i class={`fas fa-check ${classes.feedback}`}></i>}
 			</label>

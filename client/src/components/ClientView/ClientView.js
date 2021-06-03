@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Form from "./UserInput/Form";
-import List from "./List/List";
 import NewList from "./NewList/NewList";
+import ShowLists from "./ShowLists/ShowLists";
 
 const UserInterface = props => {
 	const [isMakingList, setIsMakingList] = useState(false);
@@ -13,12 +12,8 @@ const UserInterface = props => {
 
 	return (
 		<React.Fragment>
-			<a href="#" onClick={newListHandler}>
-				New List
-			</a>
 			{isMakingList && <NewList listToggler={newListHandler} />}
-			<Form liftState={props.formHandler} />
-			<List todos={props.todos} liftRemove={props.removeHandler} />
+			<ShowLists newListHandler={newListHandler} />
 		</React.Fragment>
 	);
 };

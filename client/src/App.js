@@ -9,7 +9,9 @@ import ListProvider from "./store/ListProvider";
 function App() {
 	const [list, setList] = useState([]);
 
-	const userCtx = useContext(UserContext);
+	const {
+		userData: { isLoggedIn },
+	} = useContext(UserContext);
 
 	const formHandler = todos => {
 		setList(prevList => [...prevList, todos]);
@@ -23,9 +25,9 @@ function App() {
 		<div className="App">
 			<Navbar />
 			<main>
-				{!userCtx.isLoggedIn && <Auth />}
+				{!isLoggedIn && <Auth />}
 				<ListProvider>
-					{userCtx.isLoggedIn && (
+					{isLoggedIn && (
 						<ClientView
 							todos={list}
 							formHandler={formHandler}

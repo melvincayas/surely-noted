@@ -1,10 +1,8 @@
 import React, { useReducer, useContext } from "react";
 import { UserContext } from "../../store/UserProvider";
 import { ErrorContext } from "../../store/ErrorProvider";
-import ReactDOM from "react-dom";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
-import InfoModal from "../UI/InfoModal";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 
@@ -33,8 +31,8 @@ const userReducer = (state, action) => {
 const SignUp = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 
-	const userCtx = useContext(UserContext);
-	const errCtx = useContext(ErrorContext);
+	const { isLoggedInHandler } = useContext(UserContext);
+	const { setIsError } = useContext(ErrorContext);
 
 	const emailChangeHandler = event => {
 		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
@@ -52,7 +50,7 @@ const SignUp = props => {
 			password: user.password,
 		};
 
-		const response = await fetch("/login", {
+		const result = await fetch("/user/login", {
 			method: "POST",
 			body: JSON.stringify(request),
 			headers: {
@@ -60,16 +58,13 @@ const SignUp = props => {
 			},
 		}).catch(err => console.log("Error in Register fetch", err));
 
-		const result = await response.json();
+		const { response } = await result.json();
 
-		if (result.response.type === "success") {
-			userCtx.isLoggedInHandler(
-				result.response.user,
-				result.response.session_id
-			);
+		if (response.type === "success") {
+			isLoggedInHandler(response.user, response.session_id);
 		} else {
-			errCtx.setIsError({
-				message: result.response.message,
+			setIsError({
+				message: response.message,
 			});
 		}
 	};
