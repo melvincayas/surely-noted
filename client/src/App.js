@@ -18,7 +18,7 @@ function App() {
 	};
 
 	const removeHandler = id => {
-		setList(prevList => prevList.filter(todo => todo.id !== id));
+		setList(prevList => prevList.filter(todo => todo._id !== id));
 	};
 
 	return (

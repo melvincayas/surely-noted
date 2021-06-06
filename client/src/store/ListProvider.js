@@ -4,7 +4,7 @@ import { UserContext } from "./UserProvider";
 export const ListContext = React.createContext();
 
 const ListProvider = props => {
-	const [lists, setLists] = useState(null);
+	const [lists, setLists] = useState([]);
 
 	const {
 		userData: { isLoggedIn },
@@ -29,9 +29,14 @@ const ListProvider = props => {
 		setLists(prevLists => [...prevLists, data]);
 	};
 
+	const removeListHandler = id => {
+		setLists(prevLists => prevLists.filter(list => list._id !== id));
+	};
+
 	const ctx = {
 		lists,
 		newListHandler,
+		removeListHandler,
 	};
 
 	return (

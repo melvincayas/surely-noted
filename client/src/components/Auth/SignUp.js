@@ -96,7 +96,7 @@ const SignUp = props => {
 			password: user.password,
 		};
 
-		const result = await fetch("/register", {
+		const result = await fetch("/user/register", {
 			method: "POST",
 			body: JSON.stringify(person),
 			headers: {

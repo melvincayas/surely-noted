@@ -6,14 +6,18 @@ import ListItem from "./ListItem";
 
 const ShowLists = props => {
 	const { lists } = useContext(ListContext);
+	let result = <p>Create a list to get started!</p>;
+
+	if (lists.length > 0) {
+		result = lists.map(list => (
+			<ListItem id={list._id} key={list._id} title={list.title} />
+		));
+	}
 
 	return (
 		<Card header="Lists">
 			<Button clickHandler={props.newListHandler}>Create List</Button>
-			<section>
-				{lists &&
-					lists.map(list => <ListItem key={list._id} title={list.title} />)}
-			</section>
+			<section>{result}</section>
 		</Card>
 	);
 };

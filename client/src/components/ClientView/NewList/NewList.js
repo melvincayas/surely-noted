@@ -55,7 +55,7 @@ const NewList = props => {
 			category: inputs.category,
 		};
 
-		const response = await fetch("/list/new", {
+		const result = await fetch("/list/new", {
 			method: "POST",
 			body: JSON.stringify(newList),
 			headers: {
@@ -63,12 +63,12 @@ const NewList = props => {
 			},
 		});
 
-		const result = await response.json();
+		const { response } = await result.json();
 
-		if (result.response.type === "success") {
-			listCtx.newListHandler(result.response.newList);
+		if (response.type === "success") {
+			listCtx.newListHandler(response.newList);
 		} else {
-			errCtx.setIsError({ message: result.response.message });
+			errCtx.setIsError({ message: response.message });
 		}
 	};
 

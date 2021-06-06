@@ -17,10 +17,12 @@ const listSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "User",
 	},
-	shared: {
-		type: Schema.Types.ObjectId,
-		ref: "User",
-	},
+	shared: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "User",
+		},
+	],
 	items: [
 		{
 			date: {
@@ -37,6 +39,14 @@ const listSchema = new Schema({
 			},
 		},
 	],
+});
+
+listSchema.post("findOneAndDelete", async function (doc) {
+	if (doc) {
+		await mongoose
+			.model("User")
+			.findByIdAndUpdate(doc.creator, { $pull: { lists: doc._id } });
+	}
 });
 
 module.exports = mongoose.model("List", listSchema);

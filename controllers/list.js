@@ -24,13 +24,22 @@ module.exports.newList = async (req, res, next) => {
 			category,
 			created: new Date().toUTCString(),
 			creator: user,
-			shared: user,
 		});
-		user.lists.push(newList);
+		user.lists.push(newList._id);
 		await user.save();
 		await newList.save();
 
 		return res.status(200).json({ response: { type: "success", newList } });
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};
+
+module.exports.deleteList = async (req, res, next) => {
+	try {
+		const { id } = req.body;
+		await List.findOneAndDelete({ _id: id });
+		res.status(200).json({ response: { type: "success" } });
 	} catch (err) {
 		next(new ErrorHandler(err.status, err.message));
 	}

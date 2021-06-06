@@ -6,4 +6,6 @@ router.get("/onload", listControllers.onLoad);
 
 router.post("/new", listControllers.newList);
 
+router.post("/delete", listControllers.deleteList);
+
 module.exports = router;
