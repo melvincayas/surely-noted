@@ -6,6 +6,10 @@ import { ListContext } from "../../../store/ListProvider";
 const ListItem = props => {
 	const listCtx = useContext(ListContext);
 
+	const clickHandler = () => {
+		listCtx.viewListHandler(props.id);
+	};
+
 	const trashHandler = async () => {
 		const request = {
 			id: props.id,
@@ -26,7 +30,9 @@ const ListItem = props => {
 
 	return (
 		<div className={classes.container}>
-			<span>{props.title}</span>
+			<div className={classes.context} onClick={clickHandler}>
+				<span>{props.title}</span>
+			</div>
 			<Button className={classes.trash} clickHandler={trashHandler}>
 				<i className="fas fa-trash-alt"></i>
 			</Button>

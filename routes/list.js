@@ -8,4 +8,6 @@ router.post("/new", listControllers.newList);
 
 router.post("/delete", listControllers.deleteList);
 
+router.post("/:listId/add", listControllers.addItem);
+
 module.exports = router;

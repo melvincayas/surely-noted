@@ -44,3 +44,21 @@ module.exports.deleteList = async (req, res, next) => {
 		next(new ErrorHandler(err.status, err.message));
 	}
 };
+
+module.exports.addItem = async (req, res, next) => {
+	try {
+		const { listId } = req.params;
+		const { content } = req.body;
+		const newItem = {
+			date: new Date().toUTCString(),
+			content,
+			status: "incomplete",
+		};
+		const list = await List.findOne({ _id: listId });
+		list.items.push(newItem);
+		await list.save();
+		res.status(200).json({ response: { type: "success" } });
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};

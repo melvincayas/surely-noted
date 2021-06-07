@@ -11,6 +11,10 @@
 	font-size: 1.1em;
 }
 
+.context {
+	width: 100%;
+}
+
 .trash {
 	color: red;
 	background-color: transparent;

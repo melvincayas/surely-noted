@@ -1,65 +1,59 @@
-import React, { useEffect, useState } from "react";
-import Card from "../../UI/Card";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "../../UI/Button";
 import classes from "./Form.module.css";
 import Modal from "../../UI/InfoModal";
+import { ErrorContext } from "../../../store/ErrorProvider";
+import { ListContext } from "../../../store/ListProvider";
 
-const Form = props => {
+const Form = ({ id }) => {
 	const [input, setInput] = useState("");
-	const [isValid, setIsValid] = useState(false);
-	const [isError, setIsError] = useState(null);
 
-	useEffect(() => {
-		const id = setTimeout(() => {
-			setIsValid(input.length > 0);
-		}, 100);
-
-		return () => {
-			clearTimeout(id);
-		};
-	}, [input]);
+	const listCtx = useContext(ListContext);
+	const { setIsError } = useContext(ErrorContext);
 
 	const inputHandler = event => {
 		setInput(event.target.value);
 	};
 
-	const submitHandler = event => {
+	const submitHandler = async event => {
 		event.preventDefault();
 
 		if (input.trim() === "") {
 			setInput("");
 			return setIsError({
-				header: "Empty Input",
-				message: "Please enter content.",
+				message: "Please enter something to add.",
 			});
 		}
-		const todo = {
-			id: Math.random(),
-			item: input,
-		};
-		props.liftState(todo);
-		setInput("");
-	};
 
-	const errorHandler = () => {
-		setIsError(null);
+		const item = {
+			content: input,
+		};
+
+		const result = await fetch(`/list/${id}/add`, {
+			method: "POST",
+			body: JSON.stringify(item),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const { response } = await result.json();
+
+		if (response.type === "success") {
+			listCtx.loadLists();
+		} else {
+			setIsError({ message: response.message });
+		}
+
+		setInput("");
 	};
 
 	return (
 		<React.Fragment>
-			{isError && (
-				<Modal
-					header={isError.header}
-					message={isError.message}
-					errorHandler={errorHandler}
-				/>
-			)}
-			<Card header="Add To-Do's" className={classes.container}>
-				<form onSubmit={submitHandler}>
-					<input type="text" value={input} onChange={inputHandler}></input>
-					<Button isValid={!isValid}>Add</Button>
-				</form>
-			</Card>
+			<form onSubmit={submitHandler}>
+				<input type="text" value={input} onChange={inputHandler}></input>
+				<Button>Add</Button>
+			</form>
 		</React.Fragment>
 	);
 };
