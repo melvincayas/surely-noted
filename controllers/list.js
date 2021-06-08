@@ -49,6 +49,7 @@ module.exports.addItem = async (req, res, next) => {
 	try {
 		const { listId } = req.params;
 		const { content } = req.body;
+		const { user_id } = req.session;
 		const newItem = {
 			date: new Date().toUTCString(),
 			content,
@@ -57,7 +58,8 @@ module.exports.addItem = async (req, res, next) => {
 		const list = await List.findOne({ _id: listId });
 		list.items.push(newItem);
 		await list.save();
-		res.status(200).json({ response: { type: "success" } });
+		const userLists = await List.find({ creator: user_id });
+		res.status(200).json({ response: { type: "success", lists: userLists } });
 	} catch (err) {
 		next(new ErrorHandler(err.status, err.message));
 	}

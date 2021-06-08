@@ -38,13 +38,17 @@ const ListProvider = props => {
 		setSelectedList(id);
 	};
 
+	let filteredList;
+	if (selectedList) {
+		[filteredList] = lists.filter(list => list._id === selectedList);
+	}
 	const ctx = {
 		lists,
 		newListHandler,
-		selectedList,
+		filteredList,
 		removeListHandler,
 		viewListHandler,
-		loadLists,
+		setLists,
 	};
 
 	return (

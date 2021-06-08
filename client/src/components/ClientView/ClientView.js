@@ -7,12 +7,7 @@ import { ListContext } from "../../store/ListProvider";
 const UserInterface = props => {
 	const [isMakingList, setIsMakingList] = useState(false);
 
-	const { lists, selectedList } = useContext(ListContext);
-	let filteredList;
-
-	if (selectedList) {
-		[filteredList] = lists.filter(list => list._id === selectedList);
-	}
+	const { filteredList } = useContext(ListContext);
 
 	const newListHandler = event => {
 		event.preventDefault();
@@ -23,7 +18,7 @@ const UserInterface = props => {
 		<React.Fragment>
 			{isMakingList && <NewList listToggler={newListHandler} />}
 			<ShowLists newListHandler={newListHandler} />
-			{selectedList && <ListDetail selected={filteredList} />}
+			{filteredList && <ListDetail selected={filteredList} />}
 		</React.Fragment>
 	);
 };

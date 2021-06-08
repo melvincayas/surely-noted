@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Button from "../../UI/Button";
 import classes from "./Form.module.css";
 import Modal from "../../UI/InfoModal";
@@ -40,7 +40,7 @@ const Form = ({ id }) => {
 		const { response } = await result.json();
 
 		if (response.type === "success") {
-			listCtx.loadLists();
+			listCtx.setLists(response.lists);
 		} else {
 			setIsError({ message: response.message });
 		}
