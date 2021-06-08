@@ -13,7 +13,12 @@ const List = ({ selected }) => {
 			<Form id={selected._id} />
 			{selected.items.length === 0 && emptyText}
 			{selected.items.map(item => (
-				<ItemCard key={item._id} id={item._id} item={item.content} />
+				<ItemCard
+					key={item._id}
+					listId={selected._id}
+					itemId={item._id}
+					item={item.content}
+				/>
 			))}
 		</Card>
 	);

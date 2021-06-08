@@ -1,10 +1,10 @@
-button {
+.button {
 	background-color: purple;
 	color: white;
 	font-size: 1em;
 	padding: 0.5em 1em;
 }
 
-button:disabled {
+.button:disabled {
 	background-color: rgba(128, 0, 128, 0.336);
 }

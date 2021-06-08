@@ -12,8 +12,13 @@
 	cursor: pointer;
 }
 
-.trash {
-	color: red;
+.buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button {
+	margin-right: 0.5em;
 	background-color: transparent;
 	outline: none;
 	border: none;
@@ -23,9 +28,17 @@
 	transition: opacity 0.25s;
 }
 
-.container:hover .trash {
+.container:hover .button {
 	opacity: 1;
 	cursor: pointer;
+}
+
+.trash {
+	color: red;
+}
+
+.edit {
+	color: blue;
 }
 
 .todo {
@@ -35,4 +48,14 @@
 .done {
 	text-decoration: line-through;
 	color: rgb(146, 146, 146);
+}
+
+.edit-form {
+	margin: 0;
+	width: 100%;
+}
+
+.edit-form input {
+	width: 100%;
+	font-size: 100%;
 }

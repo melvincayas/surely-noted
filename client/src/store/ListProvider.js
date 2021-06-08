@@ -42,6 +42,7 @@ const ListProvider = props => {
 	if (selectedList) {
 		[filteredList] = lists.filter(list => list._id === selectedList);
 	}
+
 	const ctx = {
 		lists,
 		newListHandler,

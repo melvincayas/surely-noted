@@ -64,3 +64,24 @@ module.exports.addItem = async (req, res, next) => {
 		next(new ErrorHandler(err.status, err.message));
 	}
 };
+
+module.exports.deleteItem = async (req, res, next) => {
+	try {
+		const { listId, itemId } = req.params;
+		const { user_id } = req.session;
+		await List.findByIdAndUpdate(listId, {
+			$pull: { items: { _id: itemId } },
+		});
+		const userLists = await List.find({ creator: user_id });
+		res.status(200).json({ response: { type: "success", lists: userLists } });
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};
+
+module.exports.editItem = async (req, res, next) => {
+	try {
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};

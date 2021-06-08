@@ -10,4 +10,9 @@ router.post("/delete", listControllers.deleteList);
 
 router.post("/:listId/add", listControllers.addItem);
 
+router
+	.route("/:listId/:itemId")
+	.delete(listControllers.deleteItem)
+	.put(listControllers.editItem);
+
 module.exports = router;
