@@ -5,6 +5,7 @@ import { ListContext } from "../../../store/ListProvider";
 
 const ItemCard = ({ listId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);
+	const [editContent, setEditContent] = useState(item);
 	const [done, setDone] = useState(null);
 
 	const { setLists } = useContext(ListContext);
@@ -37,17 +38,55 @@ const ItemCard = ({ listId, itemId, item }) => {
 		setDone(classes.done);
 	};
 
+	const editContentHandler = event => {
+		setEditContent(event.target.value);
+	};
+
+	const editFormHandler = async event => {
+		event.preventDefault();
+
+		const request = {
+			editedContent: editContent,
+		};
+
+		try {
+			const result = await fetch(`/list/${listId}/${itemId}`, {
+				method: "PATCH",
+				body: JSON.stringify(request),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			const { response } = await result.json();
+
+			if (response.type === "success") {
+				setLists(response.lists);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+
+		setIsEditing(prevIsEditing => !prevIsEditing);
+	};
+
 	const editForm = (
-		<form className={classes["edit-form"]}>
-			<input type="text" value={item}></input>
+		<form className={classes["edit-form"]} onSubmit={editFormHandler}>
+			<input
+				type="text"
+				value={editContent}
+				onChange={editContentHandler}
+			></input>
 			<button>Save</button>
 			<button onClick={editHandler}>Close</button>
 		</form>
 	);
 
-	const notEditing = (
+	const notEditingLayout = (
 		<React.Fragment>
-			<p className={`${classes.todo} ${done}`}>{item}</p>
+			<div onClick={doneHandler} className={classes.width}>
+				<p className={`${classes.todo} ${done}`}>{item}</p>
+			</div>
 			<div className={classes.buttons}>
 				<Button
 					className={`${classes.edit} ${classes.button}`}
@@ -66,9 +105,9 @@ const ItemCard = ({ listId, itemId, item }) => {
 	);
 
 	return (
-		<div onClick={doneHandler} className={classes.container}>
+		<div className={classes.container}>
 			{isEditing && editForm}
-			{!isEditing && notEditing}
+			{!isEditing && notEditingLayout}
 		</div>
 	);
 };

@@ -13,6 +13,6 @@ router.post("/:listId/add", listControllers.addItem);
 router
 	.route("/:listId/:itemId")
 	.delete(listControllers.deleteItem)
-	.put(listControllers.editItem);
+	.patch(listControllers.editItem);
 
 module.exports = router;
