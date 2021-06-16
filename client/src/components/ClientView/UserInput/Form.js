@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import { Fragment, useState, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { errorActions } from "../../../store/error-slice";
 import Button from "../../UI/Button";
-import classes from "./Form.module.css";
-import Modal from "../../UI/InfoModal";
-import { ErrorContext } from "../../../store/ErrorProvider";
 import { ListContext } from "../../../store/ListProvider";
+
+import classes from "./Form.module.css";
 
 const Form = ({ id }) => {
 	const [input, setInput] = useState("");
 
+	const dispatch = useDispatch();
+
 	const listCtx = useContext(ListContext);
-	const { setIsError } = useContext(ErrorContext);
 
 	const inputHandler = event => {
 		setInput(event.target.value);
@@ -20,9 +22,12 @@ const Form = ({ id }) => {
 
 		if (input.trim() === "") {
 			setInput("");
-			return setIsError({
-				message: "Please enter something to add.",
-			});
+			return dispatch(
+				errorActions.setError({
+					header: "Input Error",
+					message: "Please enter something to add.",
+				})
+			);
 		}
 
 		const item = {
@@ -42,19 +47,24 @@ const Form = ({ id }) => {
 		if (response.type === "success") {
 			listCtx.setLists(response.lists);
 		} else {
-			setIsError({ message: response.message });
+			dispatch(
+				errorActions.setError({
+					header: "Error",
+					message: response.message,
+				})
+			);
 		}
 
 		setInput("");
 	};
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			<form onSubmit={submitHandler}>
 				<input type="text" value={input} onChange={inputHandler}></input>
 				<Button>Add</Button>
 			</form>
-		</React.Fragment>
+		</Fragment>
 	);
 };
 

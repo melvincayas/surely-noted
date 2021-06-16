@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
 
@@ -10,10 +10,10 @@ const Auth = () => {
 	};
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			{registered && <LogIn formHandler={formHandler} />}
 			{!registered && <SignUp formHandler={formHandler} />}
-		</React.Fragment>
+		</Fragment>
 	);
 };
 

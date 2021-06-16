@@ -1,10 +1,11 @@
-import React, { useReducer, useContext } from "react";
+import { useReducer, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { errorActions } from "../../../store/error-slice";
 import FormModal from "../../UI/FormModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import classes from "../../Auth/Forms.module.css";
 import { ListContext } from "../../../store/ListProvider";
-import { ErrorContext } from "../../../store/ErrorProvider";
 
 const defaultInputs = {
 	title: "",
@@ -35,8 +36,9 @@ const inputReducer = (state, action) => {
 const NewList = props => {
 	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
 
+	const dispatch = useDispatch();
+
 	const listCtx = useContext(ListContext);
-	const errCtx = useContext(ErrorContext);
 
 	const titleHandler = event => {
 		dispatchInputs({ type: "TITLE_INPUT", title: event.target.value });
@@ -68,7 +70,12 @@ const NewList = props => {
 		if (response.type === "success") {
 			listCtx.newListHandler(response.newList);
 		} else {
-			errCtx.setIsError({ message: response.message });
+			dispatch(
+				errorActions.setError({
+					header: "Error with New List",
+					messagE: response.message,
+				})
+			);
 		}
 	};
 

@@ -1,10 +1,12 @@
-import React, { useReducer, useContext } from "react";
+import { useReducer, useContext } from "react";
 import { UserContext } from "../../store/UserProvider";
-import { ErrorContext } from "../../store/ErrorProvider";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
+
+import { errorActions } from "../../store/error-slice";
+import { useDispatch } from "react-redux";
 
 const defaultUser = {
 	email: "",
@@ -28,11 +30,12 @@ const userReducer = (state, action) => {
 	return defaultUser;
 };
 
-const SignUp = props => {
+const LogIn = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 
+	const dispatch = useDispatch();
+
 	const { isLoggedInHandler } = useContext(UserContext);
-	const { setIsError } = useContext(ErrorContext);
 
 	const emailChangeHandler = event => {
 		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
@@ -63,9 +66,12 @@ const SignUp = props => {
 		if (response.type === "success") {
 			isLoggedInHandler(response.user, response.session_id);
 		} else {
-			setIsError({
-				message: response.message,
-			});
+			dispatch(
+				errorActions.setError({
+					header: "Error Logging In",
+					message: response.message,
+				})
+			);
 		}
 	};
 
@@ -106,4 +112,4 @@ const SignUp = props => {
 	);
 };
 
-export default SignUp;
+export default LogIn;

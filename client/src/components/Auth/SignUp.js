@@ -1,6 +1,7 @@
 import React, { useReducer, useState, useEffect, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { errorActions } from "../../store/error-slice";
 import { UserContext } from "../../store/UserProvider";
-import { ErrorContext } from "../../store/ErrorProvider";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
@@ -52,8 +53,9 @@ const SignUp = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const [formIsValid, setFormIsValid] = useState(false);
 
+	const dispatch = useDispatch();
+
 	const { isLoggedInHandler } = useContext(UserContext);
-	const { setIsError } = useContext(ErrorContext);
 
 	useEffect(() => {
 		setFormIsValid(
@@ -109,9 +111,12 @@ const SignUp = props => {
 		if (response.type === "success") {
 			isLoggedInHandler(response.user, response.session_id);
 		} else {
-			setIsError({
-				message: response.message,
-			});
+			dispatch(
+				errorActions.setError({
+					header: "Error Signing Up",
+					message: response.message,
+				})
+			);
 		}
 	};
 
