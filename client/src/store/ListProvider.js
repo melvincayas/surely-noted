@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "./UserProvider";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export const ListContext = React.createContext();
 
@@ -7,9 +7,7 @@ const ListProvider = props => {
 	const [lists, setLists] = useState([]);
 	const [selectedList, setSelectedList] = useState(null);
 
-	const {
-		userData: { isLoggedIn },
-	} = useContext(UserContext);
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {

@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../store/user-slice-actions";
+
 import classes from "./Navbar.module.css";
-import { UserContext } from "../../store/UserProvider";
 
 const Navbar = () => {
-	const userCtx = useContext(UserContext);
-	const {
-		userData: { isLoggedIn },
-	} = userCtx;
-	const { logOutHandler } = userCtx;
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const dispatch = useDispatch();
+
+	const logoutHandler = () => {
+		dispatch(logoutUser());
+	};
 
 	return (
 		<nav className={classes.navbar}>
@@ -17,7 +19,7 @@ const Navbar = () => {
 			{isLoggedIn && (
 				<ul className={classes.list}>
 					<li>
-						<a href="#" onClick={logOutHandler}>
+						<a href="#" onClick={logoutHandler}>
 							Log Out
 						</a>
 					</li>

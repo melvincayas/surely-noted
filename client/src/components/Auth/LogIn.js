@@ -1,12 +1,12 @@
-import { useReducer, useContext } from "react";
-import { UserContext } from "../../store/UserProvider";
+import { useReducer } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 
-import { errorActions } from "../../store/error-slice";
 import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
+import { errorActions } from "../../store/error-slice";
 
 const defaultUser = {
 	email: "",
@@ -35,8 +35,6 @@ const LogIn = props => {
 
 	const dispatch = useDispatch();
 
-	const { isLoggedInHandler } = useContext(UserContext);
-
 	const emailChangeHandler = event => {
 		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
 	};
@@ -64,7 +62,12 @@ const LogIn = props => {
 		const { response } = await result.json();
 
 		if (response.type === "success") {
-			isLoggedInHandler(response.user, response.session_id);
+			dispatch(
+				userActions.login({
+					userData: response.user,
+					session_id: response.session_id,
+				})
+			);
 		} else {
 			dispatch(
 				errorActions.setError({

@@ -1,7 +1,8 @@
-import React, { useReducer, useState, useEffect, useContext } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../store/error-slice";
-import { UserContext } from "../../store/UserProvider";
+import { userActions } from "../../store/user-slice";
+
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
@@ -55,8 +56,6 @@ const SignUp = props => {
 
 	const dispatch = useDispatch();
 
-	const { isLoggedInHandler } = useContext(UserContext);
-
 	useEffect(() => {
 		setFormIsValid(
 			user.nameValid &&
@@ -109,7 +108,12 @@ const SignUp = props => {
 		const { response } = await result.json();
 
 		if (response.type === "success") {
-			isLoggedInHandler(response.user, response.session_id);
+			dispatch(
+				userActions.login({
+					userData: response.user,
+					session_id: response.session_id,
+				})
+			);
 		} else {
 			dispatch(
 				errorActions.setError({

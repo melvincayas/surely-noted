@@ -5,13 +5,10 @@ import store from "./store/index";
 
 import "./index.css";
 import App from "./App";
-import UserProvider from "./store/UserProvider";
 
 ReactDOM.render(
 	<Provider store={store}>
-		<UserProvider>
-			<App />
-		</UserProvider>
+		<App />
 	</Provider>,
 	document.getElementById("root")
 );
