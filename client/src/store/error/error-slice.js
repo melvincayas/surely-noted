@@ -9,6 +9,16 @@ const errorSlice = createSlice({
 	initialState: initialErrorState,
 	reducers: {
 		setError(state, action) {
+			// generic canned message
+			if (action.payload.canned) {
+				state.isError = {
+					header: "Whoops!",
+					message: "Something happened on our end. Please try again.",
+				};
+				return;
+			}
+
+			// custom messages
 			state.isError = {
 				header: action.payload.header,
 				message: action.payload.message,

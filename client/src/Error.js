@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { errorActions } from "./store/error-slice";
+import { errorActions } from "./store/error/error-slice";
 import InfoModal from "./components/UI/InfoModal";
 
 const Error = () => {

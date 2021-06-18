@@ -1,7 +1,7 @@
 import Card from "../../UI/Card";
 import ItemCard from "./ItemCard";
 import classes from "./styles/List.module.css";
-import Form from "../UserInput/Form";
+import ItemInputForm from "./ItemInputForm";
 
 const List = ({ selected }) => {
 	const emptyText = (
@@ -10,7 +10,7 @@ const List = ({ selected }) => {
 
 	return (
 		<Card header={selected.title}>
-			<Form id={selected._id} />
+			<ItemInputForm listId={selected._id} />
 			{selected.items.length === 0 && emptyText}
 			{selected.items.map(item => (
 				<ItemCard

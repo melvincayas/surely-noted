@@ -1,21 +1,21 @@
 import { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { reloadUser } from "./store/user-slice-actions";
-import { userActions } from "./store/user-slice";
+import { userActions } from "./store/user/user-slice";
+import { listsActions } from "./store/lists/lists-slice";
+import { reloadUser } from "./store/user/user-slice-actions";
+import { getUserLists } from "./store/lists/list-actions";
 
 import Navbar from "./components/Navbar/Navbar";
 import Auth from "./components/Auth/Auth";
 import ClientView from "./components/ClientView/ClientView";
 import Error from "./Error";
-import ListProvider from "./store/ListProvider";
 
 import "./App.css";
 
 const App = () => {
 	const isError = useSelector(state => state.error.isError);
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -28,6 +28,16 @@ const App = () => {
 		};
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (localStorage.getItem("session_id")) {
+			dispatch(getUserLists());
+		}
+
+		return () => {
+			dispatch(listsActions.clearAllLists());
+		};
+	}, [isLoggedIn, dispatch]);
+
 	return (
 		<Fragment>
 			{isError && <Error />}
@@ -35,7 +45,7 @@ const App = () => {
 				<Navbar />
 				<main>
 					{!isLoggedIn && <Auth />}
-					<ListProvider>{isLoggedIn && <ClientView />}</ListProvider>
+					{isLoggedIn && <ClientView />}
 				</main>
 			</div>
 		</Fragment>

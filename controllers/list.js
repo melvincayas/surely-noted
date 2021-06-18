@@ -6,9 +6,7 @@ module.exports.onLoad = async (req, res, next) => {
 	try {
 		const { user_id } = req.session;
 		const lists = await List.find({ creator: user_id });
-		return res
-			.status(200)
-			.json({ response: { type: "success", lists: lists } });
+		res.status(200).json({ response: { type: "success", lists: lists } });
 	} catch (err) {
 		next(new ErrorHandler(err.status, err.message));
 	}
@@ -28,8 +26,8 @@ module.exports.newList = async (req, res, next) => {
 		user.lists.push(newList._id);
 		await user.save();
 		await newList.save();
-
-		return res.status(200).json({ response: { type: "success", newList } });
+		const userLists = await List.find({ creator: user_id });
+		res.status(200).json({ response: { type: "success", lists: userLists } });
 	} catch (err) {
 		next(new ErrorHandler(err.status, err.message));
 	}
@@ -38,14 +36,16 @@ module.exports.newList = async (req, res, next) => {
 module.exports.deleteList = async (req, res, next) => {
 	try {
 		const { id } = req.body;
+		const { user_id } = req.session;
 		await List.findOneAndDelete({ _id: id });
-		res.status(200).json({ response: { type: "success" } });
+		const userLists = await List.find({ creator: user_id });
+		res.status(200).json({ response: { type: "success", lists: userLists } });
 	} catch (err) {
 		next(new ErrorHandler(err.status, err.message));
 	}
 };
 
-module.exports.addItem = async (req, res, next) => {
+module.exports.newListItem = async (req, res, next) => {
 	try {
 		const { listId } = req.params;
 		const { content } = req.body;
@@ -65,7 +65,7 @@ module.exports.addItem = async (req, res, next) => {
 	}
 };
 
-module.exports.deleteItem = async (req, res, next) => {
+module.exports.deleteListItem = async (req, res, next) => {
 	try {
 		const { listId, itemId } = req.params;
 		const { user_id } = req.session;
@@ -79,7 +79,7 @@ module.exports.deleteItem = async (req, res, next) => {
 	}
 };
 
-module.exports.editItem = async (req, res, next) => {
+module.exports.editListItem = async (req, res, next) => {
 	try {
 		const { listId, itemId } = req.params;
 		const { editedContent } = req.body;

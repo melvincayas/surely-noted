@@ -1,31 +1,22 @@
-import { useContext } from "react";
-import classes from "./ListItem.module.css";
+import { useDispatch } from "react-redux";
+import { listsActions } from "../../../store/lists/lists-slice";
+import { deleteOneList } from "../../../store/lists/list-actions";
 import Button from "../../UI/Button";
-import { ListContext } from "../../../store/ListProvider";
+import classes from "./styles/ListItem.module.css";
 
 const ListItem = props => {
-	const listCtx = useContext(ListContext);
+	const dispatch = useDispatch();
 
 	const clickHandler = () => {
-		listCtx.viewListHandler(props.id);
+		dispatch(
+			listsActions.viewList({
+				id: props.id,
+			})
+		);
 	};
 
-	const trashHandler = async () => {
-		const request = {
-			id: props.id,
-		};
-		const result = await fetch("/list/delete", {
-			method: "POST",
-			body: JSON.stringify(request),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		const { response } = await result.json();
-
-		if (response.type === "success") {
-			listCtx.removeListHandler(props.id);
-		}
+	const trashHandler = () => {
+		dispatch(deleteOneList(props.id));
 	};
 
 	return (

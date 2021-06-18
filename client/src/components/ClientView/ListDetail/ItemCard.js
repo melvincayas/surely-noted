@@ -1,32 +1,21 @@
-import React, { useState, useContext } from "react";
-import classes from "./styles/ItemCard.module.css";
+import { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+	removeOneListItem,
+	editOneListItem,
+} from "../../../store/lists/list-item-actions";
 import Button from "../../UI/Button";
-import { ListContext } from "../../../store/ListProvider";
+import classes from "./styles/ItemCard.module.css";
 
 const ItemCard = ({ listId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editContent, setEditContent] = useState(item);
 	const [done, setDone] = useState(null);
 
-	const { setLists } = useContext(ListContext);
+	const dispatch = useDispatch();
 
-	const removeHandler = async () => {
-		try {
-			const result = await fetch(`/list/${listId}/${itemId}`, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				setLists(response.lists);
-			}
-		} catch (err) {
-			console.log(err);
-		}
+	const removeHandler = () => {
+		dispatch(removeOneListItem(listId, itemId));
 	};
 
 	const editHandler = () => {
@@ -44,29 +33,7 @@ const ItemCard = ({ listId, itemId, item }) => {
 
 	const editFormHandler = async event => {
 		event.preventDefault();
-
-		const request = {
-			editedContent: editContent,
-		};
-
-		try {
-			const result = await fetch(`/list/${listId}/${itemId}`, {
-				method: "PATCH",
-				body: JSON.stringify(request),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				setLists(response.lists);
-			}
-		} catch (err) {
-			console.log(err);
-		}
-
+		dispatch(editOneListItem(listId, itemId, editContent));
 		setIsEditing(prevIsEditing => !prevIsEditing);
 	};
 
@@ -83,7 +50,7 @@ const ItemCard = ({ listId, itemId, item }) => {
 	);
 
 	const notEditingLayout = (
-		<React.Fragment>
+		<Fragment>
 			<div onClick={doneHandler} className={classes.width}>
 				<p className={`${classes.todo} ${done}`}>{item}</p>
 			</div>
@@ -92,16 +59,16 @@ const ItemCard = ({ listId, itemId, item }) => {
 					className={`${classes.edit} ${classes.button}`}
 					clickHandler={editHandler}
 				>
-					<i class="fas fa-edit"></i>
+					<i className="fas fa-edit"></i>
 				</Button>
 				<Button
 					className={`${classes.trash} ${classes.button}`}
 					clickHandler={removeHandler}
 				>
-					<i class="fas fa-trash-alt"></i>
+					<i className="fas fa-trash-alt"></i>
 				</Button>
 			</div>
-		</React.Fragment>
+		</Fragment>
 	);
 
 	return (

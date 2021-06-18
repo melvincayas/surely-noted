@@ -1,13 +1,15 @@
-import React, { useState, useContext } from "react";
+import { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 import NewList from "./NewList/NewList";
 import ShowLists from "./ShowLists/ShowLists";
 import ListDetail from "./ListDetail/ListDetail";
-import { ListContext } from "../../store/ListProvider";
 
-const UserInterface = props => {
+const UserInterface = () => {
 	const [isMakingList, setIsMakingList] = useState(false);
 
-	const { filteredList } = useContext(ListContext);
+	const allLists = useSelector(state => state.lists.lists);
+	const selectedListId = useSelector(state => state.lists.selectedListToView);
+	const selectedList = allLists.find(list => list._id === selectedListId);
 
 	const newListHandler = event => {
 		event.preventDefault();
@@ -15,11 +17,11 @@ const UserInterface = props => {
 	};
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			{isMakingList && <NewList listToggler={newListHandler} />}
 			<ShowLists newListHandler={newListHandler} />
-			{filteredList && <ListDetail selected={filteredList} />}
-		</React.Fragment>
+			{selectedList && <ListDetail selected={selectedList} />}
+		</Fragment>
 	);
 };
 

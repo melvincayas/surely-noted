@@ -5,8 +5,8 @@ import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 
 import { useDispatch } from "react-redux";
-import { userActions } from "../../store/user-slice";
-import { errorActions } from "../../store/error-slice";
+import { userActions } from "../../store/user/user-slice";
+import { errorActions } from "../../store/error/error-slice";
 
 const defaultUser = {
 	email: "",

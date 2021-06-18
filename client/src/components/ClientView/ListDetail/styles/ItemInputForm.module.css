@@ -2,14 +2,14 @@
 	margin-top: 4em;
 }
 
-form {
+.item-input-form {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	margin-bottom: 1em;
 }
 
-input {
+.item-input {
 	width: 60%;
 	font-size: 1.25em;
 	outline: none;

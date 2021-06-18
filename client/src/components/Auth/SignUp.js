@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { errorActions } from "../../store/error-slice";
-import { userActions } from "../../store/user-slice";
+import { errorActions } from "../../store/error/error-slice";
+import { userActions } from "../../store/user/user-slice";
 
 import Card from "../UI/Card";
 import Button from "../UI/Button";
