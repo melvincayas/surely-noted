@@ -1,48 +1,88 @@
 import { useReducer } from "react";
 import { useDispatch } from "react-redux";
+import { errorActions } from "../../store/error/error-slice";
 import { loginUser } from "../../store/user/user-actions";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
+import inputStyles from "../../components/UI/styles/Input.module.css";
 
 const defaultUser = {
 	email: "",
+	emailIsValid: false,
+	emailTouched: false,
 	password: "",
+	passwordIsValid: false,
+	passwordTouched: false,
 };
 
 const userReducer = (state, action) => {
-	if (action.type === "EMAIL_INPUT") {
-		return {
-			...state,
-			email: action.email,
-		};
+	switch (action.type) {
+		case "EMAIL_INPUT":
+			return {
+				...state,
+				email: action.email,
+				emailIsValid: action.email.trim() !== "",
+				emailTouched: false,
+			};
+		case "PASSWORD_INPUT":
+			return {
+				...state,
+				password: action.password,
+				passwordIsValid: action.password.trim() !== "",
+				passwordTouched: false,
+			};
+		case "EMAIL_BLUR":
+			return {
+				...state,
+				emailTouched: true,
+			};
+		case "PASSWORD_BLUR":
+			return {
+				...state,
+				passwordTouched: true,
+			};
+		default:
+			return defaultUser;
 	}
-	if (action.type === "PASSWORD_INPUT") {
-		return {
-			...state,
-			password: action.password,
-		};
-	}
-
-	return defaultUser;
 };
 
 const LogIn = props => {
 	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
-
 	const dispatch = useDispatch();
+
+	const emailError = !user.emailIsValid && user.emailTouched;
+	const passwordError = !user.passwordIsValid && user.passwordTouched;
 
 	const emailChangeHandler = event => {
 		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
+	};
+
+	const emailBlurHandler = () => {
+		dispatchUser({ type: "EMAIL_BLUR" });
 	};
 
 	const passwordChangeHandler = event => {
 		dispatchUser({ type: "PASSWORD_INPUT", password: event.target.value });
 	};
 
+	const passwordBlurHandler = () => {
+		dispatchUser({ type: "PASSWORD_BLUR" });
+	};
+
 	const formHandler = async event => {
 		event.preventDefault();
+
+		if (!user.emailIsValid || !user.passwordIsValid) {
+			return dispatch(
+				errorActions.setError({
+					header: "Error",
+					message: "Please enter your credentials.",
+				})
+			);
+		}
+
 		dispatch(loginUser(user.email, user.password));
 	};
 
@@ -60,7 +100,8 @@ const LogIn = props => {
 			<form className={classes.form} onSubmit={formHandler} method="POST">
 				<Input
 					onChangeHandler={emailChangeHandler}
-					inputValid={user.emailValid}
+					onBlurHandler={emailBlurHandler}
+					className={emailError ? inputStyles["input-invalid"] : ""}
 					label="Email"
 					id="email"
 					name="email"
@@ -68,7 +109,8 @@ const LogIn = props => {
 				/>
 				<Input
 					onChangeHandler={passwordChangeHandler}
-					inputValid={user.passwordValid}
+					onBlurHandler={passwordBlurHandler}
+					className={passwordError ? inputStyles["input-invalid"] : ""}
 					label="Password"
 					id="password"
 					name="password"

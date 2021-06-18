@@ -16,6 +16,15 @@
 	height: 1.5em;
 }
 
+.input-invalid {
+	border: 1px solid crimson;
+	background-color: rgba(255, 192, 203, 0.534);
+}
+
+.input:focus {
+	outline: none;
+}
+
 .display {
 	margin-bottom: 1.25em;
 	width: 90%;

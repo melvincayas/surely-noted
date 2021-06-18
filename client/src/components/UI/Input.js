@@ -10,7 +10,8 @@ const Input = props => {
 			</label>
 			<input
 				onChange={props.onChangeHandler}
-				className={classes.input}
+				onBlur={props.onBlurHandler}
+				className={`${classes.input} ${props.className}`}
 				name={props.id}
 				type={props.type}
 				id={props.id}
