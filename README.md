@@ -1,6 +1,6 @@
 # Writeoff
 
-Writeoff is an ongoing project of a To-Do app with of user authentication, creating, and sharing To-Do lists with users.
+Writeoff is an ongoing project of a To-Do app with user authentication, creating, and sharing To-Do lists with users.
 
 ## Built With
 
