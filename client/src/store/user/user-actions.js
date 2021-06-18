@@ -6,9 +6,7 @@ export const registerNewUser = (name, email, password) => {
 	return async dispatch => {
 		try {
 			const request = { name, email, password };
-
 			const response = await fetchData("/user/register", "POST", request);
-
 			dispatch(
 				userActions.login({
 					userData: response.user,
@@ -17,7 +15,7 @@ export const registerNewUser = (name, email, password) => {
 			);
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};
@@ -27,9 +25,7 @@ export const loginUser = (email, password) => {
 	return async dispatch => {
 		try {
 			const request = { email, password };
-
 			const response = await fetchData("/user/login", "POST", request);
-
 			dispatch(
 				userActions.login({
 					userData: response.user,
@@ -38,7 +34,7 @@ export const loginUser = (email, password) => {
 			);
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};
@@ -51,7 +47,7 @@ export const logoutUser = () => {
 			dispatch(userActions.logout());
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};
@@ -73,7 +69,7 @@ export const reloadUser = () => {
 			);
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};

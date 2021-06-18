@@ -1,33 +1,17 @@
 import { listsActions } from "./lists-slice";
 import { errorActions } from "../error/error-slice";
+import { fetchData } from "../helpers";
 
 export const addOneListItem = (listId, input) => {
 	return async dispatch => {
 		try {
 			const request = { content: input };
-
-			const result = await fetch(`/list/${listId}/add`, {
-				method: "POST",
-				body: JSON.stringify(request),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(listsActions.loadAllLists({ lists: response.lists }));
-			}
-
-			dispatch(
-				errorActions.setError({
-					header: "Error Adding",
-					message: response.message,
-				})
-			);
+			const response = await fetchData(`/list/${listId}/add`, "POST", request);
+			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: err.name, message: err.message })
+			);
 		}
 	};
 };
@@ -35,31 +19,16 @@ export const addOneListItem = (listId, input) => {
 export const removeOneListItem = (listId, itemId) => {
 	return async dispatch => {
 		try {
-			const result = await fetch(`/list/${listId}/${itemId}`, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(
-					listsActions.loadAllLists({
-						lists: response.lists,
-					})
-				);
-			}
-
+			const response = await fetchData(`/list/${listId}/${itemId}`, "DELETE");
 			dispatch(
-				errorActions.setError({
-					header: "Error Deleting",
-					message: response.message,
+				listsActions.loadAllLists({
+					lists: response.lists,
 				})
 			);
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: err.name, message: err.message })
+			);
 		}
 	};
 };
@@ -68,29 +37,16 @@ export const editOneListItem = (listId, itemId, editContent) => {
 	return async dispatch => {
 		try {
 			const request = { editedContent: editContent };
-
-			const result = await fetch(`/list/${listId}/${itemId}`, {
-				method: "PATCH",
-				body: JSON.stringify(request),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(listsActions.loadAllLists({ lists: response.lists }));
-			}
-
-			dispatch(
-				errorActions.setError({
-					header: "Error Editing",
-					message: response.message,
-				})
+			const response = await fetchData(
+				`/list/${listId}/${itemId}`,
+				"PATCH",
+				request
 			);
+			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: err.name, message: err.message })
+			);
 		}
 	};
 };

@@ -13,7 +13,7 @@ export const getUserLists = () => {
 			);
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};
@@ -26,7 +26,7 @@ export const createOneList = newList => {
 			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};
@@ -36,13 +36,11 @@ export const deleteOneList = id => {
 	return async dispatch => {
 		try {
 			const request = { id };
-
 			const response = await fetchData("/list/delete", "DELETE", request);
-
 			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
 			dispatch(
-				errorActions.setError({ header: "Error", message: err.message })
+				errorActions.setError({ header: err.name, message: err.message })
 			);
 		}
 	};

@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { registerNewUser } from "../../store/user/user-actions";
 import Card from "../UI/Card";
