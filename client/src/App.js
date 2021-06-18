@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { userActions } from "./store/user/user-slice";
 import { listsActions } from "./store/lists/lists-slice";
-import { reloadUser } from "./store/user/user-slice-actions";
+import { reloadUser } from "./store/user/user-actions";
 import { getUserLists } from "./store/lists/list-actions";
 
 import Navbar from "./components/Navbar/Navbar";

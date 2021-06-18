@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../store/user/user-slice-actions";
+import { logoutUser } from "../../store/user/user-actions";
 import classes from "./Navbar.module.css";
 
 const Navbar = () => {

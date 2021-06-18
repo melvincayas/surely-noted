@@ -1,8 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { errorActions } from "../../store/error/error-slice";
-import { userActions } from "../../store/user/user-slice";
-
+import { registerNewUser } from "../../store/user/user-actions";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
@@ -90,38 +88,7 @@ const SignUp = props => {
 
 	const formHandler = async event => {
 		event.preventDefault();
-
-		const person = {
-			name: user.name,
-			email: user.email,
-			password: user.password,
-		};
-
-		const result = await fetch("/user/register", {
-			method: "POST",
-			body: JSON.stringify(person),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		}).catch(err => console.log("Error in Register fetch", err));
-
-		const { response } = await result.json();
-
-		if (response.type === "success") {
-			dispatch(
-				userActions.login({
-					userData: response.user,
-					session_id: response.session_id,
-				})
-			);
-		} else {
-			dispatch(
-				errorActions.setError({
-					header: "Error Signing Up",
-					message: response.message,
-				})
-			);
-		}
+		dispatch(registerNewUser(user.name, user.email, user.password));
 	};
 
 	const context = (

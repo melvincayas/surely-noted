@@ -1,12 +1,10 @@
 import { useReducer } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/user/user-actions";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
-
-import { useDispatch } from "react-redux";
-import { userActions } from "../../store/user/user-slice";
-import { errorActions } from "../../store/error/error-slice";
 
 const defaultUser = {
 	email: "",
@@ -45,37 +43,7 @@ const LogIn = props => {
 
 	const formHandler = async event => {
 		event.preventDefault();
-
-		const request = {
-			email: user.email,
-			password: user.password,
-		};
-
-		const result = await fetch("/user/login", {
-			method: "POST",
-			body: JSON.stringify(request),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		}).catch(err => console.log("Error in Register fetch", err));
-
-		const { response } = await result.json();
-
-		if (response.type === "success") {
-			dispatch(
-				userActions.login({
-					userData: response.user,
-					session_id: response.session_id,
-				})
-			);
-		} else {
-			dispatch(
-				errorActions.setError({
-					header: "Error Logging In",
-					message: response.message,
-				})
-			);
-		}
+		dispatch(loginUser(user.email, user.password));
 	};
 
 	const context = (

@@ -1,28 +1,20 @@
 import { listsActions } from "./lists-slice";
 import { errorActions } from "../error/error-slice";
+import { fetchData } from "../helpers";
 
 export const getUserLists = () => {
 	return async dispatch => {
 		try {
-			const result = await fetch("/list/onload");
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(
-					listsActions.loadAllLists({
-						lists: response.lists,
-					})
-				);
-			}
-
+			const response = await fetchData("/list/onload");
 			dispatch(
-				errorActions.setError({
-					header: "Error",
-					message: response.message,
+				listsActions.loadAllLists({
+					lists: response.lists,
 				})
 			);
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: "Error", message: err.message })
+			);
 		}
 	};
 };
@@ -30,28 +22,12 @@ export const getUserLists = () => {
 export const createOneList = newList => {
 	return async dispatch => {
 		try {
-			const result = await fetch("/list/new", {
-				method: "POST",
-				body: JSON.stringify(newList),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(listsActions.loadAllLists({ lists: response.lists }));
-			}
-
-			dispatch(
-				errorActions.setError({
-					header: "Error with List",
-					message: response.message,
-				})
-			);
+			const response = await fetchData("/list/new", "POST", newList);
+			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: "Error", message: err.message })
+			);
 		}
 	};
 };
@@ -61,28 +37,13 @@ export const deleteOneList = id => {
 		try {
 			const request = { id };
 
-			const result = await fetch("/list/delete", {
-				method: "DELETE",
-				body: JSON.stringify(request),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
+			const response = await fetchData("/list/delete", "DELETE", request);
 
-			const { response } = await result.json();
-
-			if (response.type === "success") {
-				return dispatch(listsActions.loadAllLists({ lists: response.lists }));
-			}
-
-			dispatch(
-				errorActions.setError({
-					header: "Error",
-					message: response.message,
-				})
-			);
+			dispatch(listsActions.loadAllLists({ lists: response.lists }));
 		} catch (err) {
-			dispatch(errorActions.setError({ canned: true }));
+			dispatch(
+				errorActions.setError({ header: "Error", message: err.message })
+			);
 		}
 	};
 };
