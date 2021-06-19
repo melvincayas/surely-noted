@@ -1,146 +1,58 @@
 import { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { registerNewUser } from "../../store/user/user-actions";
+import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 import inputStyles from "../UI/styles/Input.module.css";
 
-const defaultUser = {
-	name: "",
-	nameValid: false,
-	nameTouched: false,
-	email: "",
-	emailValid: false,
-	emailTouched: false,
-	password: "",
-	passwordValid: false,
-	passwordTouched: false,
-	passwordCheck: "",
-	passwordCheckValid: false,
-	passwordCheckTouched: false,
-};
-
-const userReducer = (state, action) => {
-	switch (action.type) {
-		case "NAME_INPUT":
-			return {
-				...state,
-				name: action.name,
-				nameValid: action.name.trim() !== "",
-				nameTouched: false,
-			};
-		case "EMAIL_INPUT":
-			return {
-				...state,
-				email: action.email,
-				emailValid: action.email.includes("@") && action.email.includes("."),
-				emailTouched: false,
-			};
-		case "PASSWORD_INPUT":
-			return {
-				...state,
-				password: action.password,
-				passwordValid: action.password.length >= 6,
-				passwordTouched: false,
-			};
-
-		case "PASSWORDCHECK_INPUT":
-			return {
-				...state,
-				passwordCheck: action.passwordCheck,
-				passwordCheckValid: action.passwordCheck === state.password,
-				passwordCheckTouched: false,
-			};
-		case "NAME_BLUR":
-			return {
-				...state,
-				nameTouched: true,
-			};
-		case "EMAIL_BLUR":
-			return {
-				...state,
-				emailTouched: true,
-			};
-		case "PASSWORD_BLUR":
-			return {
-				...state,
-				passwordTouched: true,
-			};
-		case "PASSWORDCHECK_BLUR":
-			return {
-				...state,
-				passwordCheckTouched: true,
-			};
-		default:
-			return defaultUser;
-	}
-};
-
 const SignUp = props => {
-	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const [formIsValid, setFormIsValid] = useState(false);
 	const dispatch = useDispatch();
 
+	const {
+		inputChangeHandler: nameChangeHandler,
+		inputBlurHandler: nameBlurHandler,
+		inputValid: nameIsValid,
+		inputError: nameError,
+		value: enteredName,
+	} = useInputValidation(input => input.trim() !== "");
+
+	const {
+		inputChangeHandler: emailChangeHandler,
+		inputBlurHandler: emailBlurHandler,
+		inputValid: emailIsValid,
+		inputError: emailError,
+		value: enteredEmail,
+	} = useInputValidation(input => input.includes("@") && input.includes("."));
+
+	const {
+		inputChangeHandler: passwordChangeHandler,
+		inputBlurHandler: passwordBlurHandler,
+		inputValid: passwordIsValid,
+		inputError: passwordError,
+		value: enteredPassword,
+	} = useInputValidation(input => input.length >= 6);
+
+	const {
+		inputChangeHandler: passwordCheckChangeHandler,
+		inputBlurHandler: passwordCheckBlurHandler,
+		inputValid: passwordCheckIsValid,
+		inputError: passwordCheckError,
+	} = useInputValidation(input => input === enteredPassword && passwordIsValid);
+
 	useEffect(() => {
 		setFormIsValid(
-			user.nameValid &&
-				user.emailValid &&
-				user.passwordValid & user.passwordCheckValid
+			nameIsValid && emailIsValid && passwordIsValid && passwordCheckIsValid
 		);
-	}, [
-		user.nameValid,
-		user.emailValid,
-		user.passwordValid,
-		user.passwordCheckValid,
-	]);
-
-	const nameChangeHandler = event => {
-		dispatchUser({ type: "NAME_INPUT", name: event.target.value });
-	};
-
-	const nameBlurHandler = () => {
-		dispatchUser({ type: "NAME_BLUR" });
-	};
-
-	const emailChangeHandler = event => {
-		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
-	};
-
-	const emailBlurHandler = () => {
-		dispatchUser({ type: "EMAIL_BLUR" });
-	};
-
-	const passwordChangeHandler = event => {
-		dispatchUser({ type: "PASSWORD_INPUT", password: event.target.value });
-	};
-
-	const passwordBlurHandler = () => {
-		dispatchUser({ type: "PASSWORD_BLUR" });
-	};
-
-	const passwordCheckChangeHandler = event => {
-		dispatchUser({
-			type: "PASSWORDCHECK_INPUT",
-			passwordCheck: event.target.value,
-		});
-	};
-
-	const passwordCheckBlurHandler = () => {
-		dispatchUser({ type: "PASSWORDCHECK_BLUR" });
-	};
+	}, [nameIsValid, emailIsValid, passwordIsValid, passwordCheckIsValid]);
 
 	const formHandler = event => {
 		event.preventDefault();
-		dispatch(registerNewUser(user.name, user.email, user.password));
+		dispatch(registerNewUser(enteredName, enteredEmail, enteredPassword));
 	};
-
-	const nameError = !user.nameValid && user.nameTouched;
-	const emailError = !user.emailValid && user.emailTouched;
-	const passwordError = !user.passwordValid && user.passwordTouched;
-	const passwordCheckError =
-		!user.passwordCheckValid && user.passwordCheckTouched;
 
 	const context = (
 		<p className={classes.context}>
@@ -156,7 +68,7 @@ const SignUp = props => {
 			<form className={classes.form} onSubmit={formHandler} method="POST">
 				<Input
 					onChangeHandler={nameChangeHandler}
-					inputValid={user.nameValid}
+					inputValid={nameIsValid}
 					onBlurHandler={nameBlurHandler}
 					className={nameError ? inputStyles["input-invalid"] : ""}
 					label="Name"
@@ -166,7 +78,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={emailChangeHandler}
-					inputValid={user.emailValid}
+					inputValid={emailIsValid}
 					onBlurHandler={emailBlurHandler}
 					className={emailError ? inputStyles["input-invalid"] : ""}
 					label="Email"
@@ -176,7 +88,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={passwordChangeHandler}
-					inputValid={user.passwordValid}
+					inputValid={passwordIsValid}
 					onBlurHandler={passwordBlurHandler}
 					className={passwordError ? inputStyles["input-invalid"] : ""}
 					label="Password"
@@ -187,7 +99,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={passwordCheckChangeHandler}
-					inputValid={user.passwordCheckValid}
+					inputValid={passwordCheckIsValid}
 					onBlurHandler={passwordCheckBlurHandler}
 					className={passwordCheckError ? inputStyles["input-invalid"] : ""}
 					label="Repeat Password"
