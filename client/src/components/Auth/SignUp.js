@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { registerNewUser } from "../../store/user/user-actions";
 import useInputValidation from "../../hooks/useInputValidation";

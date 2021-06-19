@@ -1,80 +1,36 @@
-import { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../store/error/error-slice";
 import { loginUser } from "../../store/user/user-actions";
+import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "./Forms.module.css";
 import inputStyles from "../../components/UI/styles/Input.module.css";
 
-const defaultUser = {
-	email: "",
-	emailIsValid: false,
-	emailTouched: false,
-	password: "",
-	passwordIsValid: false,
-	passwordTouched: false,
-};
-
-const userReducer = (state, action) => {
-	switch (action.type) {
-		case "EMAIL_INPUT":
-			return {
-				...state,
-				email: action.email,
-				emailIsValid: action.email.trim() !== "",
-				emailTouched: false,
-			};
-		case "PASSWORD_INPUT":
-			return {
-				...state,
-				password: action.password,
-				passwordIsValid: action.password.trim() !== "",
-				passwordTouched: false,
-			};
-		case "EMAIL_BLUR":
-			return {
-				...state,
-				emailTouched: true,
-			};
-		case "PASSWORD_BLUR":
-			return {
-				...state,
-				passwordTouched: true,
-			};
-		default:
-			return defaultUser;
-	}
-};
-
 const LogIn = props => {
-	const [user, dispatchUser] = useReducer(userReducer, defaultUser);
 	const dispatch = useDispatch();
 
-	const emailError = !user.emailIsValid && user.emailTouched;
-	const passwordError = !user.passwordIsValid && user.passwordTouched;
+	const {
+		inputChangeHandler: emailChangeHandler,
+		inputBlurHandler: emailBlurHandler,
+		inputValid: emailIsValid,
+		inputError: emailError,
+		value: enteredEmail,
+	} = useInputValidation(input => input.trim() !== "");
 
-	const emailChangeHandler = event => {
-		dispatchUser({ type: "EMAIL_INPUT", email: event.target.value });
-	};
-
-	const emailBlurHandler = () => {
-		dispatchUser({ type: "EMAIL_BLUR" });
-	};
-
-	const passwordChangeHandler = event => {
-		dispatchUser({ type: "PASSWORD_INPUT", password: event.target.value });
-	};
-
-	const passwordBlurHandler = () => {
-		dispatchUser({ type: "PASSWORD_BLUR" });
-	};
+	const {
+		inputChangeHandler: passwordChangeHandler,
+		inputBlurHandler: passwordBlurHandler,
+		inputValid: passwordIsValid,
+		inputError: passwordError,
+		value: enteredPassword,
+	} = useInputValidation(input => input.trim() !== "");
 
 	const formHandler = async event => {
 		event.preventDefault();
 
-		if (!user.emailIsValid || !user.passwordIsValid) {
+		if (!emailIsValid || !passwordIsValid) {
 			return dispatch(
 				errorActions.setError({
 					header: "Error",
@@ -83,7 +39,7 @@ const LogIn = props => {
 			);
 		}
 
-		dispatch(loginUser(user.email, user.password));
+		dispatch(loginUser(enteredEmail, enteredPassword));
 	};
 
 	const context = (
