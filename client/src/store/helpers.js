@@ -1,3 +1,15 @@
+import { errorActions } from "./error/error-slice";
+
+export const handleAsyncErrors = fn => {
+	return dispatch => {
+		fn(dispatch).catch(err => {
+			dispatch(
+				errorActions.setError({ header: err.name, message: err.message })
+			);
+		});
+	};
+};
+
 export const fetchData = async (url, method = "GET", request) => {
 	const result = await fetch(url, {
 		method: method,
