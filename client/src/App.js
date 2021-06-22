@@ -28,7 +28,7 @@ const App = () => {
 		return () => {
 			dispatch(userActions.logout());
 		};
-	}, [dispatch]);
+	}, [dispatch, history]);
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {

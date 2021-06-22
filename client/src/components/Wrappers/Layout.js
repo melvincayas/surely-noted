@@ -9,8 +9,8 @@ const Layout = props => {
 	return (
 		<Fragment>
 			{isError && <Error />}
+			<Navbar />
 			<div className="App">
-				<Navbar />
 				<main>{props.children}</main>
 			</div>
 		</Fragment>
