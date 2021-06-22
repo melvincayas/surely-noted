@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const listControllers = require("../controllers/list");
 
-// get all lists on refresh
-router.get("/onload", listControllers.onLoad);
+router
+	.route("/")
+	.get(listControllers.onLoad)
+	.post(listControllers.newList)
+	.delete(listControllers.deleteList);
 
-// Lists
+// view specific list
 router.get("/:listId", listControllers.viewOneList);
-router.post("/new", listControllers.newList);
-router.delete("/delete", listControllers.deleteList);
 
 // Items within Lists
 router.post("/:listId/add", listControllers.newListItem);
