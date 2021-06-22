@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialUserState = {
 	userData: null,
 	isLoggedIn: false,
+	isLoading: null,
 };
 
 const userSlice = createSlice({
@@ -22,6 +23,9 @@ const userSlice = createSlice({
 		reload(state, action) {
 			state.userData = action.payload.userData;
 			state.isLoggedIn = true;
+		},
+		loading(state, action) {
+			state.isLoading = action.payload.status;
 		},
 	},
 });

@@ -17,12 +17,18 @@ export const registerNewUser = (name, email, password) => {
 
 export const loginUser = (email, password) => {
 	return handleAsyncErrors(async dispatch => {
+		dispatch(userActions.loading({ status: true }));
 		const request = { email, password };
 		const response = await fetchData("/user/login", "POST", request);
 		dispatch(
 			userActions.login({
 				userData: response.user,
 				session_id: response.session_id,
+			})
+		);
+		dispatch(
+			userActions.loading({
+				status: false,
 			})
 		);
 	});

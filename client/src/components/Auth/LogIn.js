@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../store/error/error-slice";
 import { loginUser } from "../../store/user/user-actions";
+import { useHistory } from "react-router-dom";
 import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -10,6 +11,7 @@ import inputStyles from "../../components/UI/styles/Input.module.css";
 
 const LogIn = props => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const {
 		inputChangeHandler: emailChangeHandler,
@@ -40,6 +42,7 @@ const LogIn = props => {
 		}
 
 		dispatch(loginUser(enteredEmail, enteredPassword));
+		history.push("/home");
 	};
 
 	const context = (
