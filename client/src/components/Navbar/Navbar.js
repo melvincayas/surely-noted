@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../store/user/user-actions";
 import classes from "./Navbar.module.css";
@@ -18,9 +19,10 @@ const Navbar = () => {
 			{isLoggedIn && (
 				<ul className={classes.list}>
 					<li>
-						<a href="#" onClick={logoutHandler}>
-							Log Out
-						</a>
+						<Link to="/home">Home</Link>
+					</li>
+					<li>
+						<Link onClick={logoutHandler}>Log Out</Link>
 					</li>
 				</ul>
 			)}
