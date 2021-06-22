@@ -12,6 +12,18 @@ module.exports.onLoad = async (req, res, next) => {
 	}
 };
 
+module.exports.viewOneList = async (req, res, next) => {
+	try {
+		const { user_id } = req.session;
+		const { listId } = req.params;
+		// include error handling for verifying user owns the list
+		const list = await List.findOne({ _id: listId });
+		res.status(200).json({ response: { type: "success", list } });
+	} catch (err) {
+		next(new ErrorHandler(err.status, err.message));
+	}
+};
+
 module.exports.newList = async (req, res, next) => {
 	try {
 		const { user_id } = req.session;
