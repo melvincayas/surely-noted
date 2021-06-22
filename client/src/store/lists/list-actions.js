@@ -13,6 +13,16 @@ export const getUserLists = () => {
 	});
 };
 
+export const getOneList = listId => {
+	return handleAsyncErrors(async dispatch => {
+		dispatch(listsActions.loading({ status: true }));
+		console.log("here");
+		const response = await fetchData(`/list/${listId}`);
+		dispatch(listsActions.viewOneList({ selectedList: response.list }));
+		dispatch(listsActions.loading({ status: false }));
+	});
+};
+
 export const createOneList = newList => {
 	return handleAsyncErrors(async dispatch => {
 		const response = await fetchData("/list/new", "POST", newList);

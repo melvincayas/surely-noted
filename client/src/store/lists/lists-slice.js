@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialLists = {
 	lists: [],
-	selectedListToView: null,
+	selectedList: null,
+	listsLoading: null,
 };
 
 const listsSlice = createSlice({
@@ -12,11 +13,15 @@ const listsSlice = createSlice({
 		loadAllLists(state, action) {
 			state.lists = action.payload.lists;
 		},
-		viewList(state, action) {
-			state.selectedListToView = action.payload.id;
+		viewOneList(state, action) {
+			state.selectedList = action.payload.selectedList;
+			state.listsLoading = null;
 		},
 		clearAllLists(state) {
 			state.lists = [];
+		},
+		loading(state, action) {
+			state.listsLoading = action.payload.status;
 		},
 	},
 });

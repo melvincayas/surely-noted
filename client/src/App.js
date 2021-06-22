@@ -11,6 +11,7 @@ import Layout from "./components/Wrappers/Layout";
 import AuthenticatedRoutes from "./components/Wrappers/AuthenticatedRoutes";
 import Auth from "./components/Auth/Auth";
 import ClientView from "./components/ClientView/ClientView";
+import ListDetail from "./components/ClientView/ListDetail/ListDetail";
 
 import "./App.css";
 
@@ -23,6 +24,8 @@ const App = () => {
 		if (localStorage.getItem("session_id")) {
 			dispatch(reloadUser());
 			history.push("/home");
+		} else {
+			history.push("/");
 		}
 
 		return () => {
@@ -45,6 +48,7 @@ const App = () => {
 			<Switch>
 				<Route path="/" component={Auth} exact />
 				<AuthenticatedRoutes path="/home" component={ClientView} />
+				<AuthenticatedRoutes path="/list/:listId" component={ListDetail} />
 				<Route path="*" render={() => <p>Nothing found!</p>} />
 			</Switch>
 		</Layout>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { listsActions } from "../../../store/lists/lists-slice";
 import { deleteOneList } from "../../../store/lists/list-actions";
@@ -21,9 +22,11 @@ const ListItem = props => {
 
 	return (
 		<div className={classes.container}>
-			<div className={classes.context} onClick={clickHandler}>
-				<span>{props.title}</span>
-			</div>
+			<Link to={`/list/${props.id}`}>
+				<div className={classes.context}>
+					<span>{props.title}</span>
+				</div>
+			</Link>
 			<Button className={classes.trash} clickHandler={trashHandler}>
 				<i className="fas fa-trash-alt"></i>
 			</Button>
