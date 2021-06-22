@@ -26,11 +26,6 @@ export const loginUser = (email, password) => {
 				session_id: response.session_id,
 			})
 		);
-		dispatch(
-			userActions.loading({
-				status: false,
-			})
-		);
 	});
 };
 
@@ -53,12 +48,6 @@ export const reloadUser = () => {
 		dispatch(
 			userActions.reload({
 				userData: response.user,
-			})
-		);
-
-		dispatch(
-			userActions.loading({
-				status: false,
 			})
 		);
 	});

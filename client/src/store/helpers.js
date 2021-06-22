@@ -1,10 +1,16 @@
 import { errorActions } from "./error/error-slice";
+import { userActions } from "./user/user-slice";
 
 export const handleAsyncErrors = fn => {
 	return dispatch => {
 		fn(dispatch).catch(err => {
 			dispatch(
 				errorActions.setError({ header: err.name, message: err.message })
+			);
+			dispatch(
+				userActions.loading({
+					status: false,
+				})
 			);
 		});
 	};
