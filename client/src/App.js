@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { userActions } from "./store/user/user-slice";
@@ -17,10 +17,12 @@ import "./App.css";
 const App = () => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {
 			dispatch(reloadUser());
+			history.push("/home");
 		}
 
 		return () => {

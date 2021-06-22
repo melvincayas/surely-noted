@@ -43,6 +43,8 @@ export const logoutUser = () => {
 
 export const reloadUser = () => {
 	return handleAsyncErrors(async dispatch => {
+		dispatch(userActions.loading({ status: true }));
+		console.log("here");
 		const response = await fetchData("/user/onload");
 
 		if (localStorage.getItem("session_id") !== response.session_id) {
@@ -52,6 +54,11 @@ export const reloadUser = () => {
 		dispatch(
 			userActions.reload({
 				userData: response.user,
+			})
+		);
+		dispatch(
+			userActions.loading({
+				status: false,
 			})
 		);
 	});
