@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialLists = {
 	lists: [],
 	selectedList: null,
-	listsLoading: null,
+	listsLoading: false,
 };
 
 const listsSlice = createSlice({
@@ -15,7 +15,7 @@ const listsSlice = createSlice({
 		},
 		viewOneList(state, action) {
 			state.selectedList = action.payload.selectedList;
-			state.listsLoading = null;
+			state.listsLoading = false;
 		},
 		clearAllLists(state) {
 			state.lists = [];

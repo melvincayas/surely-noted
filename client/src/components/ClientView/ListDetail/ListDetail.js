@@ -9,6 +9,8 @@ import ItemCard from "./ItemCard";
 import classes from "./styles/List.module.css";
 import ItemInputForm from "./ItemInputForm";
 
+let initialLoad = true;
+
 const List = () => {
 	const { listId } = useParams();
 	const dispatch = useDispatch();
@@ -23,7 +25,8 @@ const List = () => {
 		<p className={classes["empty-text"]}>Enter items to get started!</p>
 	);
 
-	if (listsLoading || listsLoading === null) {
+	if (initialLoad || listsLoading) {
+		initialLoad = false;
 		return <LoadingSpinner />;
 	}
 
