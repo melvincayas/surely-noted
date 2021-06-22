@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialUserState = {
 	userData: null,
 	isLoggedIn: false,
-	isLoading: false,
+	userIsLoading: false,
 };
 
 const userSlice = createSlice({
@@ -14,7 +14,7 @@ const userSlice = createSlice({
 			localStorage.setItem("session_id", action.payload.session_id);
 			state.userData = action.payload.userData;
 			state.isLoggedIn = true;
-			state.isLoading = false;
+			state.userIsLoading = false;
 		},
 		logout(state) {
 			localStorage.removeItem("session_id");
@@ -24,10 +24,10 @@ const userSlice = createSlice({
 		reload(state, action) {
 			state.userData = action.payload.userData;
 			state.isLoggedIn = true;
-			state.isLoading = false;
+			state.userIsLoading = false;
 		},
 		loading(state, action) {
-			state.isLoading = action.payload.status;
+			state.userIsLoading = action.payload.status;
 		},
 	},
 });
