@@ -19,7 +19,6 @@ const listsSlice = createSlice({
 		},
 		clearAllLists(state) {
 			state.lists = [];
-			state.selectedList = null;
 		},
 		getOneList(state, action) {
 			state.selectedList = action.payload.list;
