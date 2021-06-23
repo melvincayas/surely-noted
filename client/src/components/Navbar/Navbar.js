@@ -14,7 +14,7 @@ const Navbar = () => {
 	return (
 		<nav className={classes.navbar}>
 			<a className={classes.brand} href="#">
-				WriteOff
+				SurelyNoted
 			</a>
 			{isLoggedIn && (
 				<ul className={classes.list}>
