@@ -14,8 +14,8 @@ export const removeOneListItem = (listId, itemId) => {
 	return handleAsyncErrors(async dispatch => {
 		const response = await fetchData(`/list/${listId}/${itemId}`, "DELETE");
 		dispatch(
-			listsActions.loadAllLists({
-				lists: response.lists,
+			listsActions.getOneList({
+				list: response.list,
 			})
 		);
 	});
@@ -29,6 +29,6 @@ export const editOneListItem = (listId, itemId, editContent) => {
 			"PATCH",
 			request
 		);
-		dispatch(listsActions.loadAllLists({ lists: response.lists }));
+		dispatch(listsActions.getOneList({ list: response.list }));
 	});
 };
