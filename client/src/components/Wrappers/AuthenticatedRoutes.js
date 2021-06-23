@@ -7,11 +7,12 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 
 	const show = props => {
-		if (userIsLoading) {
+		if (userIsLoading === "pending" || userIsLoading === "loading") {
 			return <LoadingSpinner />;
 		} else if (isLoggedIn) {
 			return <Component {...props} />;
 		} else {
+			console.log("coming in here to redirect");
 			return <Redirect to="/" />;
 		}
 	};

@@ -23,7 +23,6 @@ const App = () => {
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {
 			dispatch(reloadUser());
-			history.push("/home");
 		} else {
 			history.push("/");
 		}

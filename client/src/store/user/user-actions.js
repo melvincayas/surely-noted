@@ -17,7 +17,7 @@ export const registerNewUser = (name, email, password) => {
 
 export const loginUser = (email, password) => {
 	return handleAsyncErrors(async dispatch => {
-		dispatch(userActions.loading({ status: true }));
+		dispatch(userActions.loading({ status: "loading" }));
 		const request = { email, password };
 		const response = await fetchData("/user/login", "POST", request);
 		dispatch(
@@ -38,7 +38,7 @@ export const logoutUser = () => {
 
 export const reloadUser = () => {
 	return handleAsyncErrors(async dispatch => {
-		dispatch(userActions.loading({ status: true }));
+		dispatch(userActions.loading({ status: "loading" }));
 		const response = await fetchData("/user/onload");
 
 		if (localStorage.getItem("session_id") !== response.session_id) {
