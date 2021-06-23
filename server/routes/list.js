@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const listControllers = require("../controllers/list");
+const listItemControllers = require("../controllers/list-item");
 
 router
 	.route("/")
@@ -12,10 +13,10 @@ router
 router.get("/:listId", listControllers.viewOneList);
 
 // Items within Lists
-router.post("/:listId/add", listControllers.newListItem);
+router.post("/:listId/add", listItemControllers.newListItem);
 router
 	.route("/:listId/:itemId")
-	.delete(listControllers.deleteListItem)
-	.patch(listControllers.editListItem);
+	.delete(listItemControllers.deleteListItem)
+	.patch(listItemControllers.editListItem);
 
 module.exports = router;
