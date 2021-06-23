@@ -12,7 +12,6 @@ const listsSlice = createSlice({
 	reducers: {
 		loadAllLists(state, action) {
 			state.lists = action.payload.lists;
-			state.selectedList = null;
 		},
 		viewOneList(state, action) {
 			state.selectedList = action.payload.selectedList;
