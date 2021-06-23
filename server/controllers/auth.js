@@ -8,11 +8,14 @@ module.exports.register = catchAsync(async (req, res, next) => {
 	const newUser = new User({ email, name });
 	await User.register(newUser, password, async function (err, user) {
 		if (err) {
-			return next(new ErrorHandler(err.status, err.message));
+			return next(new ErrorHandler(err.status, err.message, "authentication"));
 		}
 		await user.save();
 		req.login(user, err => {
-			if (err) return next(new ErrorHandler(err.status, err.message));
+			if (err)
+				return next(
+					new ErrorHandler(err.status, err.message, "authentication")
+				);
 			req.session.user_id = user._id;
 			res.status(200).json({
 				response: { type: "success", user, session_id: req.sessionID },
@@ -32,15 +35,22 @@ module.exports.onLoad = catchAsync(async (req, res, next) => {
 module.exports.login = catchAsync(async (req, res, next) => {
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
-			return next(new ErrorHandler(err.status, err.message));
+			return next(new ErrorHandler(err.status, err.message, "authentication"));
 		}
 		if (!user) {
 			return next(
-				new ErrorHandler(401, "Username and/or password is invalid.")
+				new ErrorHandler(
+					401,
+					"Username and/or password is invalid.",
+					"authentication"
+				)
 			);
 		}
 		req.login(user, err => {
-			if (err) return next(new ErrorHandler(err.status, err.message));
+			if (err)
+				return next(
+					new ErrorHandler(err.status, err.message, "authentication")
+				);
 			req.session.user_id = user._id;
 			res.status(200).json({
 				response: { type: "success", user, session_id: req.sessionID },

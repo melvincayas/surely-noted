@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const List = require("../models/List");
 const catchAsync = require("../public/utilities/catchAsync");
-const ErrorHandler = require("../public/utilities/ErrorHandler");
 
 module.exports.onLoad = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;

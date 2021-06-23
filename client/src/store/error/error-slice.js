@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialErrorState = {
 	isError: null,
+	origin: null,
 };
 
 const errorSlice = createSlice({
@@ -12,10 +13,12 @@ const errorSlice = createSlice({
 			state.isError = {
 				header: action.payload.header,
 				message: action.payload.message,
+				origin: action.payload.origin,
 			};
 		},
 		removeError(state) {
 			state.isError = null;
+			state.origin = null;
 		},
 	},
 });

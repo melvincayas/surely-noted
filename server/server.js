@@ -62,8 +62,8 @@ app.use("/list", listRoutes);
 
 app.use((err, req, res, next) => {
 	const errMsg = "Something went wrong on our end. Please try again.";
-	const { status = 500, message = errMsg } = err;
-	res.status(status).json({ response: { type: "error", message } });
+	const { status = 500, message = errMsg, origin } = err;
+	res.status(status).json({ response: { type: "error", message, origin } });
 });
 
 app.listen(5000, () => {

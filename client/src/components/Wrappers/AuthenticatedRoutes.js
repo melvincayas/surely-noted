@@ -7,7 +7,7 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 	const isError = useSelector(state => state.error.isError);
 
-	if (isError) {
+	if (isError && isError.origin === "authorization") {
 		return <Redirect to="/home" />;
 	}
 

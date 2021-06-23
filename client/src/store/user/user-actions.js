@@ -1,6 +1,6 @@
 import { userActions } from "./user-slice";
-import { fetchData } from "../helpers";
-import { handleAsyncErrors } from "../helpers";
+import { fetchData } from "../utilities/helpers";
+import { handleAsyncErrors } from "../utilities/helpers";
 
 export const registerNewUser = (name, email, password) => {
 	return handleAsyncErrors(async dispatch => {

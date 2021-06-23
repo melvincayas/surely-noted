@@ -8,7 +8,7 @@ module.exports.validateListUser = catchAsync(async (req, res, next) => {
 	const { creator } = await List.findOne({ _id: listId });
 
 	if (user_id !== creator.toString()) {
-		return next(new ErrorHandler(403, "This isn't yours!"));
+		return next(new ErrorHandler(403, "This isn't yours!", "authorization"));
 	}
 
 	next();
