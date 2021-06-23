@@ -24,6 +24,10 @@
 	outline: none;
 }
 
+.input:hover {
+	outline: black;
+}
+
 .display {
 	margin-bottom: 1.25em;
 	width: 90%;
