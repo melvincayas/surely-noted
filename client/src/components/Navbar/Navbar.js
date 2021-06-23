@@ -22,7 +22,9 @@ const Navbar = () => {
 						<Link to="/home">Home</Link>
 					</li>
 					<li>
-						<Link onClick={logoutHandler}>Log Out</Link>
+						<Link to="/" onClick={logoutHandler}>
+							Log Out
+						</Link>
 					</li>
 				</ul>
 			)}
