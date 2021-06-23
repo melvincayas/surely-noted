@@ -12,7 +12,6 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 		} else if (isLoggedIn) {
 			return <Component {...props} />;
 		} else {
-			console.log("coming in here to redirect");
 			return <Redirect to="/" />;
 		}
 	};
