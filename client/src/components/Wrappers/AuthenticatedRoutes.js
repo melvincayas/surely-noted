@@ -5,6 +5,11 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 	const userIsLoading = useSelector(state => state.user.userIsLoading);
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const isError = useSelector(state => state.error.isError);
+
+	if (isError) {
+		return <Redirect to="/home" />;
+	}
 
 	const show = props => {
 		if (userIsLoading === "pending" || userIsLoading === "loading") {

@@ -1,12 +1,9 @@
-const User = require("../models/User");
 const List = require("../models/List");
 const catchAsync = require("../public/utilities/catchAsync");
 
 module.exports.newListItem = catchAsync(async (req, res, next) => {
 	const { listId } = req.params;
 	const { content } = req.body;
-	const { user_id } = req.session;
-	// include validation for user owning list
 	const newItem = {
 		date: new Date().toUTCString(),
 		content,
@@ -20,8 +17,6 @@ module.exports.newListItem = catchAsync(async (req, res, next) => {
 
 module.exports.deleteListItem = catchAsync(async (req, res, next) => {
 	const { listId, itemId } = req.params;
-	const { user_id } = req.session;
-	// include user validation for owning list
 	const list = await List.findByIdAndUpdate(listId, {
 		$pull: { items: { _id: itemId } },
 	});
@@ -31,9 +26,6 @@ module.exports.deleteListItem = catchAsync(async (req, res, next) => {
 module.exports.editListItem = catchAsync(async (req, res, next) => {
 	const { listId, itemId } = req.params;
 	const { editedContent } = req.body;
-	const { user_id } = req.session;
-	// include user validation for owning list
-
 	const list = await List.findByIdAndUpdate(
 		listId,
 		{ $set: { "items.$[el].content": editedContent } },

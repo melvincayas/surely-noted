@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const listControllers = require("../controllers/list");
 const listItemControllers = require("../controllers/list-item");
+const { validateListUser } = require("../public/utilities/middleware");
 
 router
 	.route("/")
@@ -10,13 +11,14 @@ router
 	.delete(listControllers.deleteList);
 
 // view specific list
-router.get("/:listId", listControllers.viewOneList);
+router.get("/:listId", validateListUser, listControllers.viewOneList);
 
 // Items within Lists
-router.post("/:listId/add", listItemControllers.newListItem);
+router.post("/:listId/add", validateListUser, listItemControllers.newListItem);
+
 router
 	.route("/:listId/:itemId")
-	.delete(listItemControllers.deleteListItem)
-	.patch(listItemControllers.editListItem);
+	.delete(validateListUser, listItemControllers.deleteListItem)
+	.patch(validateListUser, listItemControllers.editListItem);
 
 module.exports = router;

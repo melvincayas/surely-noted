@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const List = require("../models/List");
 const catchAsync = require("../public/utilities/catchAsync");
+const ErrorHandler = require("../public/utilities/ErrorHandler");
 
 module.exports.onLoad = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;
@@ -9,9 +10,7 @@ module.exports.onLoad = catchAsync(async (req, res, next) => {
 });
 
 module.exports.viewOneList = catchAsync(async (req, res, next) => {
-	const { user_id } = req.session;
 	const { listId } = req.params;
-	// include error handling for verifying user owns the list
 	const list = await List.findOne({ _id: listId });
 	res.status(200).json({ response: { type: "success", list } });
 });
