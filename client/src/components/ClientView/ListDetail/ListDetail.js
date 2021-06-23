@@ -19,7 +19,7 @@ const List = () => {
 
 	useEffect(() => {
 		dispatch(getOneList(listId));
-	}, [dispatch]);
+	}, [dispatch, listId]);
 
 	const emptyText = (
 		<p className={classes["empty-text"]}>Enter items to get started!</p>
