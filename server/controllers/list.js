@@ -54,8 +54,8 @@ module.exports.newListItem = catchAsync(async (req, res, next) => {
 	const list = await List.findOne({ _id: listId });
 	list.items.push(newItem);
 	await list.save();
-	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	// const userLists = await List.find({ creator: user_id });
+	res.status(200).json({ response: { type: "success", list } });
 });
 
 module.exports.deleteListItem = catchAsync(async (req, res, next) => {

@@ -6,7 +6,7 @@ export const addOneListItem = (listId, input) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { content: input };
 		const response = await fetchData(`/list/${listId}/add`, "POST", request);
-		dispatch(listsActions.loadAllLists({ lists: response.lists }));
+		dispatch(listsActions.getOneList({ list: response.list }));
 	});
 };
 
