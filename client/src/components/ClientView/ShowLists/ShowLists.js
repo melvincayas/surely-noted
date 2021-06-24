@@ -4,9 +4,9 @@ import Button from "../../UI/Button";
 import ListItem from "./ListItem";
 
 const ShowLists = props => {
+	const title = props.category || "No category";
 	const allLists = useSelector(state => state.lists.lists);
 	const groupedList = allLists.filter(list => list.category === props.category);
-	console.log(groupedList);
 
 	let result = <p>Create a list to get started!</p>;
 
@@ -19,8 +19,7 @@ const ShowLists = props => {
 	}
 
 	return (
-		<Card header={props.category}>
-			<Button clickHandler={props.newListHandler}>Create List</Button>
+		<Card header={title}>
 			<section>{result}</section>
 		</Card>
 	);

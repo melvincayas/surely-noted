@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createOneList } from "../../../store/lists/list-actions";
 import FormModal from "../../UI/FormModal";
@@ -35,6 +36,7 @@ const inputReducer = (state, action) => {
 const NewList = props => {
 	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const titleHandler = event => {
 		dispatchInputs({ type: "TITLE_INPUT", title: event.target.value });
@@ -54,6 +56,7 @@ const NewList = props => {
 		};
 
 		dispatch(createOneList(newList));
+		history.push("/home");
 	};
 
 	return (
