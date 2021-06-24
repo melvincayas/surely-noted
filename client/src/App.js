@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-import { userActions } from "./store/user/user-slice";
-import { listsActions } from "./store/lists/lists-slice";
 import { reloadUser } from "./store/user/user-actions";
 import { getUserLists } from "./store/lists/list-actions";
 
+import Landing from "./components/Landing/Landing";
 import Layout from "./components/Wrappers/Layout";
 import AuthenticatedRoutes from "./components/Wrappers/AuthenticatedRoutes";
 import Auth from "./components/Auth/Auth";
@@ -26,27 +24,19 @@ const App = () => {
 		} else {
 			history.push("/");
 		}
-
-		return () => {
-			dispatch(userActions.logout());
-		};
 	}, [dispatch, history]);
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {
 			dispatch(getUserLists());
 		}
-
-		return () => {
-			dispatch(listsActions.clearAllLists());
-		};
 	}, [isLoggedIn, dispatch]);
 
 	return (
 		<Layout>
 			<Switch>
-				{/* Make auth route for login/signup and make '/' a landing page */}
-				{!isLoggedIn && <Route path="/" component={Auth} exact />}
+				<Route path="/" exact component={Landing} />
+				{!isLoggedIn && <Route path="/auth" component={Auth} />}
 				<AuthenticatedRoutes path="/home" component={ClientView} />
 				<AuthenticatedRoutes path="/list/:listId" component={ListDetail} />
 				<Route path="*" render={() => <p>Nothing found!</p>} />
