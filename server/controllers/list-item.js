@@ -17,9 +17,13 @@ module.exports.newListItem = catchAsync(async (req, res, next) => {
 
 module.exports.deleteListItem = catchAsync(async (req, res, next) => {
 	const { listId, itemId } = req.params;
-	const list = await List.findByIdAndUpdate(listId, {
-		$pull: { items: { _id: itemId } },
-	});
+	const list = await List.findByIdAndUpdate(
+		listId,
+		{
+			$pull: { items: { _id: itemId } },
+		},
+		{ new: true }
+	);
 	res.status(200).json({ response: { type: "success", list } });
 });
 
