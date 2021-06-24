@@ -4,6 +4,7 @@ import { handleAsyncErrors } from "../utilities/helpers";
 
 export const registerNewUser = (name, email, password) => {
 	return handleAsyncErrors(async dispatch => {
+		dispatch(userActions.loading({ status: "loading" }));
 		const request = { name, email, password };
 		const response = await fetchData("/user/register", "POST", request);
 		dispatch(

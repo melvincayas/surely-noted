@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { registerNewUser } from "../../store/user/user-actions";
 import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
@@ -11,6 +12,7 @@ import inputStyles from "../UI/styles/Input.module.css";
 const SignUp = props => {
 	const [formIsValid, setFormIsValid] = useState(false);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const {
 		inputChangeHandler: nameChangeHandler,
@@ -52,6 +54,7 @@ const SignUp = props => {
 	const formHandler = event => {
 		event.preventDefault();
 		dispatch(registerNewUser(enteredName, enteredEmail, enteredPassword));
+		history.replace("/home");
 	};
 
 	const context = (

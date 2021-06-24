@@ -45,7 +45,8 @@ const App = () => {
 	return (
 		<Layout>
 			<Switch>
-				<Route path="/" component={Auth} exact />
+				{/* Make auth route for login/signup and make '/' a landing page */}
+				{!isLoggedIn && <Route path="/" component={Auth} exact />}
 				<AuthenticatedRoutes path="/home" component={ClientView} />
 				<AuthenticatedRoutes path="/list/:listId" component={ListDetail} />
 				<Route path="*" render={() => <p>Nothing found!</p>} />

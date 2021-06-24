@@ -42,7 +42,7 @@ const LogIn = props => {
 		}
 
 		dispatch(loginUser(enteredEmail, enteredPassword));
-		history.push("/home");
+		history.replace("/home");
 	};
 
 	const context = (
