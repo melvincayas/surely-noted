@@ -11,8 +11,6 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 			return <LoadingSpinner />;
 		} else if (isLoggedIn) {
 			return <Component {...props} />;
-		} else {
-			return <Redirect to="/" />;
 		}
 	};
 
