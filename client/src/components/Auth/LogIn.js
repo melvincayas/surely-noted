@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { errorActions } from "../../store/error/error-slice";
 import { loginUser } from "../../store/user/user-actions";
 import { useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import classes from "./Forms.module.css";
 import inputStyles from "../../components/UI/styles/Input.module.css";
 
 const LogIn = props => {
+	const isError = useSelector(state => state.error.isError);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
