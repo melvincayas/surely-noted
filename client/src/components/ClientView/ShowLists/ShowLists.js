@@ -1,17 +1,12 @@
-import { useSelector } from "react-redux";
 import Card from "../../UI/Card";
-import Button from "../../UI/Button";
 import ListItem from "./ListItem";
 
-const ShowLists = props => {
-	const title = props.category || "No category";
-	const allLists = useSelector(state => state.lists.lists);
-	const groupedList = allLists.filter(list => list.category === props.category);
-
+const ShowLists = ({ category, lists }) => {
+	const header = category || "All";
 	let result = <p>Create a list to get started!</p>;
 
-	if (groupedList.length > 0) {
-		result = groupedList.map(list => (
+	if (lists.length > 0) {
+		result = lists.map(list => (
 			<ListItem id={list._id} key={list._id} title={list.title} />
 		));
 	} else {
@@ -19,7 +14,7 @@ const ShowLists = props => {
 	}
 
 	return (
-		<Card header={title}>
+		<Card header={header}>
 			<section>{result}</section>
 		</Card>
 	);

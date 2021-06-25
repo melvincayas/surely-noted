@@ -11,6 +11,7 @@ const Sidebar = () => {
 
 	return (
 		<div>
+			<Link to="/home">All</Link>
 			{uniqueCategories.map(category => (
 				<Category category={category} />
 			))}
