@@ -2,3 +2,7 @@
 	border-right: 1px solid #ccc;
 	height: 80vh;
 }
+
+.link:focus {
+	font-weight: bold;
+}

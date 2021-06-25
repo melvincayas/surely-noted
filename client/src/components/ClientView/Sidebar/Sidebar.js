@@ -1,25 +1,17 @@
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Category from "./Category";
+import classes from "../ListSelection.module.css";
 
-const Sidebar = () => {
-	const allLists = useSelector(state => state.lists.lists);
-	const categories = allLists.map(list => list.category);
-	const uniqueCategories = categories
-		.filter((category, index, arr) => {
-			return arr.indexOf(category) === index;
-		})
-		.sort();
-
+const Sidebar = ({ categories }) => {
 	return (
 		<Fragment>
-			<div className="mb-2">
-				<Link to="/home" className="is-size-5">
+			<div className="mb-2 pl-5 ml-5">
+				<Link to="/home" className={`is-size-5 ${classes.link}`}>
 					All
 				</Link>
 			</div>
-			{uniqueCategories.map(category => (
+			{categories.map(category => (
 				<Category category={category} />
 			))}
 		</Fragment>
