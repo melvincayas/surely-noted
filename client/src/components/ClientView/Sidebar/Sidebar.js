@@ -5,9 +5,11 @@ import Category from "./Category";
 const Sidebar = () => {
 	const allLists = useSelector(state => state.lists.lists);
 	const categories = allLists.map(list => list.category);
-	const uniqueCategories = categories.filter((category, index, arr) => {
-		return arr.indexOf(category) === index;
-	});
+	const uniqueCategories = categories
+		.filter((category, index, arr) => {
+			return arr.indexOf(category) === index;
+		})
+		.sort();
 
 	return (
 		<div>
