@@ -24,7 +24,7 @@ const ListSelection = () => {
 		list => list.category === pickedCategory
 	);
 
-	const viewedLists = pickedCategory ? filteredLists : allLists;
+	const listsBeingViewed = pickedCategory ? filteredLists : allLists;
 
 	return (
 		<div className="columns">
@@ -32,7 +32,7 @@ const ListSelection = () => {
 				<Sidebar categories={uniqueCategories} />
 			</div>
 			<div className="column is-9">
-				<ShowLists category={pickedCategory} lists={viewedLists} />
+				<ShowLists category={pickedCategory} lists={listsBeingViewed} />
 			</div>
 		</div>
 	);

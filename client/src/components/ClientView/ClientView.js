@@ -10,7 +10,8 @@ const UserInterface = () => {
 
 	return (
 		<Fragment>
-			<ListSelection />
+			{allLists.length > 0 && <ListSelection />}
+			{allLists.length === 0 && <p>Create a new Notepad!</p>}
 			{selectedList && <ListDetail selected={selectedList} />}
 		</Fragment>
 	);
