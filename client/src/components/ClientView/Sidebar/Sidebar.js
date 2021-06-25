@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Category from "./Category";
@@ -12,12 +13,16 @@ const Sidebar = () => {
 		.sort();
 
 	return (
-		<div>
-			<Link to="/home">All</Link>
+		<Fragment>
+			<div className="mb-2">
+				<Link to="/home" className="is-size-5">
+					All
+				</Link>
+			</div>
 			{uniqueCategories.map(category => (
 				<Category category={category} />
 			))}
-		</div>
+		</Fragment>
 	);
 };
 

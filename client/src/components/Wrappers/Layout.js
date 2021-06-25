@@ -11,7 +11,7 @@ const Layout = props => {
 			{isError && <Error />}
 			<Navbar />
 			<div className="App">
-				<main>{props.children}</main>
+				<main className="container">{props.children}</main>
 			</div>
 		</Fragment>
 	);
