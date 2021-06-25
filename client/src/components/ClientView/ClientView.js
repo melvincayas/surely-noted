@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import Sidebar from "./Sidebar/Sidebar";
 import ShowLists from "./ShowLists/ShowLists";
 import ListDetail from "./ListDetail/ListDetail";
 
@@ -16,6 +17,7 @@ const UserInterface = () => {
 
 	return (
 		<Fragment>
+			<Sidebar />
 			{uniqueCategories.map(category => (
 				<ShowLists category={category} />
 			))}
