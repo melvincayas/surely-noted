@@ -6,6 +6,7 @@
 	width: 100vw;
 	top: 0;
 	left: 0;
+	animation: show-modal 0.1s forwards;
 }
 
 .container {
@@ -17,4 +18,14 @@
 	font-size: 1.25em;
 	margin-top: 0;
 	margin-bottom: 1em;
+}
+
+@keyframes show-modal {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
