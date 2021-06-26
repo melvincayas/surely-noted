@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
@@ -7,10 +7,12 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 
 	const show = props => {
-		if (userIsLoading === "pending" || userIsLoading === "loading") {
+		if (userIsLoading === "loading") {
 			return <LoadingSpinner />;
 		} else if (isLoggedIn) {
 			return <Component {...props} />;
+		} else {
+			return <Redirect to="/auth" />;
 		}
 	};
 
