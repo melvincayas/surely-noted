@@ -11,8 +11,8 @@ const Sidebar = ({ categories }) => {
 					All
 				</Link>
 			</div>
-			{categories.map(category => (
-				<Category category={category} />
+			{categories.map((category, index) => (
+				<Category key={index} category={category} />
 			))}
 		</Fragment>
 	);
