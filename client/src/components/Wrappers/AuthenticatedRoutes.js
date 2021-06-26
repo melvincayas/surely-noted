@@ -7,7 +7,7 @@ const AuthenticatedRoutes = ({ component: Component, ...rest }) => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 
 	const show = props => {
-		if (userIsLoading === "loading") {
+		if (userIsLoading === "pending" || userIsLoading === "loading") {
 			return <LoadingSpinner />;
 		} else if (isLoggedIn) {
 			return <Component {...props} />;
