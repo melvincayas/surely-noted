@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { registerNewUser } from "../../store/user/user-actions";
 import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
@@ -60,9 +60,9 @@ const SignUp = props => {
 	const context = (
 		<p className={classes.context}>
 			Have an account?{" "}
-			<a href="#" onClick={props.formHandler}>
+			<Link to="/auth" onClick={props.formHandler}>
 				Log In
-			</a>
+			</Link>
 		</p>
 	);
 

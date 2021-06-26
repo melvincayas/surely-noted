@@ -41,9 +41,9 @@ const Navbar = () => {
 		<Fragment>
 			{isMakingList && <NewList listToggler={newListHandler} />}
 			<nav className={classes.navbar}>
-				<a className={classes.brand} href="#">
+				<Link className={classes.brand} to="/home">
 					SurelyNoted
-				</a>
+				</Link>
 				{isLoggedIn && loggedInLinks}
 			</nav>
 		</Fragment>

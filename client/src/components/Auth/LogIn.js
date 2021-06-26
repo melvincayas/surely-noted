@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../store/error/error-slice";
 import { loginUser } from "../../store/user/user-actions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -48,9 +48,9 @@ const LogIn = props => {
 	const context = (
 		<p className={classes.context}>
 			Don't have an account?{" "}
-			<a href="#" onClick={props.formHandler}>
+			<Link to="/auth" onClick={props.formHandler}>
 				Sign Up
-			</a>
+			</Link>
 		</p>
 	);
 
