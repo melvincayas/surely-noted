@@ -10,11 +10,6 @@
 	transition: all 0.1s ease-in-out;
 }
 
-.notepad-container div:nth-child(2) {
-	border-left: 1px solid #ccc;
-	min-height: 75px;
-}
-
 .notepad-container:hover {
 	transform: scale(1.01);
 	box-shadow: 4px 4px 6px #ccc;
