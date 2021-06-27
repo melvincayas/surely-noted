@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ItemInputForm from "./ItemInputForm";
+import TaskInputForm from "./TaskInputForm";
 import classes from "./styles/NotepadLayout.module.css";
 
 const NotepadLayout = props => {
@@ -22,7 +22,7 @@ const NotepadLayout = props => {
 					<i onClick={addTaskHandler} className={addBtnClass}></i>
 				</div>
 			</div>
-			{isAdding && <ItemInputForm listId={props.listId} />}
+			{isAdding && <TaskInputForm listId={props.listId} />}
 			<section>{props.children}</section>
 		</div>
 	);
