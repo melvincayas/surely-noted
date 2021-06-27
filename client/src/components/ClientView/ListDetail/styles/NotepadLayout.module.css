@@ -15,9 +15,25 @@
 	padding: 0.35em 1em;
 	color: white;
 	box-shadow: 1px 1px 2px #888;
+	display: flex;
+	justify-content: space-between;
 }
 
 .title {
 	font-size: 1.5em;
 	font-weight: bold;
+}
+
+.notepad-action-btns {
+	font-size: 2em;
+	margin: auto 0;
+}
+
+.notepad-action-btns i:hover {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.notepad-action-btns i:active {
+	transform: scale(0.98);
 }
