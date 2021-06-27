@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOneList } from "../../../store/lists/list-actions";
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
-import Card from "../../UI/Card";
+import NotepadLayout from "./NotepadLayout";
 import ItemCard from "./ItemCard";
 import classes from "./styles/List.module.css";
 import ItemInputForm from "./ItemInputForm";
@@ -31,18 +31,23 @@ const List = () => {
 	}
 
 	return (
-		<Card header={selectedList.title}>
+		<Fragment>
 			<ItemInputForm listId={selectedList._id} />
-			{selectedList.items.length === 0 && emptyText}
-			{selectedList.items.map(item => (
-				<ItemCard
-					key={item._id}
-					listId={selectedList._id}
-					itemId={item._id}
-					item={item.content}
-				/>
-			))}
-		</Card>
+			<NotepadLayout
+				title={selectedList.title}
+				category={selectedList.category}
+			>
+				{selectedList.items.length === 0 && emptyText}
+				{selectedList.items.map(item => (
+					<ItemCard
+						key={item._id}
+						listId={selectedList._id}
+						itemId={item._id}
+						item={item.content}
+					/>
+				))}
+			</NotepadLayout>
+		</Fragment>
 	);
 };
 
