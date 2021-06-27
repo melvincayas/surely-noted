@@ -11,9 +11,22 @@
 	outline: none;
 	padding-left: 1em;
 	border: none;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #888;
 }
 
 .submit-btn {
-	width: 15%;
+	background-color: whitesmoke;
+	width: 16%;
+	outline: none;
+	border: 1px solid #888;
+	cursor: pointer;
+	font-size: 1.25em;
+}
+
+.submit-btn:hover {
+	background-color: #ccc;
+}
+
+.submit-btn:active {
+	transform: scale(0.98);
 }
