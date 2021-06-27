@@ -6,7 +6,6 @@ import Button from "../../UI/Button";
 import classes from "./styles/ItemInputForm.module.css";
 
 const ItemInputForm = ({ listId }) => {
-	console.log(listId);
 	const [input, setInput] = useState("");
 
 	const dispatch = useDispatch();

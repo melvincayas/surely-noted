@@ -9,7 +9,7 @@ import Layout from "./components/Wrappers/Layout";
 import AuthenticatedRoutes from "./components/Wrappers/AuthenticatedRoutes";
 import Auth from "./components/Auth/Auth";
 import ClientView from "./components/ClientView/ClientView";
-import ListDetail from "./components/ClientView/ListDetail/ListDetail";
+import NotepadDetail from "./components/ClientView/NotepadDetail/NotepadDetail";
 
 import "./App.css";
 
@@ -38,7 +38,7 @@ const App = () => {
 				<Route path="/" exact component={Landing} />
 				{!isLoggedIn && <Route path="/auth" component={Auth} />}
 				<AuthenticatedRoutes path="/home" component={ClientView} />
-				<AuthenticatedRoutes path="/list/:listId" component={ListDetail} />
+				<AuthenticatedRoutes path="/list/:listId" component={NotepadDetail} />
 				<Route path="*" render={() => <p>Nothing found!</p>} />
 			</Switch>
 		</Layout>

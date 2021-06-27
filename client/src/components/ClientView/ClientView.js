@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import ListSelection from "./ListSelection";
-import ListDetail from "./ListDetail/ListDetail";
+import NotepadDetail from "./NotepadDetail/NotepadDetail";
 
 const UserInterface = () => {
 	const allLists = useSelector(state => state.lists.lists);
@@ -12,7 +12,7 @@ const UserInterface = () => {
 		<Fragment>
 			{allLists.length > 0 && <ListSelection />}
 			{allLists.length === 0 && <p>Create a new Notepad!</p>}
-			{selectedList && <ListDetail selected={selectedList} />}
+			{selectedList && <NotepadDetail selected={selectedList} />}
 		</Fragment>
 	);
 };
