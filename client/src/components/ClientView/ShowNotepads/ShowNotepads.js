@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import ShowTitle from "./ShowTitle";
-import ShowContent from "./ShowContent";
+import ShowStatus from "./ShowStatus";
 import classes from "./styles/ShowNotepads.module.css";
 
 const ShowNotepads = ({ list }) => {
@@ -15,12 +15,8 @@ const ShowNotepads = ({ list }) => {
 			className={`columns ${classes["notepad-container"]}`}
 			onClick={onClickHandler}
 		>
-			<div className="column is-half">
-				<ShowTitle title={list.title} category={list.category} />
-			</div>
-			<div className="column is-half">
-				<ShowContent created={list.created} items={list.items} />
-			</div>
+			<ShowTitle title={list.title} category={list.category} />
+			<ShowStatus items={list.items} />
 		</div>
 	);
 };
