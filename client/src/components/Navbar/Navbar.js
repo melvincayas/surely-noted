@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../store/user/user-actions";
-import NewList from "../ClientView/NewList/NewList";
+import NewList from "../ClientView/NewNotepad/NewNotepad";
 import classes from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
 			</li>
 			<li>
 				<Link to="/" onClick={newListHandler}>
-					New List
+					New Notepad
 				</Link>
 			</li>
 			<li>
