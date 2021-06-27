@@ -9,7 +9,7 @@ import Layout from "./components/Wrappers/Layout";
 import AuthenticatedRoutes from "./components/Wrappers/AuthenticatedRoutes";
 import Auth from "./components/Auth/Auth";
 import ClientView from "./components/ClientView/ClientView";
-import NotepadDetail from "./components/ClientView/NotepadDetail/NotepadDetail";
+import NotepadDetail from "./components/ClientView/NotepadDetail";
 
 import "./App.css";
 

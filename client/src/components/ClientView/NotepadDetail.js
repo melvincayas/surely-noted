@@ -1,16 +1,16 @@
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getOneList } from "../../../store/lists/list-actions";
+import { getOneList } from "../../store/lists/list-actions";
 
-import LoadingSpinner from "../../UI/LoadingSpinner";
-import NotepadLayout from "./NotepadLayout";
-import TaskCard from "./TaskCard";
-import classes from "./styles/List.module.css";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import NotepadLayout from "./NotepadDetail/NotepadLayout";
+import TaskCard from "./NotepadDetail/TaskCard";
+import classes from "./NotepadDetail/styles/NotepadDetail.module.css";
 
 let initialLoad = true;
 
-const List = () => {
+const NotepadDetail = () => {
 	const { listId } = useParams();
 	const dispatch = useDispatch();
 	const selectedList = useSelector(state => state.lists.selectedList);
@@ -50,4 +50,4 @@ const List = () => {
 	);
 };
 
-export default List;
+export default NotepadDetail;

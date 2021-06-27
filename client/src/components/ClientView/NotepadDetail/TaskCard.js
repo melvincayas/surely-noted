@@ -7,7 +7,7 @@ import {
 import Button from "../../UI/Button";
 import classes from "./styles/TaskCard.module.css";
 
-const ItemCard = ({ listId, itemId, item }) => {
+const TaskCard = ({ listId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editContent, setEditContent] = useState(item);
 	const [done, setDone] = useState(null);
@@ -79,4 +79,4 @@ const ItemCard = ({ listId, itemId, item }) => {
 	);
 };
 
-export default ItemCard;
+export default TaskCard;

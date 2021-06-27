@@ -5,7 +5,7 @@ import { addOneListItem } from "../../../store/lists/list-item-actions";
 import Button from "../../UI/Button";
 import classes from "./styles/TaskInputForm.module.css";
 
-const ItemInputForm = ({ listId }) => {
+const TaskInputForm = ({ listId }) => {
 	const [input, setInput] = useState("");
 
 	const dispatch = useDispatch();
@@ -47,4 +47,4 @@ const ItemInputForm = ({ listId }) => {
 	);
 };
 
-export default ItemInputForm;
+export default TaskInputForm;

@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import ShowNotepads from "./ShowNotepads/ShowNotepads";
 import classes from "./NotepadSelection.module.css";
 
-const ListSelection = () => {
+const NotepadSelection = () => {
 	const location = useLocation();
 	const query = new URLSearchParams(location.search);
 	const pickedCategory = query.get("filter");
@@ -40,4 +40,4 @@ const ListSelection = () => {
 	);
 };
 
-export default ListSelection;
+export default NotepadSelection;

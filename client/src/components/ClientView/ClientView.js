@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import NotepadSelection from "./NotepadSelection";
-import NotepadDetail from "./NotepadDetail/NotepadDetail";
+import NotepadDetail from "./NotepadDetail";
 
 const UserInterface = () => {
 	const allLists = useSelector(state => state.lists.lists);
