@@ -60,7 +60,7 @@ const NewList = props => {
 	};
 
 	return (
-		<FormModal header="New List">
+		<FormModal header="New Notepad">
 			<form onSubmit={formHandler} className={classes.form} method="POST">
 				<Input
 					label="Title (required)"
