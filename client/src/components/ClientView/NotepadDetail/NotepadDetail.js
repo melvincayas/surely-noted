@@ -5,7 +5,7 @@ import { getOneList } from "../../../store/lists/list-actions";
 
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import NotepadLayout from "./NotepadLayout";
-import ItemCard from "./ItemCard";
+import TaskCard from "./TaskCard";
 import classes from "./styles/List.module.css";
 
 let initialLoad = true;
@@ -38,7 +38,7 @@ const List = () => {
 			>
 				{selectedList.items.length === 0 && emptyText}
 				{selectedList.items.map(item => (
-					<ItemCard
+					<TaskCard
 						key={item._id}
 						listId={selectedList._id}
 						itemId={item._id}
