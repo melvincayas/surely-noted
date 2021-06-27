@@ -2,7 +2,6 @@ import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../../store/error/error-slice";
 import { addOneListItem } from "../../../store/lists/list-item-actions";
-import Button from "../../UI/Button";
 import classes from "./styles/TaskInputForm.module.css";
 
 const TaskInputForm = ({ listId }) => {
@@ -36,12 +35,14 @@ const TaskInputForm = ({ listId }) => {
 		<Fragment>
 			<form className={classes["item-input-form"]} onSubmit={submitHandler}>
 				<input
+					autoFocus
+					placeholder="Enter a task"
 					className={classes["item-input"]}
 					type="text"
 					value={input}
 					onChange={inputHandler}
 				></input>
-				<Button>Add</Button>
+				<button className={classes["submit-btn"]}>Add Task</button>
 			</form>
 		</Fragment>
 	);
