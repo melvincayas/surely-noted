@@ -1,0 +1,14 @@
+.notepad-container {
+	background-color: white;
+	margin-left: 0.5em;
+	margin-bottom: 2em !important;
+	border: 1px solid #ccc;
+	padding: 0.5em;
+	border-radius: 10px;
+	transition: all 0.1s ease-in-out;
+}
+
+.notepad-container:hover {
+	transform: scale(1.01);
+	box-shadow: 4px 4px 6px #ccc;
+}

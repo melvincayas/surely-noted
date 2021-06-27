@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
-import ShowLists from "./ShowLists/ShowLists";
+import ShowNotepads from "./ShowNotepads/ShowNotepads";
 import classes from "./ListSelection.module.css";
 
 const ListSelection = () => {
@@ -32,7 +32,9 @@ const ListSelection = () => {
 				<Sidebar categories={uniqueCategories} />
 			</div>
 			<div className="column is-9">
-				<ShowLists category={pickedCategory} lists={listsBeingViewed} />
+				{listsBeingViewed.map(list => (
+					<ShowNotepads key={list._id} list={list} />
+				))}
 			</div>
 		</div>
 	);
