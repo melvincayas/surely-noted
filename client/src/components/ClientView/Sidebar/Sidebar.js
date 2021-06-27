@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Category from "./Category";
-import classes from "../ListSelection.module.css";
+import classes from "../NotepadSelection.module.css";
 
 const Sidebar = ({ categories }) => {
 	const location = useLocation();

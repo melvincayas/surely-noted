@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { errorActions } from "../../../store/error/error-slice";
 import { addOneListItem } from "../../../store/lists/list-item-actions";
 import Button from "../../UI/Button";
-import classes from "./styles/ItemInputForm.module.css";
+import classes from "./styles/TaskInputForm.module.css";
 
 const ItemInputForm = ({ listId }) => {
 	const [input, setInput] = useState("");

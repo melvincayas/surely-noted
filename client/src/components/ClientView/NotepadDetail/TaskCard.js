@@ -5,7 +5,7 @@ import {
 	editOneListItem,
 } from "../../../store/lists/list-item-actions";
 import Button from "../../UI/Button";
-import classes from "./styles/ItemCard.module.css";
+import classes from "./styles/TaskCard.module.css";
 
 const ItemCard = ({ listId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);

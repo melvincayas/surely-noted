@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import ListSelection from "./ListSelection";
+import NotepadSelection from "./NotepadSelection";
 import NotepadDetail from "./NotepadDetail/NotepadDetail";
 
 const UserInterface = () => {
@@ -10,7 +10,7 @@ const UserInterface = () => {
 
 	return (
 		<Fragment>
-			{allLists.length > 0 && <ListSelection />}
+			{allLists.length > 0 && <NotepadSelection />}
 			{allLists.length === 0 && <p>Create a new Notepad!</p>}
 			{selectedList && <NotepadDetail selected={selectedList} />}
 		</Fragment>
