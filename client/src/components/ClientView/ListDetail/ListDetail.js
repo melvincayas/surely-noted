@@ -7,7 +7,6 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 import NotepadLayout from "./NotepadLayout";
 import ItemCard from "./ItemCard";
 import classes from "./styles/List.module.css";
-import ItemInputForm from "./ItemInputForm";
 
 let initialLoad = true;
 
@@ -32,8 +31,8 @@ const List = () => {
 
 	return (
 		<Fragment>
-			<ItemInputForm listId={selectedList._id} />
 			<NotepadLayout
+				listId={selectedList._id}
 				title={selectedList.title}
 				category={selectedList.category}
 			>
