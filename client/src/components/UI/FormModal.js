@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import classes from "./styles/Modal.module.css";
+import classes from "../../styles/UI/Modal.module.css";
 
 const FormModal = props => {
 	return (

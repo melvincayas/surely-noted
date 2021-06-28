@@ -1,4 +1,4 @@
-import classes from "./styles/LoadingSpinner.module.css";
+import classes from "../../styles/UI/LoadingSpinner.module.css";
 
 const LoadingSpinner = () => {
 	return <div className={classes.spinner}></div>;

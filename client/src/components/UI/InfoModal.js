@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import Button from "./Button";
-import classes from "./styles/Modal.module.css";
+import classes from "../../styles/UI/Modal.module.css";
 
 const InfoModal = props => {
 	return (

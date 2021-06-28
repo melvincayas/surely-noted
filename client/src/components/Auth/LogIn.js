@@ -7,7 +7,7 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "../../styles/Auth/Forms.module.css";
-import inputStyles from "../../components/UI/styles/Input.module.css";
+import inputStyles from "../../styles/UI/Input.module.css";
 
 const LogIn = props => {
 	const dispatch = useDispatch();

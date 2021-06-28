@@ -7,7 +7,7 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "../../styles/Auth/Forms.module.css";
-import inputStyles from "../UI/styles/Input.module.css";
+import inputStyles from "../../styles/UI/Input.module.css";
 
 const SignUp = props => {
 	const [formIsValid, setFormIsValid] = useState(false);
