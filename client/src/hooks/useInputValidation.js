@@ -31,7 +31,7 @@ const useInputValidation = validateInput => {
 		dispatchState({ type: "INPUT", input: event.target.value });
 	};
 
-	const inputBlurHandler = event => {
+	const inputBlurHandler = () => {
 		dispatchState({ type: "BLUR" });
 	};
 
