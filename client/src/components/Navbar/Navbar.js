@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../store/user/user-actions";
 import NewList from "../Home/NewNotepad/NewNotepad";
-import classes from "./Navbar.module.css";
+import classes from "../../styles/Navbar/Navbar.module.css";
 
 const Navbar = () => {
 	const [isMakingList, setIsMakingList] = useState(false);
