@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import NotepadSelection from "./NotepadSelection";
 import NotepadDetail from "./NotepadDetail";
 
-const UserInterface = () => {
+const ClientView = () => {
 	const allLists = useSelector(state => state.lists.lists);
 	const selectedListId = useSelector(state => state.lists.selectedListToView);
 	const selectedList = allLists.find(list => list._id === selectedListId);
@@ -17,4 +17,4 @@ const UserInterface = () => {
 	);
 };
 
-export default UserInterface;
+export default ClientView;
