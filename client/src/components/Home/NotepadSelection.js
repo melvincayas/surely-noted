@@ -8,8 +8,8 @@ const NotepadSelection = () => {
 	const location = useLocation();
 	const query = new URLSearchParams(location.search);
 	const pickedCategory = query.get("filter");
-	const allLists = useSelector(state => state.lists.lists);
-	const allCategories = allLists.map(list => list.category);
+	const allNotepads = useSelector(state => state.lists.lists);
+	const allCategories = allNotepads.map(notepad => notepad.category);
 	const uniqueCategories = allCategories
 		.filter((category, index, arr) => {
 			return arr.indexOf(category) === index;
@@ -20,11 +20,11 @@ const NotepadSelection = () => {
 		return <p>That category doesn't exist!</p>;
 	}
 
-	const filteredLists = allLists.filter(
-		list => list.category === pickedCategory
+	const filteredLists = allNotepads.filter(
+		notepad => notepad.category === pickedCategory
 	);
 
-	const listsBeingViewed = pickedCategory ? filteredLists : allLists;
+	const listsBeingViewed = pickedCategory ? filteredLists : allNotepads;
 
 	return (
 		<div className="columns">
@@ -32,8 +32,8 @@ const NotepadSelection = () => {
 				<Sidebar categories={uniqueCategories} />
 			</div>
 			<div className="column is-9">
-				{listsBeingViewed.map(list => (
-					<ShowNotepads key={list._id} list={list} />
+				{listsBeingViewed.map(notepad => (
+					<ShowNotepads key={notepad._id} notepad={notepad} />
 				))}
 			</div>
 		</div>

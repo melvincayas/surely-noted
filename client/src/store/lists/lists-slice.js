@@ -9,10 +9,10 @@ const listsSlice = createSlice({
 	name: "lists",
 	initialState: initialLists,
 	reducers: {
-		loadAllLists(state, action) {
+		loadAllNotepads(state, action) {
 			state.lists = action.payload.lists;
 		},
-		clearAllLists(state) {
+		clearAllNotepads(state) {
 			state.lists = [];
 		},
 		loading(state, action) {

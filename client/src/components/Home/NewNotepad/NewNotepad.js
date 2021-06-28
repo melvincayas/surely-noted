@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createOneList } from "../../../store/lists/list-actions";
+import { createOneNotepad } from "../../../store/lists/list-actions";
 import FormModal from "../../UI/FormModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
@@ -55,7 +55,7 @@ const NewList = props => {
 			category: inputs.category,
 		};
 
-		dispatch(createOneList(newList));
+		dispatch(createOneNotepad(newList));
 		history.push("/home");
 	};
 

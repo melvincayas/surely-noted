@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 import NotepadSelection from "./NotepadSelection";
 
 const Home = () => {
-	const allLists = useSelector(state => state.lists.lists);
+	const allNotepads = useSelector(state => state.lists.lists);
 
 	const initialShow =
-		allLists.length > 0 ? <NotepadSelection /> : <p>Create a new notepad!</p>;
+		allNotepads.length > 0 ? (
+			<NotepadSelection />
+		) : (
+			<p>Create a new notepad!</p>
+		);
 
 	return <Fragment>{initialShow}</Fragment>;
 };

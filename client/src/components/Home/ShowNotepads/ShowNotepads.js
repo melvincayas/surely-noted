@@ -3,11 +3,11 @@ import ShowTitle from "./ShowTitle";
 import ShowStatus from "./ShowStatus";
 import classes from "../../../styles/Home/ShowNotepads.module.css";
 
-const ShowNotepads = ({ list }) => {
+const ShowNotepads = ({ notepad }) => {
 	const history = useHistory();
 
 	const onClickHandler = () => {
-		history.push(`/list/${list._id}`);
+		history.push(`/list/${notepad._id}`);
 	};
 
 	return (
@@ -15,8 +15,8 @@ const ShowNotepads = ({ list }) => {
 			className={`columns ${classes["notepad-container"]}`}
 			onClick={onClickHandler}
 		>
-			<ShowTitle title={list.title} category={list.category} />
-			<ShowStatus items={list.items} />
+			<ShowTitle title={notepad.title} category={notepad.category} />
+			<ShowStatus items={notepad.items} />
 		</div>
 	);
 };
