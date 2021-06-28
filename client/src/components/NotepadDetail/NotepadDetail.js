@@ -8,7 +8,7 @@ import classes from "../../styles/NotepadDetail/NotepadDetail.module.css";
 
 const NotepadDetail = () => {
 	const { listId } = useParams();
-	const allNotepads = useSelector(state => state.lists.lists);
+	const allNotepads = useSelector(state => state.notepads.notepads);
 
 	const selectedNotepad = allNotepads.find(notepad => notepad._id === listId);
 

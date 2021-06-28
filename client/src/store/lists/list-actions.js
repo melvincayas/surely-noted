@@ -1,4 +1,4 @@
-import { listsActions } from "./lists-slice";
+import { notepadActions } from "./lists-slice";
 import { fetchData } from "../utilities/helpers";
 import { handleAsyncErrors } from "../utilities/helpers";
 
@@ -6,8 +6,8 @@ export const getUserNotepads = () => {
 	return handleAsyncErrors(async dispatch => {
 		const response = await fetchData("/list");
 		dispatch(
-			listsActions.loadAllNotepads({
-				lists: response.lists,
+			notepadActions.loadAllNotepads({
+				notepads: response.notepads,
 			})
 		);
 	});
@@ -16,7 +16,7 @@ export const getUserNotepads = () => {
 export const createOneNotepad = newList => {
 	return handleAsyncErrors(async dispatch => {
 		const response = await fetchData("/list", "POST", newList);
-		dispatch(listsActions.loadAllNotepads({ lists: response.lists }));
+		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
 
@@ -24,6 +24,6 @@ export const deleteOneNotepad = id => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { id };
 		const response = await fetchData("/list", "DELETE", request);
-		dispatch(listsActions.loadAllNotepads({ lists: response.lists }));
+		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };

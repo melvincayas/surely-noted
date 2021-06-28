@@ -14,7 +14,7 @@ module.exports.newListItem = catchAsync(async (req, res, next) => {
 	list.items.push(newItem);
 	await list.save();
 	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	res.status(200).json({ response: { type: "success", notepads: userLists } });
 });
 
 module.exports.deleteListItem = catchAsync(async (req, res, next) => {
@@ -28,7 +28,7 @@ module.exports.deleteListItem = catchAsync(async (req, res, next) => {
 		{ new: true }
 	);
 	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	res.status(200).json({ response: { type: "success", notepads: userLists } });
 });
 
 module.exports.editListItem = catchAsync(async (req, res, next) => {
@@ -44,5 +44,5 @@ module.exports.editListItem = catchAsync(async (req, res, next) => {
 		}
 	);
 	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	res.status(200).json({ response: { type: "success", notepads: userLists } });
 });

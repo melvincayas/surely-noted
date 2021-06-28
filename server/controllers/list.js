@@ -5,7 +5,7 @@ const catchAsync = require("../public/utilities/catchAsync");
 module.exports.onLoad = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;
 	const lists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: lists } });
+	res.status(200).json({ response: { type: "success", notepads: lists } });
 });
 
 module.exports.viewOneList = catchAsync(async (req, res, next) => {
@@ -28,7 +28,7 @@ module.exports.newList = catchAsync(async (req, res, next) => {
 	await user.save();
 	await newList.save();
 	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	res.status(200).json({ response: { type: "success", notepads: userLists } });
 });
 
 module.exports.deleteList = catchAsync(async (req, res, next) => {
@@ -36,5 +36,5 @@ module.exports.deleteList = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;
 	await List.findOneAndDelete({ _id: id });
 	const userLists = await List.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", lists: userLists } });
+	res.status(200).json({ response: { type: "success", notepads: userLists } });
 });

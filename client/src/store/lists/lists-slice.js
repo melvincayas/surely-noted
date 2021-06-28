@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialLists = {
-	lists: [],
-	listsLoading: false,
+const initialNotepads = {
+	notepads: [],
+	notepadsLoading: false,
 };
 
-const listsSlice = createSlice({
-	name: "lists",
-	initialState: initialLists,
+const notepadSlice = createSlice({
+	name: "notepads",
+	initialState: initialNotepads,
 	reducers: {
 		loadAllNotepads(state, action) {
-			state.lists = action.payload.lists;
+			state.notepads = action.payload.notepads;
 		},
 		clearAllNotepads(state) {
-			state.lists = [];
+			state.notepads = [];
 		},
 		loading(state, action) {
-			state.listsLoading = action.payload.status;
+			state.notepadsLoading = action.payload.status;
 		},
 	},
 });
 
-export const listsActions = listsSlice.actions;
-export default listsSlice.reducer;
+export const notepadActions = notepadSlice.actions;
+export default notepadSlice.reducer;

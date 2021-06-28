@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import NotepadSelection from "./NotepadSelection";
 
 const Home = () => {
-	const allNotepads = useSelector(state => state.lists.lists);
+	const allNotepads = useSelector(state => state.notepads.notepads);
 
 	const initialShow =
 		allNotepads.length > 0 ? (

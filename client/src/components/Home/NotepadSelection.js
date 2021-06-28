@@ -8,7 +8,7 @@ const NotepadSelection = () => {
 	const location = useLocation();
 	const query = new URLSearchParams(location.search);
 	const pickedCategory = query.get("filter");
-	const allNotepads = useSelector(state => state.lists.lists);
+	const allNotepads = useSelector(state => state.notepads.notepads);
 	const allCategories = allNotepads.map(notepad => notepad.category);
 	const uniqueCategories = allCategories
 		.filter((category, index, arr) => {
