@@ -15,6 +15,7 @@ import "./App.css";
 
 const App = () => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const selectedList = useSelector(state => state.lists.selectedList);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -30,7 +31,7 @@ const App = () => {
 		if (localStorage.getItem("session_id")) {
 			dispatch(getUserLists());
 		}
-	}, [isLoggedIn, dispatch]);
+	}, [isLoggedIn, dispatch, selectedList]);
 
 	return (
 		<Layout>
