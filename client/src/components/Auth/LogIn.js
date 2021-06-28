@@ -6,7 +6,7 @@ import useInputValidation from "../../hooks/useInputValidation";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
-import classes from "./Forms.module.css";
+import classes from "../../styles/Auth/Forms.module.css";
 import inputStyles from "../../components/UI/styles/Input.module.css";
 
 const LogIn = props => {

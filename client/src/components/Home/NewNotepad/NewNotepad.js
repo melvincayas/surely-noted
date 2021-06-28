@@ -5,7 +5,7 @@ import { createOneList } from "../../../store/lists/list-actions";
 import FormModal from "../../UI/FormModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
-import classes from "../../Auth/Forms.module.css";
+import classes from "../../../styles/Auth/Forms.module.css";
 
 const defaultInputs = {
 	title: "",
