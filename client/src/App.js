@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { reloadUser } from "./store/user/user-actions";
-import { getUserNotepads } from "./store/lists/list-actions";
+import { getUserNotepads } from "./store/notepads/notepad-actions";
 
 import Landing from "./components/Landing/Landing";
 import Layout from "./components/Wrappers/Layout";

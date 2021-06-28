@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createOneNotepad } from "../../../store/lists/list-actions";
+import { createOneNotepad } from "../../../store/notepads/notepad-actions";
 import FormModal from "../../UI/FormModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
