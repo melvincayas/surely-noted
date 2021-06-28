@@ -10,8 +10,11 @@ const ClientView = () => {
 
 	return (
 		<Fragment>
-			{allLists.length > 0 && <NotepadSelection />}
-			{allLists.length === 0 && <p>Create a new Notepad!</p>}
+			{allLists.length > 0 ? (
+				<NotepadSelection />
+			) : (
+				<p>Create a new Notepad!</p>
+			)}
 			{selectedList && <NotepadDetail selected={selectedList} />}
 		</Fragment>
 	);
