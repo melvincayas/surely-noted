@@ -27,11 +27,3 @@ export const deleteOneList = id => {
 		dispatch(listsActions.loadAllLists({ lists: response.lists }));
 	});
 };
-
-// export const getOneList = listId => {
-// 	return handleAsyncErrors(async dispatch => {
-// 		dispatch(listsActions.loading({ status: true }));
-// 		const response = await fetchData(`/list/${listId}`);
-// 		dispatch(listsActions.viewOneList({ selectedList: response.list }));
-// 	});
-// };
