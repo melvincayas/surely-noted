@@ -1,33 +1,24 @@
-import { useEffect, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getOneList } from "../../store/lists/list-actions";
 
-import LoadingSpinner from "../UI/LoadingSpinner";
 import NotepadLayout from "./NotepadDetail/NotepadLayout";
 import TaskCard from "./NotepadDetail/TaskCard";
 import classes from "./NotepadDetail/styles/NotepadDetail.module.css";
 
-let initialLoad = true;
-
 const NotepadDetail = () => {
 	const { listId } = useParams();
-	const dispatch = useDispatch();
-	const selectedList = useSelector(state => state.lists.selectedList);
-	const listsLoading = useSelector(state => state.lists.listsLoading);
+	const allLists = useSelector(state => state.lists.lists);
 
-	useEffect(() => {
-		dispatch(getOneList(listId));
-	}, [dispatch, listId]);
+	const selectedList = allLists.find(list => list._id === listId);
+
+	if (!selectedList) {
+		return <p>That Notepad doesn't exist!</p>;
+	}
 
 	const emptyText = (
 		<p className={classes["empty-text"]}>Enter items to get started!</p>
 	);
-
-	if (initialLoad || listsLoading) {
-		initialLoad = false;
-		return <LoadingSpinner />;
-	}
 
 	return (
 		<Fragment>

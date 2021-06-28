@@ -28,10 +28,10 @@ export const deleteOneList = id => {
 	});
 };
 
-export const getOneList = listId => {
-	return handleAsyncErrors(async dispatch => {
-		dispatch(listsActions.loading({ status: true }));
-		const response = await fetchData(`/list/${listId}`);
-		dispatch(listsActions.viewOneList({ selectedList: response.list }));
-	});
-};
+// export const getOneList = listId => {
+// 	return handleAsyncErrors(async dispatch => {
+// 		dispatch(listsActions.loading({ status: true }));
+// 		const response = await fetchData(`/list/${listId}`);
+// 		dispatch(listsActions.viewOneList({ selectedList: response.list }));
+// 	});
+// };
