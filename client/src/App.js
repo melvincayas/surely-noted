@@ -11,7 +11,7 @@ import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import NotepadDetail from "./components/NotepadDetail/NotepadDetail";
 
-import "./App.css";
+import "./styles/App.css";
 
 const App = () => {
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
