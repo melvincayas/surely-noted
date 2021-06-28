@@ -7,7 +7,7 @@ const userSchema = new Schema({
 		type: String,
 		required: [true, "Please enter your name."],
 	},
-	lists: [
+	notepads: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: "List",

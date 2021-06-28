@@ -1,13 +1,13 @@
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-	removeOneListItem,
-	editOneListItem,
+	removeOneNotepadItem,
+	editOneNotepadItem,
 } from "../../store/notepads/notepad-item-actions";
 import Button from "../UI/Button";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
-const TaskCard = ({ listId, itemId, item }) => {
+const TaskCard = ({ notepadId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editContent, setEditContent] = useState(item);
 	const [done, setDone] = useState(null);
@@ -15,7 +15,7 @@ const TaskCard = ({ listId, itemId, item }) => {
 	const dispatch = useDispatch();
 
 	const removeHandler = () => {
-		dispatch(removeOneListItem(listId, itemId));
+		dispatch(removeOneNotepadItem(notepadId, itemId));
 	};
 
 	const editHandler = () => {
@@ -33,7 +33,7 @@ const TaskCard = ({ listId, itemId, item }) => {
 
 	const editFormHandler = async event => {
 		event.preventDefault();
-		dispatch(editOneListItem(listId, itemId, editContent));
+		dispatch(editOneNotepadItem(notepadId, itemId, editContent));
 		setIsEditing(prevIsEditing => !prevIsEditing);
 	};
 

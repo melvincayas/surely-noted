@@ -9,10 +9,10 @@ const User = require("./models/User");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const authRoutes = require("./routes/auth");
-const listRoutes = require("./routes/list");
+const notepadRoutes = require("./routes/notepad");
 
 mongoose
-	.connect("mongodb://localhost:27017/todoapp", {
+	.connect("mongodb://localhost:27017/surely-noted", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true,
@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 });
 
 app.use("/user", authRoutes);
-app.use("/list", listRoutes);
+app.use("/notepad", notepadRoutes);
 
 app.use((err, req, res, next) => {
 	const errMsg = "Something went wrong on our end. Please try again.";

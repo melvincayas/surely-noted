@@ -7,10 +7,12 @@ import TaskCard from "./TaskCard";
 import classes from "../../styles/NotepadDetail/NotepadDetail.module.css";
 
 const NotepadDetail = () => {
-	const { listId } = useParams();
+	const { notepadId } = useParams();
 	const allNotepads = useSelector(state => state.notepads.notepads);
 
-	const selectedNotepad = allNotepads.find(notepad => notepad._id === listId);
+	const selectedNotepad = allNotepads.find(
+		notepad => notepad._id === notepadId
+	);
 
 	if (!selectedNotepad) {
 		return <p>That Notepad doesn't exist!</p>;
@@ -23,7 +25,7 @@ const NotepadDetail = () => {
 	return (
 		<Fragment>
 			<NotepadLayout
-				listId={selectedNotepad._id}
+				notepadId={selectedNotepad._id}
 				title={selectedNotepad.title}
 				category={selectedNotepad.category}
 			>
@@ -31,7 +33,7 @@ const NotepadDetail = () => {
 				{selectedNotepad.items.map(item => (
 					<TaskCard
 						key={item._id}
-						listId={selectedNotepad._id}
+						notepadId={selectedNotepad._id}
 						itemId={item._id}
 						item={item.content}
 					/>

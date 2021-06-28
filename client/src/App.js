@@ -38,7 +38,10 @@ const App = () => {
 				<Route path="/" exact component={Landing} />
 				{!isLoggedIn && <Route path="/auth" component={Auth} />}
 				<AuthenticatedRoutes path="/home" component={Home} />
-				<AuthenticatedRoutes path="/list/:listId" component={NotepadDetail} />
+				<AuthenticatedRoutes
+					path="/notepad/:notepadId"
+					component={NotepadDetail}
+				/>
 				<Route path="*" render={() => <p>Nothing found!</p>} />
 			</Switch>
 		</Layout>

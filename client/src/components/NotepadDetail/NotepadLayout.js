@@ -22,7 +22,7 @@ const NotepadLayout = props => {
 					<i onClick={addTaskHandler} className={addBtnClass}></i>
 				</div>
 			</div>
-			{isAdding && <TaskInputForm listId={props.listId} />}
+			{isAdding && <TaskInputForm notepadId={props.notepadId} />}
 			<section>{props.children}</section>
 		</div>
 	);

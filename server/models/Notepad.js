@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const listSchema = new Schema({
+const notepadSchema = new Schema({
 	title: {
 		type: String,
 		required: [true, "Please enter a title for your list."],
@@ -41,7 +41,7 @@ const listSchema = new Schema({
 	],
 });
 
-listSchema.post("findOneAndDelete", async function (doc) {
+notepadSchema.post("findOneAndDelete", async function (doc) {
 	if (doc) {
 		await mongoose
 			.model("User")
@@ -49,4 +49,4 @@ listSchema.post("findOneAndDelete", async function (doc) {
 	}
 });
 
-module.exports = mongoose.model("List", listSchema);
+module.exports = mongoose.model("Notepad", notepadSchema);

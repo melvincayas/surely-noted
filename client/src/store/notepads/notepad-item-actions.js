@@ -2,17 +2,24 @@ import { notepadActions } from "./notepads-slice";
 import { fetchData } from "../utilities/helpers";
 import { handleAsyncErrors } from "../utilities/helpers";
 
-export const addOneListItem = (listId, input) => {
+export const addOneNotepadItem = (notepadId, input) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { content: input };
-		const response = await fetchData(`/list/${listId}/add`, "POST", request);
+		const response = await fetchData(
+			`/notepad/${notepadId}/add`,
+			"POST",
+			request
+		);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
 
-export const removeOneListItem = (listId, itemId) => {
+export const removeOneNotepadItem = (notepadId, itemId) => {
 	return handleAsyncErrors(async dispatch => {
-		const response = await fetchData(`/list/${listId}/${itemId}`, "DELETE");
+		const response = await fetchData(
+			`/notepad/${notepadId}/${itemId}`,
+			"DELETE"
+		);
 		dispatch(
 			notepadActions.loadAllNotepads({
 				notepads: response.notepads,
@@ -21,11 +28,11 @@ export const removeOneListItem = (listId, itemId) => {
 	});
 };
 
-export const editOneListItem = (listId, itemId, editContent) => {
+export const editOneNotepadItem = (notepadId, itemId, editContent) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { editedContent: editContent };
 		const response = await fetchData(
-			`/list/${listId}/${itemId}`,
+			`/notepad/${notepadId}/${itemId}`,
 			"PATCH",
 			request
 		);

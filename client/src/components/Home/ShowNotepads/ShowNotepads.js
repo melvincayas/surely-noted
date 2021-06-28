@@ -7,7 +7,7 @@ const ShowNotepads = ({ notepad }) => {
 	const history = useHistory();
 
 	const onClickHandler = () => {
-		history.push(`/list/${notepad._id}`);
+		history.push(`/notepad/${notepad._id}`);
 	};
 
 	return (

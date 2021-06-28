@@ -4,7 +4,7 @@ import { handleAsyncErrors } from "../utilities/helpers";
 
 export const getUserNotepads = () => {
 	return handleAsyncErrors(async dispatch => {
-		const response = await fetchData("/list");
+		const response = await fetchData("/notepad");
 		dispatch(
 			notepadActions.loadAllNotepads({
 				notepads: response.notepads,
@@ -15,7 +15,7 @@ export const getUserNotepads = () => {
 
 export const createOneNotepad = newList => {
 	return handleAsyncErrors(async dispatch => {
-		const response = await fetchData("/list", "POST", newList);
+		const response = await fetchData("/notepad", "POST", newList);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
@@ -23,7 +23,7 @@ export const createOneNotepad = newList => {
 export const deleteOneNotepad = id => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { id };
-		const response = await fetchData("/list", "DELETE", request);
+		const response = await fetchData("/notepad", "DELETE", request);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };

@@ -1,10 +1,10 @@
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { errorActions } from "../../store/error/error-slice";
-import { addOneListItem } from "../../store/notepads/notepad-item-actions";
+import { addOneNotepadItem } from "../../store/notepads/notepad-item-actions";
 import classes from "../../styles/NotepadDetail/TaskInputForm.module.css";
 
-const TaskInputForm = ({ listId }) => {
+const TaskInputForm = ({ notepadId }) => {
 	const [input, setInput] = useState("");
 
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const TaskInputForm = ({ listId }) => {
 			);
 		}
 
-		dispatch(addOneListItem(listId, input));
+		dispatch(addOneNotepadItem(notepadId, input));
 
 		setInput("");
 	};
