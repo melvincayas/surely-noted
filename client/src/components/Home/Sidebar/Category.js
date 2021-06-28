@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import classes from "../NotepadSelection.module.css";
+import classes from "../../../styles/Home/NotepadSelection.module.css";
 
 const Category = props => {
 	const isQueried = props.queryText === props.category ? classes.active : "";

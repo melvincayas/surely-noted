@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
 import ShowNotepads from "./ShowNotepads/ShowNotepads";
-import classes from "./NotepadSelection.module.css";
+import classes from "../../styles/Home/NotepadSelection.module.css";
 
 const NotepadSelection = () => {
 	const location = useLocation();

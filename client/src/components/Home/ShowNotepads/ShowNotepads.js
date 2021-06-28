@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import ShowTitle from "./ShowTitle";
 import ShowStatus from "./ShowStatus";
-import classes from "./styles/ShowNotepads.module.css";
+import classes from "../../../styles/Home/ShowNotepads.module.css";
 
 const ShowNotepads = ({ list }) => {
 	const history = useHistory();
