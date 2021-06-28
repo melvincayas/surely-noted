@@ -5,17 +5,14 @@ import NotepadDetail from "./NotepadDetail";
 
 const ClientView = () => {
 	const allLists = useSelector(state => state.lists.lists);
-	const selectedListId = useSelector(state => state.lists.selectedListToView);
-	const selectedList = allLists.find(list => list._id === selectedListId);
+
+	const initialShow =
+		allLists.length > 0 ? <NotepadSelection /> : <p>Create a new notepad!</p>;
 
 	return (
 		<Fragment>
-			{allLists.length > 0 ? (
-				<NotepadSelection />
-			) : (
-				<p>Create a new Notepad!</p>
-			)}
-			{selectedList && <NotepadDetail selected={selectedList} />}
+			{initialShow}
+			<NotepadDetail />
 		</Fragment>
 	);
 };
