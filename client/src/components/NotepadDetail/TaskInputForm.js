@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
-import { errorActions } from "../../../store/error/error-slice";
-import { addOneListItem } from "../../../store/lists/list-item-actions";
-import classes from "./styles/TaskInputForm.module.css";
+import { errorActions } from "../../store/error/error-slice";
+import { addOneListItem } from "../../store/lists/list-item-actions";
+import classes from "../../styles/NotepadDetail/TaskInputForm.module.css";
 
 const TaskInputForm = ({ listId }) => {
 	const [input, setInput] = useState("");

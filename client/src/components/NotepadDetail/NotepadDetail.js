@@ -2,9 +2,9 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import NotepadLayout from "./NotepadDetail/NotepadLayout";
-import TaskCard from "./NotepadDetail/TaskCard";
-import classes from "./NotepadDetail/styles/NotepadDetail.module.css";
+import NotepadLayout from "./NotepadLayout";
+import TaskCard from "./TaskCard";
+import classes from "../../styles/NotepadDetail/NotepadDetail.module.css";
 
 const NotepadDetail = () => {
 	const { listId } = useParams();

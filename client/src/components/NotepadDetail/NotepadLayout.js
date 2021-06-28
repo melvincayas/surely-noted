@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TaskInputForm from "./TaskInputForm";
-import classes from "./styles/NotepadLayout.module.css";
+import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 
 const NotepadLayout = props => {
 	const [isAdding, setIsAdding] = useState(false);

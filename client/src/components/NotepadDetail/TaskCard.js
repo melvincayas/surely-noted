@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import {
 	removeOneListItem,
 	editOneListItem,
-} from "../../../store/lists/list-item-actions";
-import Button from "../../UI/Button";
-import classes from "./styles/TaskCard.module.css";
+} from "../../store/lists/list-item-actions";
+import Button from "../UI/Button";
+import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskCard = ({ listId, itemId, item }) => {
 	const [isEditing, setIsEditing] = useState(false);
