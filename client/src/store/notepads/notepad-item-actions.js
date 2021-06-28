@@ -1,4 +1,4 @@
-import { notepadActions } from "./lists-slice";
+import { notepadActions } from "./notepads-slice";
 import { fetchData } from "../utilities/helpers";
 import { handleAsyncErrors } from "../utilities/helpers";
 

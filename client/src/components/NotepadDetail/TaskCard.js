@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
 	removeOneListItem,
 	editOneListItem,
-} from "../../store/lists/list-item-actions";
+} from "../../store/notepads/notepad-item-actions";
 import Button from "../UI/Button";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
