@@ -21,10 +21,10 @@ const App = () => {
 
 	useEffect(() => {
 		if (localStorage.getItem("session_id")) {
-			dispatch(reloadUser());
-		} else {
-			history.push("/");
+			return dispatch(reloadUser());
 		}
+
+		history.push("/");
 	}, [dispatch, history]);
 
 	useEffect(() => {
