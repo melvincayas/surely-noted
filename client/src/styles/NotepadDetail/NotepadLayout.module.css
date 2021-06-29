@@ -24,19 +24,27 @@
 }
 
 .notepad-action-btns {
-	font-size: 2em;
-	margin: auto 0;
+	display: flex;
 }
 
-.notepad-action-btns i:first-of-type {
+.notepad-action-btns button {
+	padding: 0;
+	font-size: 2em;
+	outline: none;
+	border: none;
+	background-color: transparent;
+	color: white;
+}
+
+.notepad-action-btns button:first-of-type {
 	margin-right: 0.35em;
 }
 
-.notepad-action-btns i:hover {
+.notepad-action-btns button:hover {
 	color: #ccc;
 	cursor: pointer;
 }
 
-.notepad-action-btns i:active {
+.notepad-action-btns button:active {
 	transform: scale(0.98);
 }

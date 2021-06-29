@@ -5,9 +5,7 @@ import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 const NotepadLayout = props => {
 	const [isAdding, setIsAdding] = useState(false);
 
-	const addTaskHandler = () => {
-		setIsAdding(prevState => !prevState);
-	};
+	const addTaskHandler = () => setIsAdding(prevState => !prevState);
 
 	const addBtnClass = isAdding ? "fas fa-minus-square" : "fas fa-plus-square";
 
@@ -19,8 +17,12 @@ const NotepadLayout = props => {
 					<h3 className={classes.subtitle}>{props.category}</h3>
 				</div>
 				<div className={classes["notepad-action-btns"]}>
-					<i onClick={addTaskHandler} className={addBtnClass}></i>
-					<i className="fas fa-cog"></i>
+					<button onClick={addTaskHandler}>
+						<i className={addBtnClass}></i>
+					</button>
+					<button>
+						<i className="fas fa-cog"></i>
+					</button>
 				</div>
 			</div>
 			{isAdding && <TaskInputForm notepadId={props.notepadId} />}
