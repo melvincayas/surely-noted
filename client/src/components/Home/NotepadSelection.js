@@ -24,7 +24,7 @@ const NotepadSelection = () => {
 		notepad => notepad.category === pickedCategory
 	);
 
-	const listsBeingViewed = pickedCategory ? filteredNotepads : allNotepads;
+	const notepadsBeingViewed = pickedCategory ? filteredNotepads : allNotepads;
 
 	return (
 		<div className="columns">
@@ -32,7 +32,7 @@ const NotepadSelection = () => {
 				<Sidebar categories={uniqueCategories} />
 			</div>
 			<div className="column is-9">
-				{listsBeingViewed.map(notepad => (
+				{notepadsBeingViewed.map(notepad => (
 					<ShowNotepads key={notepad._id} notepad={notepad} />
 				))}
 			</div>
