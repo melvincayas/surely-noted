@@ -9,6 +9,7 @@ import Layout from "./components/Wrappers/Layout";
 import AuthenticatedRoutes from "./components/Wrappers/AuthenticatedRoutes";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
+import NotFound from "./components/NotFound/NotFound";
 import NotepadDetail from "./components/NotepadDetail/NotepadDetail";
 
 import "./styles/App.css";
@@ -42,7 +43,7 @@ const App = () => {
 					path="/notepad/:notepadId"
 					component={NotepadDetail}
 				/>
-				<Route path="*" render={() => <p>Nothing found!</p>} />
+				<Route path="*" component={NotFound} />
 			</Switch>
 		</Layout>
 	);
