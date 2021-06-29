@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
+import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
 const SettingsDropdownMenu = () => {
 	const [settingsActive, setSettingsActive] = useState(false);
