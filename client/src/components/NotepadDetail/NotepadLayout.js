@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TaskInputForm from "./TaskInputForm";
+import SettingsDropdownMenu from "./SettingsDropdownMenu";
 import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 
 const NotepadLayout = props => {
@@ -20,9 +21,7 @@ const NotepadLayout = props => {
 					<button onClick={addTaskHandler}>
 						<i className={addBtnClass}></i>
 					</button>
-					<button>
-						<i className="fas fa-cog"></i>
-					</button>
+					<SettingsDropdownMenu />
 				</div>
 			</div>
 			{isAdding && <TaskInputForm notepadId={props.notepadId} />}
