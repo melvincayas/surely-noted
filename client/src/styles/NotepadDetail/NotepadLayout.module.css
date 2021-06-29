@@ -28,6 +28,10 @@
 	margin: auto 0;
 }
 
+.notepad-action-btns i:first-of-type {
+	margin-right: 0.35em;
+}
+
 .notepad-action-btns i:hover {
 	color: #ccc;
 	cursor: pointer;

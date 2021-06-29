@@ -20,6 +20,7 @@ const NotepadLayout = props => {
 				</div>
 				<div className={classes["notepad-action-btns"]}>
 					<i onClick={addTaskHandler} className={addBtnClass}></i>
+					<i className="fas fa-cog"></i>
 				</div>
 			</div>
 			{isAdding && <TaskInputForm notepadId={props.notepadId} />}
