@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const notepadControllers = require("../controllers/notepad");
 const notepadItemControllers = require("../controllers/notepad-item");
-const { validateListUser } = require("../public/utilities/middleware");
+const { validateNotepadUser } = require("../public/utilities/middleware");
 
 router
 	.route("/")
@@ -10,16 +10,16 @@ router
 	.post(notepadControllers.newNotepad)
 	.delete(notepadControllers.deleteNotepad);
 
-// Items within Lists
+// Items within Notepads
 router.post(
 	"/:notepadId/add",
-	validateListUser,
+	validateNotepadUser,
 	notepadItemControllers.newNotepadItem
 );
 
 router
 	.route("/:notepadId/:itemId")
-	.delete(validateListUser, notepadItemControllers.deleteNotepadItem)
-	.patch(validateListUser, notepadItemControllers.editNotepadItem);
+	.delete(validateNotepadUser, notepadItemControllers.deleteNotepadItem)
+	.patch(validateNotepadUser, notepadItemControllers.editNotepadItem);
 
 module.exports = router;
