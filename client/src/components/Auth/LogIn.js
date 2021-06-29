@@ -29,7 +29,7 @@ const LogIn = props => {
 		value: enteredPassword,
 	} = useInputValidation(input => input.trim() !== "");
 
-	const formHandler = async event => {
+	const formHandler = event => {
 		event.preventDefault();
 
 		if (!emailIsValid || !passwordIsValid) {
