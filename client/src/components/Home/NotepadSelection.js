@@ -20,11 +20,11 @@ const NotepadSelection = () => {
 		return <p>That category doesn't exist!</p>;
 	}
 
-	const filteredLists = allNotepads.filter(
+	const filteredNotepads = allNotepads.filter(
 		notepad => notepad.category === pickedCategory
 	);
 
-	const listsBeingViewed = pickedCategory ? filteredLists : allNotepads;
+	const listsBeingViewed = pickedCategory ? filteredNotepads : allNotepads;
 
 	return (
 		<div className="columns">
