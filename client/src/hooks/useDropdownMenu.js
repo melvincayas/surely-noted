@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import GeneralModal from "../components/UI/GeneralModal";
+import Button from "../components/UI/Button";
 import { deleteOneNotepad } from "../store/notepads/notepad-actions";
 
 const useDropdownMenu = (nodeReference, notepadId) => {
 	const [settingsActive, setSettingsActive] = useState(false);
+	const [showingDeleteConfirm, setShowingDeleteConfirm] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -29,15 +33,32 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 
 	const settingsHandler = () => setSettingsActive(prevState => !prevState);
 
-	const deleteHandler = () => {
+	const confirmedDeleteHandler = () => {
 		dispatch(deleteOneNotepad(notepadId));
 		history.replace("/home");
 	};
 
+	const deleteClickHandler = () => {
+		setShowingDeleteConfirm(prevState => !prevState);
+	};
+
+	const confirmDeleteModal = ReactDOM.createPortal(
+		<GeneralModal header="Confirm Deletion">
+			<p>You'll lose everything in this notepad. Are you sure?</p>
+			<div>
+				<Button clickHandler={confirmedDeleteHandler}>Delete</Button>
+				<Button clickHandler={deleteClickHandler}>Cancel</Button>
+			</div>
+		</GeneralModal>,
+		document.getElementById("modal")
+	);
+
 	return {
 		settingsActive,
 		settingsHandler,
-		deleteHandler,
+		deleteClickHandler,
+		showingDeleteConfirm,
+		confirmDeleteModal,
 	};
 };
 
