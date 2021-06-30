@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { errorActions } from "./store/error/error-slice";
-import ErrorModal from "./components/UI/ErrorModal";
+import InfoModal from "./components/UI/InfoModal";
 
 const Error = () => {
 	const isError = useSelector(state => state.error.isError);
@@ -25,9 +25,9 @@ const Error = () => {
 	};
 
 	const modal = ReactDOM.createPortal(
-		<ErrorModal
+		<InfoModal
 			header={isError.header}
-			errorHandler={errorHandler}
+			closeHandler={errorHandler}
 			message={isError.message}
 		/>,
 		document.getElementById("modal")

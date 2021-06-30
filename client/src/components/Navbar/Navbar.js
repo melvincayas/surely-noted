@@ -6,7 +6,7 @@ import NewList from "../Home/NewNotepad/NewNotepad";
 import classes from "../../styles/Navbar/Navbar.module.css";
 
 const Navbar = () => {
-	const [isMakingList, setIsMakingList] = useState(false);
+	const [isMakingNotepad, setIsMakingNotepad] = useState(false);
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 	const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const Navbar = () => {
 
 	const newListHandler = event => {
 		event.preventDefault();
-		setIsMakingList(prevIsMakingList => !prevIsMakingList);
+		setIsMakingNotepad(prevIsMakingNotepad => !prevIsMakingNotepad);
 	};
 
 	const loggedInLinks = (
@@ -39,7 +39,7 @@ const Navbar = () => {
 
 	return (
 		<Fragment>
-			{isMakingList && <NewList listToggler={newListHandler} />}
+			{isMakingNotepad && <NewList listToggler={newListHandler} />}
 			<nav className={classes.navbar}>
 				<Link className={classes.brand} to="/home">
 					SurelyNoted
