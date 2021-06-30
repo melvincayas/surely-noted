@@ -20,8 +20,12 @@ const SettingsDropdownMenu = () => {
 			</button>
 			<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>
 				<ul>
-					<li>Edit</li>
-					<li>Delete</li>
+					<li>
+						<button>Edit</button>
+					</li>
+					<li>
+						<button>Delete</button>
+					</li>
 				</ul>
 			</nav>
 		</div>

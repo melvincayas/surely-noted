@@ -4,6 +4,7 @@
 }
 
 .dropdown-menu {
+	padding: 0.5em;
 	position: absolute;
 	top: 45px;
 	right: 0;
@@ -25,9 +26,20 @@
 	transform: translateY(0);
 }
 
-.dropdown-menu li {
-	color: black;
+.dropdown-menu li button {
+	border-radius: 10px;
+	font-size: 1.25em;
+	width: 100%;
 	padding: 0.5em;
+	color: black;
+	outline: none;
+	background-color: transparent;
+	border: none;
+}
+
+.dropdown-menu li button:hover {
+	background-color: #ccc;
+	color: black;
 }
 
 .dropdown-icon-active {
