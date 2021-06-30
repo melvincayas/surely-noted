@@ -1,32 +1,13 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
+import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
 const SettingsDropdownMenu = () => {
-	const [settingsActive, setSettingsActive] = useState(false);
 	const dropdownRef = useRef();
-
-	useEffect(() => {
-		const pageClick = event => {
-			if (
-				dropdownRef.current !== null &&
-				!dropdownRef.current.contains(event.target)
-			) {
-				setSettingsActive(prevState => !prevState);
-			}
-		};
-
-		if (settingsActive) {
-			document.addEventListener("click", pageClick);
-		}
-
-		return () => {
-			document.removeEventListener("click", pageClick);
-		};
-	}, [settingsActive]);
+	const { settingsActive, setSettingsActive } = useDropdownMenu(dropdownRef);
 
 	const settingsHandler = () => setSettingsActive(prevState => !prevState);
 
-	// think about using useReducer here with settingsActive
 	const dropdownIconClass = settingsActive
 		? classes["dropdown-icon-active"]
 		: "";
