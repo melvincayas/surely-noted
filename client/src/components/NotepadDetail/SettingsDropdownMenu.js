@@ -25,6 +25,9 @@ const SettingsDropdownMenu = ({ id }) => {
 						<button>Edit</button>
 					</li>
 					<li>
+						<button>Share</button>
+					</li>
+					<li>
 						<button onClick={deleteHandler}>Delete</button>
 					</li>
 				</ul>
