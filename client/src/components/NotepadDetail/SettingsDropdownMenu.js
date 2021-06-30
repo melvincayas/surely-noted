@@ -2,11 +2,12 @@ import { useRef } from "react";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
-const SettingsDropdownMenu = () => {
+const SettingsDropdownMenu = ({ id }) => {
 	const dropdownRef = useRef();
-	const { settingsActive, setSettingsActive } = useDropdownMenu(dropdownRef);
-
-	const settingsHandler = () => setSettingsActive(prevState => !prevState);
+	const { settingsActive, settingsHandler, deleteHandler } = useDropdownMenu(
+		dropdownRef,
+		id
+	);
 
 	const dropdownIconClass = settingsActive
 		? classes["dropdown-icon-active"]
@@ -24,7 +25,7 @@ const SettingsDropdownMenu = () => {
 						<button>Edit</button>
 					</li>
 					<li>
-						<button>Delete</button>
+						<button onClick={deleteHandler}>Delete</button>
 					</li>
 				</ul>
 			</nav>

@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { deleteOneNotepad } from "../store/notepads/notepad-actions";
 
-const useDropdownMenu = nodeReference => {
+const useDropdownMenu = (nodeReference, notepadId) => {
 	const [settingsActive, setSettingsActive] = useState(false);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		const pageClick = event => {
@@ -22,9 +27,17 @@ const useDropdownMenu = nodeReference => {
 		};
 	}, [settingsActive]);
 
+	const settingsHandler = () => setSettingsActive(prevState => !prevState);
+
+	const deleteHandler = () => {
+		dispatch(deleteOneNotepad(notepadId));
+		history.replace("/home");
+	};
+
 	return {
 		settingsActive,
-		setSettingsActive,
+		settingsHandler,
+		deleteHandler,
 	};
 };
 

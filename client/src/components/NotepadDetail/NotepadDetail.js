@@ -25,7 +25,7 @@ const NotepadDetail = () => {
 	return (
 		<Fragment>
 			<NotepadLayout
-				notepadId={selectedNotepad._id}
+				id={selectedNotepad._id}
 				title={selectedNotepad.title}
 				category={selectedNotepad.category}
 			>
