@@ -23,7 +23,7 @@ const NotepadLayout = props => {
 					addTaskBtnClass={addTaskBtnClass}
 				/>
 			</div>
-			{isAdding && <TaskInputForm notepadId={props.notepadId} />}
+			{isAdding && <TaskInputForm id={props.id} />}
 			<section>{props.children}</section>
 		</div>
 	);

@@ -4,7 +4,7 @@ import { errorActions } from "../../store/error/error-slice";
 import { addOneNotepadItem } from "../../store/notepads/notepad-item-actions";
 import classes from "../../styles/NotepadDetail/TaskInputForm.module.css";
 
-const TaskInputForm = ({ notepadId }) => {
+const TaskInputForm = ({ id }) => {
 	const [input, setInput] = useState("");
 
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const TaskInputForm = ({ notepadId }) => {
 			);
 		}
 
-		dispatch(addOneNotepadItem(notepadId, input));
+		dispatch(addOneNotepadItem(id, input));
 
 		setInput("");
 	};
