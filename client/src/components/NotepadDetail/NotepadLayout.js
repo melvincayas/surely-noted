@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TaskInputForm from "./TaskInputForm";
+import NotepadName from "./NotepadName";
 import SettingsDropdownMenu from "./SettingsDropdownMenu";
 import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 
@@ -13,10 +14,7 @@ const NotepadLayout = props => {
 	return (
 		<div className={`${classes.notepad} ${props.className}`}>
 			<div className={classes.header}>
-				<div>
-					<h1 className={classes.title}>{props.title}</h1>
-					<h3 className={classes.subtitle}>{props.category}</h3>
-				</div>
+				<NotepadName title={props.title} category={props.category} />
 				<div className={classes["notepad-action-btns"]}>
 					<button onClick={addTaskHandler}>
 						<i className={addBtnClass}></i>
