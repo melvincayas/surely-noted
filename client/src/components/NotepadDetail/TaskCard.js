@@ -4,12 +4,19 @@ import {
 	removeOneNotepadItem,
 	editOneNotepadItem,
 } from "../../store/notepads/notepad-item-actions";
+import useEdit from "../../hooks/useEdit";
 import Button from "../UI/Button";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskCard = ({ notepadId, itemId, item }) => {
-	const [isEditing, setIsEditing] = useState(false);
-	const [editContent, setEditContent] = useState(item);
+	const {
+		isEditing,
+		setIsEditing,
+		editedContent,
+		editStatusHandler,
+		editContentHandler,
+	} = useEdit(item);
+
 	const [done, setDone] = useState(null);
 
 	const dispatch = useDispatch();
@@ -18,22 +25,14 @@ const TaskCard = ({ notepadId, itemId, item }) => {
 		dispatch(removeOneNotepadItem(notepadId, itemId));
 	};
 
-	const editHandler = () => {
-		setIsEditing(prevIsEditing => !prevIsEditing);
-	};
-
 	const doneHandler = () => {
 		if (done) return setDone(null);
 		setDone(classes.done);
 	};
 
-	const editContentHandler = event => {
-		setEditContent(event.target.value);
-	};
-
 	const editFormHandler = async event => {
 		event.preventDefault();
-		dispatch(editOneNotepadItem(notepadId, itemId, editContent));
+		dispatch(editOneNotepadItem(notepadId, itemId, editedContent));
 		setIsEditing(prevIsEditing => !prevIsEditing);
 	};
 
@@ -41,11 +40,11 @@ const TaskCard = ({ notepadId, itemId, item }) => {
 		<form className={classes["edit-form"]} onSubmit={editFormHandler}>
 			<input
 				type="text"
-				value={editContent}
+				value={editedContent}
 				onChange={editContentHandler}
 			></input>
 			<button>Save</button>
-			<button onClick={editHandler}>Close</button>
+			<button onClick={editStatusHandler}>Close</button>
 		</form>
 	);
 
@@ -57,7 +56,7 @@ const TaskCard = ({ notepadId, itemId, item }) => {
 			<div className={classes.buttons}>
 				<Button
 					className={`${classes.edit} ${classes.button}`}
-					clickHandler={editHandler}
+					clickHandler={editStatusHandler}
 				>
 					<i className="fas fa-edit"></i>
 				</Button>
