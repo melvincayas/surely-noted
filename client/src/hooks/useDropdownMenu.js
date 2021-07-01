@@ -38,13 +38,14 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 		history.replace("/home");
 	};
 
-	const deleteClickHandler = () => {
+	const deleteClickHandler = event => {
+		event.stopPropagation();
 		if (settingsActive) setSettingsActive(prevState => !prevState);
 		setShowingDeleteConfirm(prevState => !prevState);
 	};
 
 	const confirmDeleteModal = ReactDOM.createPortal(
-		<GeneralModal header="Confirm Deletion">
+		<GeneralModal clickHandler={deleteClickHandler} header="Confirm Deletion">
 			<p>You'll lose everything in this notepad. Are you sure?</p>
 			<div>
 				<Button clickHandler={confirmedDeleteHandler}>Delete</Button>

@@ -26,6 +26,7 @@ const Error = () => {
 
 	const modal = ReactDOM.createPortal(
 		<ErrorModal
+			errorHandler={errorHandler}
 			header={isError.header}
 			closeHandler={errorHandler}
 			message={isError.message}
