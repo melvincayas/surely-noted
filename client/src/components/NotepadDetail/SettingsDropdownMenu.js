@@ -9,7 +9,7 @@ const SettingsDropdownMenu = ({ id }) => {
 		settingsActive,
 		settingsHandler,
 		deleteClickHandler,
-		showingDeleteConfirm,
+		isShowingDeleteConfirm,
 		confirmDeleteModal,
 	} = useDropdownMenu(dropdownRef, id);
 
@@ -20,7 +20,7 @@ const SettingsDropdownMenu = ({ id }) => {
 
 	return (
 		<Fragment>
-			{showingDeleteConfirm && confirmDeleteModal}
+			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
 				<button onClick={settingsHandler}>
 					<i className={`fas fa-cog ${dropdownIconClass}`}></i>

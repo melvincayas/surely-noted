@@ -8,7 +8,7 @@ import { deleteOneNotepad } from "../store/notepads/notepad-actions";
 
 const useDropdownMenu = (nodeReference, notepadId) => {
 	const [settingsActive, setSettingsActive] = useState(false);
-	const [showingDeleteConfirm, setShowingDeleteConfirm] = useState(false);
+	const [isShowingDeleteConfirm, setIsShowingDeleteConfirm] = useState(false);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -41,7 +41,7 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 	const deleteClickHandler = event => {
 		event.stopPropagation();
 		if (settingsActive) setSettingsActive(prevState => !prevState);
-		setShowingDeleteConfirm(prevState => !prevState);
+		setIsShowingDeleteConfirm(prevState => !prevState);
 	};
 
 	const confirmDeleteModal = ReactDOM.createPortal(
@@ -59,7 +59,7 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 		settingsActive,
 		settingsHandler,
 		deleteClickHandler,
-		showingDeleteConfirm,
+		isShowingDeleteConfirm,
 		confirmDeleteModal,
 	};
 };
