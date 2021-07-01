@@ -39,6 +39,7 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 	};
 
 	const deleteClickHandler = () => {
+		if (settingsActive) setSettingsActive(prevState => !prevState);
 		setShowingDeleteConfirm(prevState => !prevState);
 	};
 
