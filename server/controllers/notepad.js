@@ -4,8 +4,10 @@ const catchAsync = require("../public/utilities/catchAsync");
 
 module.exports.onLoad = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;
-	const notepads = await Notepad.find({ creator: user_id });
-	res.status(200).json({ response: { type: "success", notepads: notepads } });
+	const userNotepads = await Notepad.find({ creator: user_id });
+	res
+		.status(200)
+		.json({ response: { type: "success", notepads: userNotepads } });
 });
 
 module.exports.newNotepad = catchAsync(async (req, res, next) => {
@@ -31,6 +33,22 @@ module.exports.deleteNotepad = catchAsync(async (req, res, next) => {
 	const { id } = req.body;
 	const { user_id } = req.session;
 	await Notepad.findOneAndDelete({ _id: id });
+	const userNotepads = await Notepad.find({ creator: user_id });
+	res
+		.status(200)
+		.json({ response: { type: "success", notepads: userNotepads } });
+});
+
+module.exports.editNotepad = catchAsync(async (req, res, next) => {
+	const { notepadId } = req.params;
+	const { title, category } = req.body;
+	const { user_id } = req.session;
+
+	await Notepad.findByIdAndUpdate(
+		{ _id: notepadId },
+		{ $set: { title, category } }
+	);
+
 	const userNotepads = await Notepad.find({ creator: user_id });
 	res
 		.status(200)

@@ -5,11 +5,7 @@ import { handleAsyncErrors } from "../utilities/helpers";
 export const addOneNotepadItem = (notepadId, input) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { content: input };
-		const response = await fetchData(
-			`/notepad/${notepadId}/add`,
-			"POST",
-			request
-		);
+		const response = await fetchData(`/notepad/${notepadId}`, "POST", request);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };

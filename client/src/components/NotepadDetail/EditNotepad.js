@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {} from "../../../store/notepads/notepad-actions";
+import { createOneNotepad } from "../../../store/notepads/notepad-actions";
 import GeneralModal from "../../UI/GeneralModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
@@ -33,7 +33,7 @@ const inputReducer = (state, action) => {
 	return defaultInputs;
 };
 
-const EditNotepad = props => {
+const NewNotepad = props => {
 	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -87,4 +87,4 @@ const EditNotepad = props => {
 	);
 };
 
-export default EditNotepad;
+export default NewNotepad;

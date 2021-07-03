@@ -10,12 +10,10 @@ router
 	.post(notepadControllers.newNotepad)
 	.delete(notepadControllers.deleteNotepad);
 
-// Items within Notepads
-router.post(
-	"/:notepadId/add",
-	validateNotepadUser,
-	notepadItemControllers.newNotepadItem
-);
+router
+	.route("/:notepadId")
+	.post(validateNotepadUser, notepadItemControllers.newNotepadItem)
+	.put(notepadControllers.editNotepad);
 
 router
 	.route("/:notepadId/:itemId")
