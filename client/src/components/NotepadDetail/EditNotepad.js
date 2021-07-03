@@ -1,11 +1,11 @@
 import { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createOneNotepad } from "../../../store/notepads/notepad-actions";
-import GeneralModal from "../../UI/GeneralModal";
-import Button from "../../UI/Button";
-import Input from "../../UI/Input";
-import classes from "../../../styles/Auth/Forms.module.css";
+import { createOneNotepad } from "../../store/notepads/notepad-actions";
+import GeneralModal from "../UI/GeneralModal";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
+import classes from "../../styles/Auth/Forms.module.css";
 
 const defaultInputs = {
 	title: "",

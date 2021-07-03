@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 import { useRef } from "react";
+import useEdit from "../../hooks/useEdit";
+import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
@@ -12,6 +14,7 @@ const SettingsDropdownMenu = ({ id }) => {
 		isShowingDeleteConfirm,
 		confirmDeleteModal,
 	} = useDropdownMenu(dropdownRef, id);
+	const { isEditing, editStatusHandler } = useEdit();
 
 	const dropdownIconClass = settingsActive
 		? classes["dropdown-icon-active"]
@@ -28,7 +31,7 @@ const SettingsDropdownMenu = ({ id }) => {
 				<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>
 					<ul>
 						<li>
-							<button>Edit</button>
+							<button onClick={editStatusHandler}>Edit</button>
 						</li>
 						<li>
 							<button>Share</button>
