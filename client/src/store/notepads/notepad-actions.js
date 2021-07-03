@@ -28,10 +28,10 @@ export const deleteOneNotepad = id => {
 	});
 };
 
-export const editOneNotepad = editedContent => {
+export const editOneNotepad = (editedNotepad, id) => {
 	return handleAsyncErrors(async dispatch => {
-		const request = editedContent; // { title, category };
-		const response = await fetchData("/notepad", "PUT", request);
+		const request = editedNotepad;
+		const response = await fetchData(`/notepad/${id}`, "PUT", request);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };

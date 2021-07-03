@@ -1,7 +1,6 @@
 import { useReducer } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createOneNotepad } from "../../store/notepads/notepad-actions";
+import { editOneNotepad } from "../../store/notepads/notepad-actions";
 import GeneralModal from "../UI/GeneralModal";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
@@ -33,10 +32,9 @@ const inputReducer = (state, action) => {
 	return defaultInputs;
 };
 
-const NewNotepad = props => {
+const EditNotepad = props => {
 	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	const titleHandler = event => {
 		dispatchInputs({ type: "TITLE_INPUT", title: event.target.value });
@@ -47,20 +45,19 @@ const NewNotepad = props => {
 	};
 
 	const formHandler = async event => {
-		props.listToggler(event);
+		props.modalToggler(event);
 		event.preventDefault();
 
-		const newList = {
+		const editedNotepad = {
 			title: inputs.title,
 			category: inputs.category,
 		};
 
-		dispatch(createOneNotepad(newList));
-		history.push("/home");
+		dispatch(editOneNotepad(editedNotepad, props.id));
 	};
 
 	return (
-		<GeneralModal header="New Notepad">
+		<GeneralModal header="Edit Notepad">
 			<form onSubmit={formHandler} className={classes.form} method="POST">
 				<Input
 					label="Title (required)"
@@ -80,11 +77,11 @@ const NewNotepad = props => {
 				/>
 				<div className={classes.container}>
 					<Button>Create</Button>
-					<Button clickHandler={props.listToggler}>Close</Button>
+					<Button clickHandler={props.modalToggler}>Close</Button>
 				</div>
 			</form>
 		</GeneralModal>
 	);
 };
 
-export default NewNotepad;
+export default EditNotepad;

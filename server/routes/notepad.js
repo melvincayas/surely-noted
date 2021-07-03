@@ -12,8 +12,8 @@ router
 
 router
 	.route("/:notepadId")
-	.post(validateNotepadUser, notepadItemControllers.newNotepadItem)
-	.put(notepadControllers.editNotepad);
+	.put(notepadControllers.editNotepad)
+	.post(validateNotepadUser, notepadItemControllers.newNotepadItem);
 
 router
 	.route("/:notepadId/:itemId")

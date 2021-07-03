@@ -23,6 +23,7 @@ const SettingsDropdownMenu = ({ id }) => {
 
 	return (
 		<Fragment>
+			{isEditing && <EditNotepad id={id} modalToggler={editStatusHandler} />}
 			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
 				<button onClick={settingsHandler}>
