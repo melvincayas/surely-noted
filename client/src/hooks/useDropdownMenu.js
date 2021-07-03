@@ -29,7 +29,7 @@ const useDropdownMenu = (nodeReference, notepadId) => {
 		return () => {
 			document.removeEventListener("click", pageClick);
 		};
-	}, [settingsActive]);
+	}, [settingsActive, nodeReference]);
 
 	const settingsHandler = () => setSettingsActive(prevState => !prevState);
 
