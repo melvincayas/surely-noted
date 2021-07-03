@@ -33,7 +33,7 @@ const inputReducer = (state, action) => {
 	return defaultInputs;
 };
 
-const NewList = props => {
+const NewNotepad = props => {
 	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -87,4 +87,4 @@ const NewList = props => {
 	);
 };
 
-export default NewList;
+export default NewNotepad;
