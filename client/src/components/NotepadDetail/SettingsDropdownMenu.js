@@ -1,20 +1,17 @@
 import { Fragment } from "react";
 import { useRef } from "react";
 import useEdit from "../../hooks/useEdit";
+import useDelete from "../../hooks/useDelete";
 import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
 const SettingsDropdownMenu = ({ id }) => {
 	const dropdownRef = useRef();
-	const {
-		settingsActive,
-		settingsHandler,
-		deleteClickHandler,
-		isShowingDeleteConfirm,
-		confirmDeleteModal,
-	} = useDropdownMenu(dropdownRef, id);
-	const { isEditing, editStatusHandler } = useEdit();
+	const { settingsActive, settingsHandler } = useDropdownMenu(dropdownRef);
+	const { isEditing, editStatusHandler } = useEdit(id);
+	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
+		useDelete(id);
 
 	const dropdownIconClass = settingsActive
 		? classes["dropdown-icon-active"]
