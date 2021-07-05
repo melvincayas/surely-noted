@@ -14,6 +14,7 @@ const Input = props => {
 				className={`${classes.input} ${props.className}`}
 				name={props.id}
 				type={props.type}
+				value={props.value}
 				id={props.id}
 				placeholder={props.placeholder}
 			></input>
