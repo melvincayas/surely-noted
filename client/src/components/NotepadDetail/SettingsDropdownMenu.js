@@ -8,22 +8,23 @@ import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css"
 
 const SettingsDropdownMenu = ({ id }) => {
 	const dropdownRef = useRef();
-	const { settingsActive, settingsHandler } = useDropdownMenu(dropdownRef);
+	const { areSettingsActive, setAreSettingsActive } =
+		useDropdownMenu(dropdownRef);
 	const { isEditing, editStatusHandler } = useEdit(id);
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
 
-	const dropdownIconClass = settingsActive
+	const dropdownIconClass = areSettingsActive
 		? classes["dropdown-icon-active"]
 		: "";
-	const dropdownMenuClass = settingsActive ? classes.active : "";
+	const dropdownMenuClass = areSettingsActive ? classes.active : "";
 
 	return (
 		<Fragment>
 			{isEditing && <EditNotepad id={id} modalToggler={editStatusHandler} />}
 			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
-				<button onClick={settingsHandler}>
+				<button onClick={setAreSettingsActive}>
 					<i className={`fas fa-cog ${dropdownIconClass}`}></i>
 				</button>
 				<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>

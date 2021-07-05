@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useDropdownMenu = nodeReference => {
-	const [settingsActive, setSettingsActive] = useState(false);
+	const [areSettingsActive, setAreSettingsActive] = useState(false);
 
 	useEffect(() => {
 		const pageClick = event => {
@@ -9,23 +9,23 @@ const useDropdownMenu = nodeReference => {
 				nodeReference.current !== null &&
 				!nodeReference.current.contains(event.target)
 			) {
-				setSettingsActive(prevState => !prevState);
+				setAreSettingsActive(prevState => !prevState);
 			}
 		};
 
-		if (settingsActive) {
+		if (areSettingsActive) {
 			document.addEventListener("click", pageClick);
 		}
 
 		return () => {
 			document.removeEventListener("click", pageClick);
 		};
-	}, [settingsActive, nodeReference]);
+	}, [areSettingsActive, nodeReference]);
 
-	const settingsHandler = () => setSettingsActive(prevState => !prevState);
+	const settingsHandler = () => setAreSettingsActive(prevState => !prevState);
 
 	return {
-		settingsActive,
+		areSettingsActive,
 		settingsHandler,
 	};
 };
