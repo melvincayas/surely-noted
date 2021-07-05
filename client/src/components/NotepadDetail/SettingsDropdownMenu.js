@@ -10,7 +10,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 	const dropdownRef = useRef();
 	const { areSettingsActive, setAreSettingsActive, settingsHandler } =
 		useDropdownMenu(dropdownRef);
-	const { isEditing, editStatusHandler, editedContent } = useEdit({
+	const { isEditing, editStatusHandler } = useEdit({
 		title,
 		category,
 	});
