@@ -1,58 +1,46 @@
-import { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import useInputValidation from "../../../hooks/useInputValidation";
 import { createOneNotepad } from "../../../store/notepads/notepad-actions";
+import { errorActions } from "../../../store/error/error-slice";
 import GeneralModal from "../../UI/GeneralModal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import classes from "../../../styles/Auth/Forms.module.css";
-
-const defaultInputs = {
-	title: "",
-	titleValid: false,
-	category: "",
-	categoryValid: false,
-};
-
-const inputReducer = (state, action) => {
-	if (action.type === "TITLE_INPUT") {
-		return {
-			...state,
-			title: action.title,
-			titleValid: action.title.length > 0 && action.title.trim() !== "",
-		};
-	}
-	if (action.type === "CATEGORY_INPUT") {
-		return {
-			...state,
-			category: action.category,
-			categoryValid:
-				action.category.length > 0 && action.category.trim() !== "",
-		};
-	}
-	return defaultInputs;
-};
+import inputStyles from "../../../styles/UI/Input.module.css";
 
 const NewNotepad = props => {
-	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
+	const {
+		inputChangeHandler: titleChangeHandler,
+		inputBlurHandler: titleBlurHandler,
+		value: title,
+		inputError: titleHasError,
+	} = useInputValidation(input => input.trim() !== "");
+	const {
+		inputChangeHandler: categoryChangeHandler,
+		inputBlurHandler: categoryBlurHandler,
+		value: category,
+		inputError: categoryHasError,
+	} = useInputValidation(input => input.trim() !== "");
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-	const titleHandler = event => {
-		dispatchInputs({ type: "TITLE_INPUT", title: event.target.value });
-	};
-
-	const categoryHandler = event => {
-		dispatchInputs({ type: "CATEGORY_INPUT", category: event.target.value });
-	};
 
 	const formHandler = async event => {
 		props.listToggler(event);
 		event.preventDefault();
 
+		if (titleHasError || categoryHasError) {
+			return dispatch(
+				errorActions.setError({
+					header: "Error",
+					message: "Please fill out all the details.",
+				})
+			);
+		}
+
 		const newList = {
-			title: inputs.title,
-			category: inputs.category,
+			title,
+			category,
 		};
 
 		dispatch(createOneNotepad(newList));
@@ -68,7 +56,9 @@ const NewNotepad = props => {
 					name="title"
 					type="text"
 					placeholder="ex: New Clothes"
-					onChangeHandler={titleHandler}
+					className={titleHasError ? inputStyles["input-invalid"] : ""}
+					onBlurHandler={titleBlurHandler}
+					onChangeHandler={titleChangeHandler}
 				/>
 				<Input
 					label="Category (optional)"
@@ -76,7 +66,9 @@ const NewNotepad = props => {
 					name="category"
 					type="text"
 					placeholder="ex: Vacation"
-					onChangeHandler={categoryHandler}
+					className={categoryHasError ? inputStyles["input-invalid"] : ""}
+					onBlurHandler={categoryBlurHandler}
+					onChangeHandler={categoryChangeHandler}
 				/>
 				<div className={classes.container}>
 					<Button>Create</Button>
