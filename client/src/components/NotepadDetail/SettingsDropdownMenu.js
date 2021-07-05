@@ -14,15 +14,21 @@ const SettingsDropdownMenu = ({ id }) => {
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
 
-	const dropdownIconClass = areSettingsActive
-		? classes["dropdown-icon-active"]
-		: "";
-	const dropdownMenuClass = areSettingsActive ? classes.active : "";
+	const toggleEditModal = () => {
+		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
+		editStatusHandler();
+	};
 
 	const toggleDeleteConfirmModal = event => {
 		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
 		deleteClickHandler(event);
 	};
+
+	const dropdownIconClass = areSettingsActive
+		? classes["dropdown-icon-active"]
+		: "";
+
+	const dropdownMenuClass = areSettingsActive ? classes.active : "";
 
 	return (
 		<Fragment>
@@ -35,7 +41,7 @@ const SettingsDropdownMenu = ({ id }) => {
 				<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>
 					<ul>
 						<li>
-							<button onClick={editStatusHandler}>Edit</button>
+							<button onClick={toggleEditModal}>Edit</button>
 						</li>
 						<li>
 							<button>Share</button>
