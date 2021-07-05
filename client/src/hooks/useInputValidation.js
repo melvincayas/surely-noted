@@ -1,8 +1,10 @@
 import { useReducer } from "react";
 
-const defaultInput = {
-	input: "",
-	inputTouched: false,
+const initializeState = initialInputState => {
+	return {
+		input: initialInputState ? initialInputState : "",
+		inputTouched: false,
+	};
 };
 
 const inputReducer = (state, action) => {
@@ -18,12 +20,16 @@ const inputReducer = (state, action) => {
 				inputTouched: true,
 			};
 		default:
-			return defaultInput;
+			return initializeState(action.payload);
 	}
 };
 
-const useInputValidation = validateInput => {
-	const [state, dispatchState] = useReducer(inputReducer, defaultInput);
+const useInputValidation = (validateInput, initialInputState = null) => {
+	const [state, dispatchState] = useReducer(
+		inputReducer,
+		initialInputState,
+		initializeState
+	);
 
 	const inputValid = validateInput(state.input);
 
