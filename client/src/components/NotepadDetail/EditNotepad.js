@@ -6,11 +6,13 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "../../styles/Auth/Forms.module.css";
 
-const defaultInputs = {
-	title: "",
-	titleValid: false,
-	category: "",
-	categoryValid: false,
+const init = currentNotepadDetails => {
+	return {
+		title: currentNotepadDetails.title,
+		titleValid: false,
+		category: currentNotepadDetails.category,
+		categoryValid: false,
+	};
 };
 
 const inputReducer = (state, action) => {
@@ -29,11 +31,16 @@ const inputReducer = (state, action) => {
 				action.category.length > 0 && action.category.trim() !== "",
 		};
 	}
-	return defaultInputs;
+	return init(action.payload);
 };
 
-const EditNotepad = props => {
-	const [inputs, dispatchInputs] = useReducer(inputReducer, defaultInputs);
+const EditNotepad = ({ id, title, category, modalToggler }) => {
+	const currentNotepadDetails = { title, category };
+	const [inputs, dispatchInputs] = useReducer(
+		inputReducer,
+		currentNotepadDetails,
+		init
+	);
 	const dispatch = useDispatch();
 
 	const titleHandler = event => {
@@ -45,7 +52,7 @@ const EditNotepad = props => {
 	};
 
 	const formHandler = async event => {
-		props.modalToggler(event);
+		modalToggler(event);
 		event.preventDefault();
 
 		const editedNotepad = {
@@ -53,7 +60,7 @@ const EditNotepad = props => {
 			category: inputs.category,
 		};
 
-		dispatch(editOneNotepad(editedNotepad, props.id));
+		dispatch(editOneNotepad(editedNotepad, id));
 	};
 
 	return (
@@ -64,6 +71,7 @@ const EditNotepad = props => {
 					id="title"
 					name="title"
 					type="text"
+					value={inputs.title}
 					placeholder="ex: New Clothes"
 					onChangeHandler={titleHandler}
 				/>
@@ -72,12 +80,13 @@ const EditNotepad = props => {
 					id="category"
 					name="category"
 					type="text"
+					value={inputs.category}
 					placeholder="ex: Vacation"
 					onChangeHandler={categoryHandler}
 				/>
 				<div className={classes.container}>
 					<Button>Create</Button>
-					<Button clickHandler={props.modalToggler}>Close</Button>
+					<Button clickHandler={modalToggler}>Close</Button>
 				</div>
 			</form>
 		</GeneralModal>

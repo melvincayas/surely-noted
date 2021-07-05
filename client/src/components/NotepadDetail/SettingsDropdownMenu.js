@@ -6,11 +6,14 @@ import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
-const SettingsDropdownMenu = ({ id }) => {
+const SettingsDropdownMenu = ({ id, title, category }) => {
 	const dropdownRef = useRef();
 	const { areSettingsActive, setAreSettingsActive, settingsHandler } =
 		useDropdownMenu(dropdownRef);
-	const { isEditing, editStatusHandler } = useEdit(id);
+	const { isEditing, editStatusHandler, editedContent } = useEdit({
+		title,
+		category,
+	});
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
 
@@ -32,7 +35,14 @@ const SettingsDropdownMenu = ({ id }) => {
 
 	return (
 		<Fragment>
-			{isEditing && <EditNotepad id={id} modalToggler={editStatusHandler} />}
+			{isEditing && (
+				<EditNotepad
+					id={id}
+					title={title}
+					category={category}
+					modalToggler={editStatusHandler}
+				/>
+			)}
 			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
 				<button onClick={settingsHandler}>
