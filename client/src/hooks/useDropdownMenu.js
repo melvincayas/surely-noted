@@ -26,6 +26,7 @@ const useDropdownMenu = nodeReference => {
 
 	return {
 		areSettingsActive,
+		setAreSettingsActive,
 		settingsHandler,
 	};
 };

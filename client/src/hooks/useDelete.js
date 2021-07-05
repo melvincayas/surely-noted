@@ -18,7 +18,6 @@ const useDelete = notepadId => {
 
 	const deleteClickHandler = event => {
 		event.stopPropagation();
-		// if (settingsActive) setSettingsActive(prevState => !prevState);
 		setIsShowingDeleteConfirm(prevState => !prevState);
 	};
 

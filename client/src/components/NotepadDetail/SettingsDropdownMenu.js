@@ -8,7 +8,7 @@ import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css"
 
 const SettingsDropdownMenu = ({ id }) => {
 	const dropdownRef = useRef();
-	const { areSettingsActive, setAreSettingsActive } =
+	const { areSettingsActive, setAreSettingsActive, settingsHandler } =
 		useDropdownMenu(dropdownRef);
 	const { isEditing, editStatusHandler } = useEdit(id);
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
@@ -19,12 +19,17 @@ const SettingsDropdownMenu = ({ id }) => {
 		: "";
 	const dropdownMenuClass = areSettingsActive ? classes.active : "";
 
+	const toggleDeleteConfirmModal = event => {
+		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
+		deleteClickHandler(event);
+	};
+
 	return (
 		<Fragment>
 			{isEditing && <EditNotepad id={id} modalToggler={editStatusHandler} />}
 			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
-				<button onClick={setAreSettingsActive}>
+				<button onClick={settingsHandler}>
 					<i className={`fas fa-cog ${dropdownIconClass}`}></i>
 				</button>
 				<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>
@@ -36,7 +41,7 @@ const SettingsDropdownMenu = ({ id }) => {
 							<button>Share</button>
 						</li>
 						<li>
-							<button onClick={deleteClickHandler}>Delete</button>
+							<button onClick={toggleDeleteConfirmModal}>Delete</button>
 						</li>
 					</ul>
 				</nav>
