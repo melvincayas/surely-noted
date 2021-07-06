@@ -6,8 +6,9 @@ import { errorActions } from "../../../store/error/error-slice";
 import Modal from "../../UI/Modal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
-import classes from "../../../styles/Auth/Forms.module.css";
-import inputStyles from "../../../styles/UI/Input.module.css";
+import formClasses from "../../../styles/Auth/Forms.module.css";
+import inputClasses from "../../../styles/UI/Input.module.css";
+import modalClasses from "../../../styles/UI/Modal.module.css";
 
 const NewNotepad = props => {
 	const {
@@ -49,14 +50,14 @@ const NewNotepad = props => {
 
 	return (
 		<Modal header="New Notepad">
-			<form onSubmit={formHandler} className={classes.form} method="POST">
+			<form onSubmit={formHandler} className={formClasses.form} method="POST">
 				<Input
 					label="Title (required)"
 					id="title"
 					name="title"
 					type="text"
 					placeholder="ex: New Clothes"
-					className={titleHasError ? inputStyles["input-invalid"] : ""}
+					className={titleHasError ? inputClasses["input-invalid"] : ""}
 					onBlurHandler={titleBlurHandler}
 					onChangeHandler={titleChangeHandler}
 				/>
@@ -66,13 +67,13 @@ const NewNotepad = props => {
 					name="category"
 					type="text"
 					placeholder="ex: Vacation"
-					className={categoryHasError ? inputStyles["input-invalid"] : ""}
+					className={categoryHasError ? inputClasses["input-invalid"] : ""}
 					onBlurHandler={categoryBlurHandler}
 					onChangeHandler={categoryChangeHandler}
 				/>
-				<div className={classes.container}>
+				<div className={modalClasses["btn-container"]}>
 					<Button>Create</Button>
-					<Button clickHandler={props.listToggler}>Close</Button>
+					<Button clickHandler={props.listToggler}>Cancel</Button>
 				</div>
 			</form>
 		</Modal>
