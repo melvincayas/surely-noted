@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import useInputValidation from "../../hooks/useInputValidation";
 import { editOneNotepad } from "../../store/notepads/notepad-actions";
 import { errorActions } from "../../store/error/error-slice";
-import GeneralModal from "../UI/GeneralModal";
+import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import classes from "../../styles/Auth/Forms.module.css";
@@ -46,7 +46,7 @@ const EditNotepad = ({ id, title, category, modalToggler }) => {
 	};
 
 	return (
-		<GeneralModal header="Edit Notepad">
+		<Modal header="Edit Notepad">
 			<form onSubmit={formHandler} className={classes.form} method="POST">
 				<Input
 					label="Title (required)"
@@ -75,7 +75,7 @@ const EditNotepad = ({ id, title, category, modalToggler }) => {
 					<Button clickHandler={modalToggler}>Close</Button>
 				</div>
 			</form>
-		</GeneralModal>
+		</Modal>
 	);
 };
 

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import useInputValidation from "../../../hooks/useInputValidation";
 import { createOneNotepad } from "../../../store/notepads/notepad-actions";
 import { errorActions } from "../../../store/error/error-slice";
-import GeneralModal from "../../UI/GeneralModal";
+import Modal from "../../UI/Modal";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import classes from "../../../styles/Auth/Forms.module.css";
@@ -48,7 +48,7 @@ const NewNotepad = props => {
 	};
 
 	return (
-		<GeneralModal header="New Notepad">
+		<Modal header="New Notepad">
 			<form onSubmit={formHandler} className={classes.form} method="POST">
 				<Input
 					label="Title (required)"
@@ -75,7 +75,7 @@ const NewNotepad = props => {
 					<Button clickHandler={props.listToggler}>Close</Button>
 				</div>
 			</form>
-		</GeneralModal>
+		</Modal>
 	);
 };
 

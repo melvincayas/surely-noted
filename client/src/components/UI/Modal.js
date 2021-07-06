@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import classes from "../../styles/UI/Modal.module.css";
 
-const GeneralModal = props => {
+const Modal = props => {
 	return (
 		<div onClick={props.clickHandler} className={classes.backdrop}>
 			<Card header={props.header} className={classes.container}>
@@ -12,4 +12,4 @@ const GeneralModal = props => {
 	);
 };
 
-export default GeneralModal;
+export default Modal;
