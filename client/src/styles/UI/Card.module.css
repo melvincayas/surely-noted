@@ -4,17 +4,19 @@
 	max-width: 600px;
 	margin: 0 auto;
 	border-radius: 10px;
-	box-shadow: 2px 2px 2px #a3a0a0;
+	box-shadow: 4px 4px 8px #888;
 	margin-bottom: 2em;
-	border: 1px solid #ccc;
+	border: 1px solid #888;
 }
 
 .header {
-	background-color: pink;
+	background-color: #23395d;
+	color: white;
 	border-radius: 10px 10px 0 0;
 	margin: 0;
 	margin-bottom: 0.5em;
-	padding: 0.25em;
+	padding: 0.35em 1em;
+	font-size: 1.25em;
 }
 
 .content {
