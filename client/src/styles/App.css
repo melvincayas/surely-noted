@@ -1,0 +1,21 @@
+.notepad-action-btn {
+	padding: 0;
+	font-size: 2em;
+	outline: none;
+	border: none;
+	background-color: transparent;
+	color: white;
+}
+
+.notepad-action-btn:first-of-type {
+	margin-right: 0.35em;
+}
+
+.notepad-action-btn:hover {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.notepad-action-btn:active {
+	transform: scale(0.98);
+}

@@ -9,8 +9,8 @@ const NotepadControls = ({
 	addTaskBtnClass,
 }) => {
 	return (
-		<div className={classes["notepad-action-btns"]}>
-			<button onClick={addTaskHandler}>
+		<div className={classes["notepad-action-btns-container"]}>
+			<button className="notepad-action-btn" onClick={addTaskHandler}>
 				<i className={addTaskBtnClass}></i>
 			</button>
 			<SettingsDropdownMenu id={id} title={title} category={category} />

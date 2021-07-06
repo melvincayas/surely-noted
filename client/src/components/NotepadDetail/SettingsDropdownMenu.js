@@ -45,7 +45,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 			)}
 			{isShowingDeleteConfirm && confirmDeleteModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
-				<button onClick={settingsHandler}>
+				<button className="notepad-action-btn" onClick={settingsHandler}>
 					<i className={`fas fa-cog ${dropdownIconClass}`}></i>
 				</button>
 				<nav className={`${classes["dropdown-menu"]} ${dropdownMenuClass}`}>
