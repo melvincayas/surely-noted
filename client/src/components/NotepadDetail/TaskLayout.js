@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Fragment, useState } from "react";
 import { removeOneNotepadItem } from "../../store/notepads/notepad-item-actions";
-import Button from "../UI/Button";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskLayout = props => {
@@ -23,18 +22,18 @@ const TaskLayout = props => {
 				<p className={`${classes.todo} ${props.done}`}>{props.item}</p>
 			</div>
 			<div className={classes.buttons}>
-				<Button
+				<button
 					className={`${classes.edit} ${classes.button}`}
-					clickHandler={props.editStatusHandler}
+					onClick={props.editStatusHandler}
 				>
 					<i className="fas fa-edit"></i>
-				</Button>
-				<Button
+				</button>
+				<button
 					className={`${classes.trash} ${classes.button}`}
-					clickHandler={removeHandler}
+					onClick={removeHandler}
 				>
 					<i className="fas fa-trash-alt"></i>
-				</Button>
+				</button>
 			</div>
 		</Fragment>
 	);
