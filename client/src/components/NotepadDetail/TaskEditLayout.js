@@ -16,6 +16,7 @@ const TaskEditLayout = props => {
 	return (
 		<form className={classes["edit-form"]} onSubmit={editFormHandler}>
 			<input
+				autoFocus
 				type="text"
 				value={props.editedContent}
 				onChange={props.editContentHandler}
