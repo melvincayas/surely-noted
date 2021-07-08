@@ -28,9 +28,9 @@ const NotepadSelection = () => {
 
 	return (
 		<div className="columns">
-			<div className={`column is-3 ${classes.border}`}>
+			<nav className={`column is-3 ${classes.border}`}>
 				<Sidebar categories={uniqueCategories} />
-			</div>
+			</nav>
 			<div className="column is-9">
 				{notepadsBeingViewed.map(notepad => (
 					<ShowNotepads key={notepad._id} notepad={notepad} />
