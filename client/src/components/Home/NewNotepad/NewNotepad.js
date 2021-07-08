@@ -9,6 +9,7 @@ import Input from "../../UI/Input";
 import formClasses from "../../../styles/Auth/Forms.module.css";
 import inputClasses from "../../../styles/UI/Input.module.css";
 import modalClasses from "../../../styles/UI/Modal.module.css";
+import btnClasses from "../../../styles/UI/Button.module.css";
 
 const NewNotepad = props => {
 	const {
@@ -73,7 +74,12 @@ const NewNotepad = props => {
 				/>
 				<div className={modalClasses["btn-container"]}>
 					<Button>Create</Button>
-					<Button clickHandler={props.listToggler}>Cancel</Button>
+					<Button
+						className={btnClasses.cancel}
+						clickHandler={props.listToggler}
+					>
+						Cancel
+					</Button>
 				</div>
 			</form>
 		</Modal>

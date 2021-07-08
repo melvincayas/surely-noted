@@ -6,6 +6,7 @@ import { deleteOneNotepad } from "../store/notepads/notepad-actions";
 import Modal from "../components/UI/Modal";
 import Button from "../components/UI/Button";
 import modalClasses from "../styles/UI/Modal.module.css";
+import btnClasses from "../styles/UI/Button.module.css";
 
 const useDelete = notepadId => {
 	const [isShowingDeleteConfirm, setIsShowingDeleteConfirm] = useState(false);
@@ -29,7 +30,9 @@ const useDelete = notepadId => {
 			</p>
 			<div className={modalClasses["btn-container"]}>
 				<Button clickHandler={confirmedDeleteHandler}>Delete</Button>
-				<Button clickHandler={deleteClickHandler}>Cancel</Button>
+				<Button className={btnClasses.cancel} clickHandler={deleteClickHandler}>
+					Cancel
+				</Button>
 			</div>
 		</Modal>,
 		document.getElementById("modal")
