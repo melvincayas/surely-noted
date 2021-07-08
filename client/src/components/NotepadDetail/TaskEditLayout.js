@@ -22,7 +22,7 @@ const TaskEditLayout = props => {
 				onChange={props.editContentHandler}
 			></input>
 			<button>Save</button>
-			<button onClick={props.editStatusHandler}>Close</button>
+			<button onClick={props.editStatusHandler}>Cancel</button>
 		</form>
 	);
 };
