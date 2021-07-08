@@ -8,6 +8,7 @@ import Input from "../UI/Input";
 import classes from "../../styles/Auth/Forms.module.css";
 import inputStyles from "../../styles/UI/Input.module.css";
 import modalClasses from "../../styles/UI/Modal.module.css";
+import btnClasses from "../../styles/UI/Button.module.css";
 
 const EditNotepad = ({ id, title, category, modalToggler }) => {
 	const {
@@ -73,7 +74,9 @@ const EditNotepad = ({ id, title, category, modalToggler }) => {
 				/>
 				<div className={modalClasses["btn-container"]}>
 					<Button>Save</Button>
-					<Button clickHandler={modalToggler}>Cancel</Button>
+					<Button className={btnClasses.cancel} clickHandler={modalToggler}>
+						Cancel
+					</Button>
 				</div>
 			</form>
 		</Modal>
