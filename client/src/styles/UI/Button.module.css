@@ -1,4 +1,4 @@
-.button {
+.base-btn {
 	background-color: #87c6eb;
 	color: white;
 	font-size: 1em;
@@ -8,11 +8,11 @@
 	transition: background-color 0.25s ease;
 }
 
-.button:hover {
+.base-btn:hover {
 	cursor: pointer;
 	background-color: #7cb6d8;
 }
 
-.button:disabled {
+.base-btn:disabled {
 	background-color: rgba(128, 0, 128, 0.336);
 }

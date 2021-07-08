@@ -4,7 +4,7 @@ import classes from "../../styles/UI/Button.module.css";
 const Button = props => {
 	return (
 		<button
-			className={`${classes.button} ${props.className}`}
+			className={`${classes["base-btn"]} ${props.className}`}
 			disabled={props.isValid}
 			onClick={props.clickHandler}
 		>
