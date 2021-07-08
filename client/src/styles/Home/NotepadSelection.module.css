@@ -5,4 +5,15 @@
 
 .active {
 	font-weight: bold;
+	color: #23395d !important;
+}
+
+.sidebar-links {
+	color: black;
+	display: block;
+}
+
+.sidebar-links:hover {
+	background-color: #ccc;
+	border-radius: 10px;
 }

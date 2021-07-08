@@ -10,8 +10,11 @@ const Sidebar = ({ categories }) => {
 
 	return (
 		<ul>
-			<li className="mb-2 pl-5 ml-5">
-				<Link to="/home" className={`is-size-5 ${isAll}`}>
+			<li className="mb-2">
+				<Link
+					to="/home"
+					className={`is-size-5 pl-5 ml-5 ${isAll} ${classes["sidebar-links"]}`}
+				>
 					All
 				</Link>
 			</li>

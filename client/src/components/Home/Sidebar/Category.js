@@ -8,7 +8,7 @@ const Category = props => {
 		<li className="mb-2">
 			<Link
 				to={`/home?filter=${props.category}`}
-				className={`is-size-5 mb-2 pl-5 ml-5 ${isQueried}`}
+				className={`is-size-5 mb-2 pl-5 ml-5 ${classes["sidebar-links"]} ${isQueried}`}
 			>
 				{props.category}
 			</Link>
