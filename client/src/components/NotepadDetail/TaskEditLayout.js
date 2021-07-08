@@ -21,8 +21,15 @@ const TaskEditLayout = props => {
 				value={props.editedContent}
 				onChange={props.editContentHandler}
 			></input>
-			<button>Save</button>
-			<button onClick={props.editStatusHandler}>Cancel</button>
+			<div>
+				<button className={classes["edit-form-btns"]}>Save</button>
+				<button
+					className={`${classes["edit-form-btns"]} ${classes["edit-form-cancel-btn"]}`}
+					onClick={props.editStatusHandler}
+				>
+					Cancel
+				</button>
+			</div>
 		</form>
 	);
 };
