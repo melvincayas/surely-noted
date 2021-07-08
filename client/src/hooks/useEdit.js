@@ -6,6 +6,7 @@ const useEdit = contentToEdit => {
 
 	const editStatusHandler = () => {
 		setIsEditing(prevIsEditing => !prevIsEditing);
+		if (isEditing) setEditedContent(contentToEdit);
 	};
 
 	const editContentHandler = event => {
