@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
 import ShowNotepads from "./ShowNotepads/ShowNotepads";
+import SortDropdown from "./ShowNotepads/SortDropdown";
 
 const NotepadSelection = () => {
 	const location = useLocation();
@@ -29,6 +30,7 @@ const NotepadSelection = () => {
 		<div className="columns">
 			<Sidebar categories={uniqueCategories} />
 			<div className="column is-9">
+				<SortDropdown />
 				{notepadsBeingViewed.map(notepad => (
 					<ShowNotepads key={notepad._id} notepad={notepad} />
 				))}
