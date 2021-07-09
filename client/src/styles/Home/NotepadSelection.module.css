@@ -1,8 +1,3 @@
-.border {
-	border-right: 1px solid #ccc;
-	height: 100%;
-}
-
 .active {
 	font-weight: bold;
 	color: #23395d !important;
@@ -11,9 +6,25 @@
 .sidebar-links {
 	color: black;
 	display: block;
+	padding: 0 0.75em;
+	font-size: 1.25em;
 }
 
 .sidebar-links:hover {
 	background-color: #ccc;
-	border-radius: 10px;
+}
+
+.filter-box {
+	border: 1px solid #ccc;
+	background-color: white;
+}
+
+.header {
+	background-color: #23395d;
+	color: white;
+	border-bottom: 1px solid #ccc;
+	padding: 0.25em 0.75em;
+	font-weight: bold;
+	font-size: 1.25em;
+	margin-bottom: 0.25em;
 }
