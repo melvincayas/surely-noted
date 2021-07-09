@@ -8,9 +8,12 @@ const Sidebar = ({ categories }) => {
 	const queryText = query.get("filter");
 	const isAll = queryText === null ? classes.active : "";
 
+	console.log(categories);
+
 	return (
 		<nav className={`column is-3 ${classes.border}`}>
 			<p class="title is-4 pl-5 ml-5">Filter by:</p>
+
 			<ul>
 				<li className="mb-2">
 					<Link
