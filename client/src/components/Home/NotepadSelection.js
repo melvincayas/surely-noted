@@ -29,6 +29,7 @@ const NotepadSelection = () => {
 	return (
 		<div className="columns">
 			<nav className={`column is-3 ${classes.border}`}>
+				<p class="title is-4 pl-5 ml-5">Filter by:</p>
 				<Sidebar categories={uniqueCategories} />
 			</nav>
 			<div className="column is-9">
