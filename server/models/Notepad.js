@@ -13,6 +13,9 @@ const notepadSchema = new Schema({
 		type: Date,
 		required: true,
 	},
+	modified: {
+		type: Date,
+	},
 	creator: {
 		type: Schema.Types.ObjectId,
 		ref: "User",
