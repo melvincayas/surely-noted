@@ -1,8 +1,15 @@
-const SortDropdown = () => {
+const SortDropdown = ({ sortValue, onChangeHandler }) => {
 	return (
-		<select name="sort" className="mb-5 ml-2">
-			<option value="asc">Name: A-Z</option>
-			<option value="desc">Name: Z-A</option>
+		<select
+			value={sortValue}
+			onChange={onChangeHandler}
+			name="sort"
+			className="mb-5 ml-2"
+		>
+			<option value="recent">Recently Updated</option>
+			<option value="ascending">Name: A-Z</option>
+			<option value="descending">Name: Z-A</option>
+			<option value="newest">Newest</option>
 		</select>
 	);
 };

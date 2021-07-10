@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
@@ -5,6 +6,8 @@ import ShowNotepads from "./ShowNotepads/ShowNotepads";
 import SortDropdown from "./ShowNotepads/SortDropdown";
 
 const NotepadSelection = () => {
+	const [selectedSortValue, setSelectedSortValue] = useState("recent");
+
 	const location = useLocation();
 	const query = new URLSearchParams(location.search);
 	const pickedCategory = query.get("filter");
@@ -25,13 +28,38 @@ const NotepadSelection = () => {
 	);
 
 	const notepadsBeingViewed = pickedCategory ? filteredNotepads : allNotepads;
+	const sortedNotepadsBeingViewed = [...notepadsBeingViewed];
+
+	switch (selectedSortValue) {
+		case "ascending":
+			sortedNotepadsBeingViewed.sort((a, b) => {
+				if (a.title < b.title) return -1;
+				if (a.title > b.title) return 1;
+				return 0;
+			});
+			break;
+		case "descending":
+			sortedNotepadsBeingViewed.sort((a, b) => {
+				if (a.title > b.title) return -1;
+				if (a.title < b.title) return 1;
+				return 0;
+			});
+			break;
+		default:
+			break;
+	}
+
+	const selectedSortHandler = event => setSelectedSortValue(event.target.value);
 
 	return (
 		<div className="columns">
 			<Sidebar categories={uniqueCategories} />
 			<div className="column is-9">
-				<SortDropdown />
-				{notepadsBeingViewed.map(notepad => (
+				<SortDropdown
+					sortValue={selectedSortValue}
+					onChangeHandler={selectedSortHandler}
+				/>
+				{sortedNotepadsBeingViewed.map(notepad => (
 					<ShowNotepads key={notepad._id} notepad={notepad} />
 				))}
 			</div>
