@@ -45,6 +45,13 @@ const NotepadSelection = () => {
 				return 0;
 			});
 			break;
+		case "newest":
+			sortedNotepadsBeingViewed.sort((a, b) => {
+				if (a.created > b.created) return -1;
+				if (a.created < b.created) return 1;
+				return 0;
+			});
+			break;
 		default:
 			break;
 	}
