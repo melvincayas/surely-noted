@@ -24,13 +24,10 @@ module.exports.newNotepadItem = catchAsync(async (req, res, next) => {
 module.exports.deleteNotepadItem = catchAsync(async (req, res, next) => {
 	const { notepadId, itemId } = req.params;
 	const { user_id } = req.session;
-	await Notepad.findByIdAndUpdate(
-		notepadId,
-		{
-			$pull: { items: { _id: itemId } },
-		},
-		{ new: true }
-	);
+	await Notepad.findByIdAndUpdate(notepadId, {
+		$pull: { items: { _id: itemId } },
+		$set: { modified: new Date().toUTCString() },
+	});
 	const userNotepads = await Notepad.find({ creator: user_id });
 	res
 		.status(200)
