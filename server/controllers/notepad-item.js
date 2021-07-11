@@ -40,7 +40,12 @@ module.exports.editNotepadItem = catchAsync(async (req, res, next) => {
 	const { editedContent } = req.body;
 	await Notepad.findByIdAndUpdate(
 		notepadId,
-		{ $set: { "items.$[el].content": editedContent } },
+		{
+			$set: {
+				"items.$[el].content": editedContent,
+				modified: new Date().toUTCString(),
+			},
+		},
 		{
 			arrayFilters: [{ "el._id": itemId }],
 			new: true,
