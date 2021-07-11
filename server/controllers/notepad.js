@@ -18,6 +18,7 @@ module.exports.newNotepad = catchAsync(async (req, res, next) => {
 		title,
 		category,
 		created: new Date().toUTCString(),
+		modified: new Date().toUTCString(),
 		creator: user,
 	});
 	user.notepads.push(newNotepad._id);
