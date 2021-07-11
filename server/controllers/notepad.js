@@ -47,7 +47,7 @@ module.exports.editNotepad = catchAsync(async (req, res, next) => {
 
 	await Notepad.findByIdAndUpdate(
 		{ _id: notepadId },
-		{ $set: { title, category } }
+		{ $set: { title, category, modified: new Date().toUTCString() } }
 	);
 
 	const userNotepads = await Notepad.find({ creator: user_id });
