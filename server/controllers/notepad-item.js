@@ -10,7 +10,9 @@ module.exports.newNotepadItem = catchAsync(async (req, res, next) => {
 		content,
 		status: "incomplete",
 	};
-	const notepad = await Notepad.findOne({ _id: notepadId });
+	const notepad = await Notepad.findByIdAndUpdate(notepadId, {
+		$set: { modified: new Date().toUTCString() },
+	});
 	notepad.items.push(newItem);
 	await notepad.save();
 	const userNotepads = await Notepad.find({ creator: user_id });
