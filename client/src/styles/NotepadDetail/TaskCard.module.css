@@ -99,3 +99,7 @@
 input.complete-checkbox {
 	transform: scale(1.5);
 }
+
+input.complete-checkbox:hover {
+	cursor: pointer;
+}
