@@ -4,13 +4,7 @@ import { removeOneNotepadItem } from "../../store/notepads/notepad-item-actions"
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskLayout = props => {
-	const [done, setDone] = useState(null);
 	const dispatch = useDispatch();
-
-	const doneHandler = () => {
-		if (done) return setDone(null);
-		setDone(classes.done);
-	};
 
 	const removeHandler = () => {
 		dispatch(removeOneNotepadItem(props.notepadId, props.itemId));
@@ -18,10 +12,15 @@ const TaskLayout = props => {
 
 	return (
 		<Fragment>
-			<div onClick={doneHandler} className={classes.width}>
-				<input type="checkbox" id={props.item} name={props.item} />
+			<div className={classes.width}>
+				<input
+					className={classes["complete-checkbox"]}
+					type="checkbox"
+					id={props.item}
+					name={props.item}
+				/>
 				<label htmlFor={props.item}>
-					<span className={`${classes.todo} ${props.done}`}>{props.item}</span>
+					<span className={classes.todo}>{props.item}</span>
 				</label>
 			</div>
 			<div className={classes.buttons}>
