@@ -4,10 +4,13 @@ import { removeOneNotepadItem } from "../../store/notepads/notepad-item-actions"
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskLayout = props => {
-	const [taskCompleted, setTaskCompleted] = useState(false);
+	const [taskCompletionStatus, setTaskCompletionStatus] = useState(
+		props.completionStatus
+	);
 	const dispatch = useDispatch();
 
-	const onChangeHandler = () => setTaskCompleted(prevState => !prevState);
+	const onChangeHandler = () =>
+		setTaskCompletionStatus(prevState => !prevState);
 
 	const removeHandler = () => {
 		dispatch(removeOneNotepadItem(props.notepadId, props.itemId));
@@ -22,7 +25,7 @@ const TaskLayout = props => {
 					type="checkbox"
 					id={props.item}
 					name={props.item}
-					checked={taskCompleted}
+					checked={taskCompletionStatus}
 				/>
 				<label htmlFor={props.item}>
 					<span className={classes.todo}>{props.item}</span>

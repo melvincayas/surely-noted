@@ -36,6 +36,7 @@ const NotepadDetail = () => {
 						notepadId={selectedNotepad._id}
 						itemId={item._id}
 						item={item.content}
+						completionStatus={item.complete}
 					/>
 				))}
 			</NotepadLayout>

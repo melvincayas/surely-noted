@@ -4,7 +4,7 @@ import TaskLayout from "./TaskLayout";
 import TaskEditLayout from "./TaskEditLayout";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
-const TaskCard = ({ notepadId, itemId, item }) => {
+const TaskCard = ({ notepadId, itemId, item, completionStatus }) => {
 	const {
 		isEditing,
 		setIsEditing,
@@ -30,6 +30,7 @@ const TaskCard = ({ notepadId, itemId, item }) => {
 					notepadId={notepadId}
 					itemId={itemId}
 					item={item}
+					completionStatus={completionStatus}
 					editStatusHandler={editStatusHandler}
 				/>
 			)}
