@@ -19,7 +19,10 @@ const TaskLayout = props => {
 	return (
 		<Fragment>
 			<div onClick={doneHandler} className={classes.width}>
-				<p className={`${classes.todo} ${props.done}`}>{props.item}</p>
+				<input type="checkbox" id={props.item} name={props.item} />
+				<label htmlFor={props.item}>
+					<span className={`${classes.todo} ${props.done}`}>{props.item}</span>
+				</label>
 			</div>
 			<div className={classes.buttons}>
 				<button
