@@ -8,7 +8,7 @@ module.exports.newNotepadItem = catchAsync(async (req, res, next) => {
 	const newItem = {
 		date: new Date().toUTCString(),
 		content,
-		status: "incomplete",
+		complete: false,
 	};
 	const notepad = await Notepad.findByIdAndUpdate(notepadId, {
 		$set: { modified: new Date().toUTCString() },
