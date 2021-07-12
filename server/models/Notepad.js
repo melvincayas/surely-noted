@@ -37,8 +37,7 @@ const notepadSchema = new Schema({
 				required: true,
 			},
 			status: {
-				type: String,
-				enum: ["complete", "incomplete"],
+				type: Boolean,
 			},
 		},
 	],
