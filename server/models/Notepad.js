@@ -36,7 +36,7 @@ const notepadSchema = new Schema({
 				type: String,
 				required: true,
 			},
-			status: {
+			complete: {
 				type: Boolean,
 			},
 		},
