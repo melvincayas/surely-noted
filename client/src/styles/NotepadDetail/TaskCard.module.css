@@ -7,7 +7,7 @@
 	justify-content: space-between;
 }
 
-.width {
+.item-container {
 	width: 100%;
 }
 
@@ -98,6 +98,7 @@
 
 input.complete-checkbox {
 	transform: scale(1.5);
+	margin-left: 0.65em;
 }
 
 input.complete-checkbox:hover {

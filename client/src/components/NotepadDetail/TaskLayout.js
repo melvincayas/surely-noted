@@ -12,7 +12,7 @@ const TaskLayout = props => {
 
 	return (
 		<Fragment>
-			<div className={classes.width}>
+			<div className={classes["item-container"]}>
 				<input
 					className={classes["complete-checkbox"]}
 					type="checkbox"
