@@ -95,3 +95,7 @@
 .edit-form-cancel-btn:hover {
 	background-color: #f7605d;
 }
+
+input.complete-checkbox {
+	transform: scale(1.5);
+}
