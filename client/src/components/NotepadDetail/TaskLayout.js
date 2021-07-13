@@ -16,6 +16,8 @@ const TaskLayout = props => {
 		dispatch(removeOneNotepadItem(props.notepadId, props.itemId));
 	};
 
+	const completedTask = taskCompletionStatus ? classes["completed-task"] : "";
+
 	return (
 		<Fragment>
 			<div className={classes["task-container"]}>
@@ -28,7 +30,9 @@ const TaskLayout = props => {
 					checked={taskCompletionStatus}
 				/>
 				<label htmlFor={props.item}>
-					<span className={classes.task}>{props.item}</span>
+					<span className={`${classes.task} ${completedTask}`}>
+						{props.item}
+					</span>
 				</label>
 			</div>
 			<div className={classes["btn-container"]}>
