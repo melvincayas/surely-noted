@@ -17,6 +17,7 @@ router
 
 router
 	.route("/:notepadId/:itemId")
+	.post(validateNotepadUser, notepadItemControllers.updateCompletionStatus)
 	.delete(validateNotepadUser, notepadItemControllers.deleteNotepadItem)
 	.patch(validateNotepadUser, notepadItemControllers.editNotepadItem);
 
