@@ -14,7 +14,7 @@ const TaskCard = ({ notepadId, itemId, item, completionStatus }) => {
 	} = useEdit(item);
 
 	return (
-		<div className={classes.container}>
+		<div className={classes["main-container"]}>
 			{isEditing && (
 				<TaskEditLayout
 					notepadId={notepadId}
