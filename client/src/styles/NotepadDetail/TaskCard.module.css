@@ -53,7 +53,7 @@
 	cursor: pointer;
 }
 
-.done {
+.completed-task {
 	text-decoration: line-through;
 	color: rgb(146, 146, 146);
 }
