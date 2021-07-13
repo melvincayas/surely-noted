@@ -17,8 +17,11 @@ router
 
 router
 	.route("/:notepadId/:itemId")
-	.post(validateNotepadUser, notepadItemControllers.updateCompletionStatus)
 	.delete(validateNotepadUser, notepadItemControllers.deleteNotepadItem)
 	.patch(validateNotepadUser, notepadItemControllers.editNotepadItem);
+
+router
+	.route("/:notepadId/:itemId/status")
+	.patch(validateNotepadUser, notepadItemControllers.updateCompletionStatus);
 
 module.exports = router;
