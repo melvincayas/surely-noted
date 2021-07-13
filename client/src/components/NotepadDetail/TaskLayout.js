@@ -31,7 +31,7 @@ const TaskLayout = props => {
 					<span className={classes.todo}>{props.item}</span>
 				</label>
 			</div>
-			<div className={classes.buttons}>
+			<div className={classes["btn-container"]}>
 				<button
 					className={`${classes.edit} ${classes.button}`}
 					onClick={props.editStatusHandler}
