@@ -48,7 +48,6 @@ module.exports.editNotepadItem = catchAsync(async (req, res, next) => {
 		},
 		{
 			arrayFilters: [{ "el._id": itemId }],
-			new: true,
 		}
 	);
 	const userNotepads = await Notepad.find({ creator: user_id });
@@ -72,7 +71,6 @@ module.exports.updateCompletionStatus = catchAsync(async (req, res, next) => {
 		},
 		{
 			arrayFilters: [{ "el._id": itemId }],
-			new: true,
 		}
 	);
 
