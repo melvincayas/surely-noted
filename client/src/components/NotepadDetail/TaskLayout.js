@@ -18,7 +18,7 @@ const TaskLayout = props => {
 
 	return (
 		<Fragment>
-			<div className={classes["item-container"]}>
+			<div className={classes["task-container"]}>
 				<input
 					className={classes["complete-checkbox"]}
 					onChange={onChangeHandler}
