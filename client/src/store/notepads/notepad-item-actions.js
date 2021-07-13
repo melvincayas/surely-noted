@@ -35,3 +35,14 @@ export const editOneNotepadItem = (notepadId, itemId, editContent) => {
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
+
+export const updateCompletionStatusOfNotepadItem = (
+	notepadId,
+	itemId,
+	completionStatus
+) => {
+	return handleAsyncErrors(async dispatch => {
+		const request = { completionStatus };
+		const response = await fetchData();
+	});
+};
