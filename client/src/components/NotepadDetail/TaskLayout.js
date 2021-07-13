@@ -1,22 +1,28 @@
 import { useDispatch } from "react-redux";
-import { Fragment, useState } from "react";
-import { removeOneNotepadItem } from "../../store/notepads/notepad-item-actions";
+import { Fragment } from "react";
+import {
+	removeOneNotepadItem,
+	updateCompletionStatusOfNotepadItem,
+} from "../../store/notepads/notepad-item-actions";
 import classes from "../../styles/NotepadDetail/TaskCard.module.css";
 
 const TaskLayout = props => {
-	const [taskCompletionStatus, setTaskCompletionStatus] = useState(
-		props.completionStatus
-	);
 	const dispatch = useDispatch();
 
 	const onChangeHandler = () =>
-		setTaskCompletionStatus(prevState => !prevState);
+		dispatch(
+			updateCompletionStatusOfNotepadItem(
+				props.notepadId,
+				props.itemId,
+				!props.completionStatus
+			)
+		);
 
 	const removeHandler = () => {
 		dispatch(removeOneNotepadItem(props.notepadId, props.itemId));
 	};
 
-	const completedTask = taskCompletionStatus ? classes["completed-task"] : "";
+	const completedTask = props.completionStatus ? classes["completed-task"] : "";
 
 	return (
 		<Fragment>
@@ -27,7 +33,7 @@ const TaskLayout = props => {
 					type="checkbox"
 					id={props.item}
 					name={props.item}
-					checked={taskCompletionStatus}
+					checked={props.completionStatus}
 				/>
 				<label htmlFor={props.item}>
 					<span className={`${classes.task} ${completedTask}`}>
