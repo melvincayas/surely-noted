@@ -43,6 +43,12 @@ export const updateCompletionStatusOfNotepadItem = (
 ) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { completionStatus };
-		const response = await fetchData();
+		const response = await fetchData(
+			`/notepad/${notepadId}/${itemId}/status`,
+			"PATCH",
+			request
+		);
+
+		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
