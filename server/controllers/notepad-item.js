@@ -56,3 +56,29 @@ module.exports.editNotepadItem = catchAsync(async (req, res, next) => {
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
 });
+
+module.exports.updateCompletionStatus = catchAsync(async (req, res, next) => {
+	const { notepadId, itemId } = req.params;
+	const { user_id } = req.session;
+	const { completionStatus } = req.body;
+
+	await Notepad.findByIdAndUpdate(
+		notepadId,
+		{
+			$set: {
+				"items.$[el].complete": completionStatus,
+				modified: new Date().toUTCString(),
+			},
+		},
+		{
+			arrayFilters: [{ "el._id": itemId }],
+			new: true,
+		}
+	);
+
+	const userNotepads = await Notepad.find({ creator: user_id });
+
+	res
+		.status(200)
+		.json({ response: { type: "success", notepads: userNotepads } });
+});
