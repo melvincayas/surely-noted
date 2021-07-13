@@ -28,7 +28,7 @@ const TaskLayout = props => {
 					checked={taskCompletionStatus}
 				/>
 				<label htmlFor={props.item}>
-					<span className={classes.todo}>{props.item}</span>
+					<span className={classes.task}>{props.item}</span>
 				</label>
 			</div>
 			<div className={classes["btn-container"]}>
