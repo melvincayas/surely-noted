@@ -20,9 +20,8 @@ const NewNotepad = props => {
 	} = useInputValidation(input => input.trim() !== "");
 	const {
 		inputChangeHandler: categoryChangeHandler,
-		inputBlurHandler: categoryBlurHandler,
 		value: category,
-		inputError: categoryHasError,
+		inputValid: isCategoryValid,
 	} = useInputValidation(input => input.trim() !== "");
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -31,7 +30,7 @@ const NewNotepad = props => {
 		props.listToggler(event);
 		event.preventDefault();
 
-		if (titleHasError || categoryHasError) {
+		if (titleHasError) {
 			return dispatch(
 				errorActions.setError({
 					header: "Error",
@@ -42,7 +41,7 @@ const NewNotepad = props => {
 
 		const newList = {
 			title,
-			category,
+			category: isCategoryValid ? category : "Uncategorized",
 		};
 
 		dispatch(createOneNotepad(newList));
@@ -68,8 +67,6 @@ const NewNotepad = props => {
 					name="category"
 					type="text"
 					placeholder="ex: Vacation"
-					className={categoryHasError ? inputClasses["input-invalid"] : ""}
-					onBlurHandler={categoryBlurHandler}
 					onChangeHandler={categoryChangeHandler}
 				/>
 				<div className={modalClasses["btn-container"]}>
