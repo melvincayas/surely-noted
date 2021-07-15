@@ -31,7 +31,7 @@ const useInputValidation = (validateInput, initialInputState = null) => {
 		initializeState
 	);
 
-	const inputValid = validateInput(state.input);
+	const isInputValid = validateInput(state.input);
 
 	const inputChangeHandler = event => {
 		dispatchState({ type: "INPUT", input: event.target.value });
@@ -41,13 +41,13 @@ const useInputValidation = (validateInput, initialInputState = null) => {
 		dispatchState({ type: "BLUR" });
 	};
 
-	const inputError = !inputValid && state.inputTouched;
+	const inputError = !isInputValid && state.inputTouched;
 
 	return {
 		inputChangeHandler,
 		inputBlurHandler,
 		inputError,
-		inputValid,
+		isInputValid,
 		value: state.input,
 	};
 };

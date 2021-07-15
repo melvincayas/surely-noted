@@ -21,7 +21,7 @@ const NewNotepad = props => {
 	const {
 		inputChangeHandler: categoryChangeHandler,
 		value: category,
-		inputValid: isCategoryValid,
+		isInputValid: isCategoryValid,
 	} = useInputValidation(input => input.trim() !== "");
 	const dispatch = useDispatch();
 	const history = useHistory();
