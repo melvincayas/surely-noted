@@ -41,12 +41,12 @@ const useInputValidation = (validateInput, initialInputState = null) => {
 		dispatchState({ type: "BLUR" });
 	};
 
-	const inputError = !isInputValid && state.inputTouched;
+	const inputHasError = !isInputValid && state.inputTouched;
 
 	return {
 		inputChangeHandler,
 		inputBlurHandler,
-		inputError,
+		inputHasError,
 		isInputValid,
 		value: state.input,
 	};
