@@ -48,7 +48,7 @@ const EditNotepad = ({ id, title, category, modalToggler }) => {
 	};
 
 	return (
-		<Modal header="Edit Notepad">
+		<Modal clickHandler={modalToggler} header="Edit Notepad">
 			<form onSubmit={formHandler} className={classes.form} method="POST">
 				<Input
 					label="Title (required)"
