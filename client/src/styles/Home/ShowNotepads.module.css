@@ -16,3 +16,8 @@
 	box-shadow: 4px 4px 6px #ccc;
 	cursor: pointer;
 }
+
+.sort-dropdown {
+	font-size: 1em;
+	outline: none;
+}
