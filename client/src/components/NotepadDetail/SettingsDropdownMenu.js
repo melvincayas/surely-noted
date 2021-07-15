@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useRef } from "react";
 import useEdit from "../../hooks/useEdit";
 import useDelete from "../../hooks/useDelete";
+import useShare from "../../hooks/useShare";
 import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
@@ -16,6 +17,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 	});
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
+	const { isShowingShareModal, toggleShareModal, shareModal } = useShare(id);
 
 	const toggleEditModal = () => {
 		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
@@ -44,6 +46,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 				/>
 			)}
 			{isShowingDeleteConfirm && confirmDeleteModal}
+			{isShowingShareModal && shareModal}
 			<div ref={dropdownRef} className={classes["dropdown-menu-container"]}>
 				<button className="notepad-action-btn" onClick={settingsHandler}>
 					<i className={`fas fa-cog ${dropdownIconClass}`}></i>
@@ -54,7 +57,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 							<button onClick={toggleEditModal}>Edit</button>
 						</li>
 						<li>
-							<button>Share</button>
+							<button onClick={toggleShareModal}>Share</button>
 						</li>
 						<li>
 							<button onClick={toggleDeleteConfirmModal}>Delete</button>
