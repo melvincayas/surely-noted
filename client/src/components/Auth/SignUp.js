@@ -17,32 +17,32 @@ const SignUp = props => {
 	const {
 		inputChangeHandler: nameChangeHandler,
 		inputBlurHandler: nameBlurHandler,
-		inputValid: nameIsValid,
-		inputError: nameError,
+		isInputValid: nameIsValid,
+		inputHasError: nameError,
 		value: enteredName,
 	} = useInputValidation(input => input.trim() !== "");
 
 	const {
 		inputChangeHandler: emailChangeHandler,
 		inputBlurHandler: emailBlurHandler,
-		inputValid: emailIsValid,
-		inputError: emailError,
+		isInputValid: emailIsValid,
+		inputHasError: emailError,
 		value: enteredEmail,
 	} = useInputValidation(input => input.includes("@") && input.includes("."));
 
 	const {
 		inputChangeHandler: passwordChangeHandler,
 		inputBlurHandler: passwordBlurHandler,
-		inputValid: passwordIsValid,
-		inputError: passwordError,
+		isInputValid: passwordIsValid,
+		inputHasError: passwordError,
 		value: enteredPassword,
 	} = useInputValidation(input => input.length >= 6);
 
 	const {
 		inputChangeHandler: passwordCheckChangeHandler,
 		inputBlurHandler: passwordCheckBlurHandler,
-		inputValid: passwordCheckIsValid,
-		inputError: passwordCheckError,
+		isInputValid: passwordCheckIsValid,
+		inputHasError: passwordCheckError,
 	} = useInputValidation(input => input === enteredPassword && passwordIsValid);
 
 	useEffect(() => {
@@ -71,7 +71,7 @@ const SignUp = props => {
 			<form className={classes.form} onSubmit={formHandler} method="POST">
 				<Input
 					onChangeHandler={nameChangeHandler}
-					inputValid={nameIsValid}
+					isInputValid={nameIsValid}
 					onBlurHandler={nameBlurHandler}
 					className={nameError ? inputStyles["input-invalid"] : ""}
 					label="Name"
@@ -81,7 +81,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={emailChangeHandler}
-					inputValid={emailIsValid}
+					isInputValid={emailIsValid}
 					onBlurHandler={emailBlurHandler}
 					className={emailError ? inputStyles["input-invalid"] : ""}
 					label="Email"
@@ -91,7 +91,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={passwordChangeHandler}
-					inputValid={passwordIsValid}
+					isInputValid={passwordIsValid}
 					onBlurHandler={passwordBlurHandler}
 					className={passwordError ? inputStyles["input-invalid"] : ""}
 					label="Password"
@@ -102,7 +102,7 @@ const SignUp = props => {
 				/>
 				<Input
 					onChangeHandler={passwordCheckChangeHandler}
-					inputValid={passwordCheckIsValid}
+					isInputValid={passwordCheckIsValid}
 					onBlurHandler={passwordCheckBlurHandler}
 					className={passwordCheckError ? inputStyles["input-invalid"] : ""}
 					label="Repeat Password"

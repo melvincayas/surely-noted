@@ -16,16 +16,16 @@ const LogIn = props => {
 	const {
 		inputChangeHandler: emailChangeHandler,
 		inputBlurHandler: emailBlurHandler,
-		inputValid: emailIsValid,
-		inputError: emailError,
+		isInputValid: emailIsValid,
+		inputHasError: emailError,
 		value: enteredEmail,
 	} = useInputValidation(input => input.trim() !== "");
 
 	const {
 		inputChangeHandler: passwordChangeHandler,
 		inputBlurHandler: passwordBlurHandler,
-		inputValid: passwordIsValid,
-		inputError: passwordError,
+		isInputValid: passwordIsValid,
+		inputHasError: passwordError,
 		value: enteredPassword,
 	} = useInputValidation(input => input.trim() !== "");
 
