@@ -1,10 +1,13 @@
 const User = require("../models/User");
 const Notepad = require("../models/Notepad");
 const catchAsync = require("../public/utilities/catchAsync");
+const ErrorHandler = require("../public/utilities/ErrorHandler");
 
 module.exports.onLoad = catchAsync(async (req, res, next) => {
 	const { user_id } = req.session;
-	const userNotepads = await Notepad.find({ creator: user_id });
+	const userNotepads = await Notepad.find({
+		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
+	});
 	res
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
@@ -54,4 +57,34 @@ module.exports.editNotepad = catchAsync(async (req, res, next) => {
 	res
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
+});
+
+module.exports.shareNotepad = catchAsync(async (req, res, next) => {
+	const { notepadId } = req.params;
+	const { user_id } = req.session;
+	const { enteredEmail } = req.body;
+
+	const notepadToShare = await Notepad.findById(notepadId).populate("creator");
+	const [foundUserToShareWith] = await User.find({ email: enteredEmail });
+
+	if (enteredEmail === notepadToShare.creator.email) {
+		return next(new ErrorHandler(400, "You own this notepad!", "share"));
+	}
+
+	if (!foundUserToShareWith) {
+		return next(new ErrorHandler(400, "That e-mail doesn't exist!", "share"));
+	}
+
+	notepadToShare.shared.push(foundUserToShareWith._id);
+	await notepadToShare.save();
+
+	const user = await User.findById(user_id);
+	user.shared.push(notepadToShare._id);
+	await user.save();
+
+	const userNotepads = await Notepad.find({ creator: user_id });
+
+	res
+		.status(200)
+		.json({ response: { ype: "success", notepads: userNotepads } });
 });
