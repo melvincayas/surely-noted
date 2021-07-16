@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
+import { shareOneNotepad } from "../store/notepads/notepad-actions";
 import Modal from "../components/UI/Modal";
 import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
@@ -9,10 +10,9 @@ import btnClasses from "../styles/UI/Button.module.css";
 import useInputValidation from "./useInputValidation";
 import inputStyles from "../styles/UI/Input.module.css";
 
-// useState for opening share modal onClick of Share in dropdown
-// make modal where user will enter e-mail to find
-// make buttons for Share and Cancel
 // make dispatch action on Share button on modal
+// create route in backend
+// make mongo enter shared users into shared category
 
 const useShare = notepadId => {
 	const [isShowingShareModal, setIsShowingShareModal] = useState(false);
@@ -30,6 +30,10 @@ const useShare = notepadId => {
 		setIsShowingShareModal(prevState => !prevState);
 	};
 
+	const onShareConfirm = () => {
+		dispatch(shareOneNotepad(notepadId, enteredEmail));
+	};
+
 	const shareModal = ReactDOM.createPortal(
 		<Modal clickHandler={shareClickHandler} header="Share Notepad">
 			<p className={modalClasses.message}>
@@ -45,7 +49,7 @@ const useShare = notepadId => {
 				type="email"
 			/>
 			<div className={modalClasses["btn-container"]}>
-				<Button clickHandler={shareClickHandler}>Share</Button>
+				<Button clickHandler={onShareConfirm}>Share</Button>
 				<Button className={btnClasses.cancel} clickHandler={shareClickHandler}>
 					Cancel
 				</Button>
