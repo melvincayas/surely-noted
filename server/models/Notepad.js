@@ -47,7 +47,7 @@ notepadSchema.post("findOneAndDelete", async function (doc) {
 	if (doc) {
 		await mongoose
 			.model("User")
-			.findByIdAndUpdate(doc.creator, { $pull: { lists: doc._id } });
+			.findByIdAndUpdate(doc.creator, { $pull: { notepads: doc._id } });
 	}
 });
 
