@@ -35,3 +35,15 @@ export const editOneNotepad = (editedNotepad, id) => {
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };
+
+export const shareOneNotepad = (notepadId, enteredEmail) => {
+	return handleAsyncErrors(async dispatch => {
+		const request = { notepadId, enteredEmail };
+		const response = await fetchData(
+			`/notepad/${notepadId}/share`,
+			"POST",
+			request
+		);
+		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
+	});
+};
