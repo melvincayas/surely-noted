@@ -74,14 +74,6 @@ module.exports.shareNotepad = catchAsync(async (req, res, next) => {
 	const notepadToShare = await Notepad.findById(notepadId).populate("creator");
 	const [foundUserToShareWith] = await User.find({ email: enteredEmail });
 
-	if (enteredEmail === notepadToShare.creator.email) {
-		return next(new ErrorHandler(400, "You own this notepad!", "share"));
-	}
-
-	if (!foundUserToShareWith) {
-		return next(new ErrorHandler(400, "That e-mail doesn't exist!", "share"));
-	}
-
 	notepadToShare.shared.push(foundUserToShareWith._id);
 	await notepadToShare.save();
 

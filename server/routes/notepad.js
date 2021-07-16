@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const notepadControllers = require("../controllers/notepad");
 const notepadItemControllers = require("../controllers/notepad-item");
-const { validateNotepadUser } = require("../public/utilities/middleware");
+const {
+	validateNotepadUser,
+	validateUserToShareWith,
+} = require("../public/utilities/middleware");
 
 router
 	.route("/")
@@ -15,7 +18,9 @@ router
 	.put(notepadControllers.editNotepad)
 	.post(validateNotepadUser, notepadItemControllers.newNotepadItem);
 
-router.route("/:notepadId/share").post(notepadControllers.shareNotepad);
+router
+	.route("/:notepadId/share")
+	.post(validateUserToShareWith, notepadControllers.shareNotepad);
 
 router
 	.route("/:notepadId/:itemId")
