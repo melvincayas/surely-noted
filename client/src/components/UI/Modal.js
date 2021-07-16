@@ -4,7 +4,8 @@ import classes from "../../styles/UI/Modal.module.css";
 
 const Modal = props => {
 	return (
-		<div onClick={props.clickHandler} className={classes.backdrop}>
+		<div>
+			<div onClick={props.clickHandler} className={classes.backdrop}></div>
 			<Card header={props.header} className={classes.container}>
 				{props.children}
 			</Card>
