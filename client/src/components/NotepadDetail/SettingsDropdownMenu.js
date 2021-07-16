@@ -17,7 +17,7 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 	});
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
-	const { isShowingShareModal, toggleShareModal, shareModal } = useShare(id);
+	const { isShowingShareModal, shareClickHandler, shareModal } = useShare(id);
 
 	const toggleEditModal = () => {
 		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
@@ -27,6 +27,11 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 	const toggleDeleteConfirmModal = event => {
 		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
 		deleteClickHandler(event);
+	};
+
+	const toggleShareModal = event => {
+		if (areSettingsActive) setAreSettingsActive(prevState => !prevState);
+		shareClickHandler(event);
 	};
 
 	const dropdownIconClass = areSettingsActive

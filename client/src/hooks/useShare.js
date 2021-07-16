@@ -12,22 +12,22 @@ import btnClasses from "../styles/UI/Button.module.css";
 // make dispatch action on Share button on modal
 
 const useShare = notepadId => {
-	const [isShowingShareModal, setIsShareModalOpen] = useState(false);
+	const [isShowingShareModal, setIsShowingShareModal] = useState(false);
 	const dispatch = useDispatch();
 
-	const toggleShareModal = event => {
+	const shareClickHandler = event => {
 		event.stopPropagation();
-		setIsShareModalOpen(prevState => !prevState);
+		setIsShowingShareModal(prevState => !prevState);
 	};
 
 	const shareModal = ReactDOM.createPortal(
-		<Modal clickHandler={toggleShareModal} header="Share Notepad">
+		<Modal clickHandler={shareClickHandler} header="Share Notepad">
 			<p className={modalClasses.message}>
 				Enter e-mail(s) of people to share your notepad with!
 			</p>
 			<div className={modalClasses["btn-container"]}>
-				<Button clickHandler={toggleShareModal}>Share</Button>
-				<Button className={btnClasses.cancel} clickHandler={toggleShareModal}>
+				<Button clickHandler={shareClickHandler}>Share</Button>
+				<Button className={btnClasses.cancel} clickHandler={shareClickHandler}>
 					Cancel
 				</Button>
 			</div>
@@ -37,7 +37,8 @@ const useShare = notepadId => {
 
 	return {
 		isShowingShareModal,
-		toggleShareModal,
+		setIsShowingShareModal,
+		shareClickHandler,
 		shareModal,
 	};
 };
