@@ -49,7 +49,7 @@ const NewNotepad = props => {
 	};
 
 	return (
-		<Modal header="New Notepad">
+		<Modal clickHandler={props.listToggler} header="New Notepad">
 			<form onSubmit={formHandler} className={formClasses.form} method="POST">
 				<Input
 					label="Title (required)"
