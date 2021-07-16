@@ -27,7 +27,9 @@ module.exports.newNotepad = catchAsync(async (req, res, next) => {
 	user.notepads.push(newNotepad._id);
 	await user.save();
 	await newNotepad.save();
-	const userNotepads = await Notepad.find({ creator: user_id });
+	const userNotepads = await Notepad.find({
+		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
+	});
 	res
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
@@ -37,7 +39,9 @@ module.exports.deleteNotepad = catchAsync(async (req, res, next) => {
 	const { id } = req.body;
 	const { user_id } = req.session;
 	await Notepad.findOneAndDelete({ _id: id });
-	const userNotepads = await Notepad.find({ creator: user_id });
+	const userNotepads = await Notepad.find({
+		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
+	});
 	res
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
@@ -53,7 +57,10 @@ module.exports.editNotepad = catchAsync(async (req, res, next) => {
 		{ $set: { title, category, modified: new Date().toUTCString() } }
 	);
 
-	const userNotepads = await Notepad.find({ creator: user_id });
+	const userNotepads = await Notepad.find({
+		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
+	});
+
 	res
 		.status(200)
 		.json({ response: { type: "success", notepads: userNotepads } });
@@ -82,7 +89,9 @@ module.exports.shareNotepad = catchAsync(async (req, res, next) => {
 	user.shared.push(notepadToShare._id);
 	await user.save();
 
-	const userNotepads = await Notepad.find({ creator: user_id });
+	const userNotepads = await Notepad.find({
+		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
+	});
 
 	res
 		.status(200)
