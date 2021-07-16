@@ -10,13 +10,13 @@ const userSchema = new Schema({
 	notepads: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: "List",
+			ref: "Notepad",
 		},
 	],
 	shared: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: "List",
+			ref: "Notepad",
 		},
 	],
 });
