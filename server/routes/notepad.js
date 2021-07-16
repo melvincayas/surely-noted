@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const notepadControllers = require("../controllers/notepad");
+const notepadShareControllers = require("../controllers/notepad-share");
 const notepadItemControllers = require("../controllers/notepad-item");
 const {
 	validateNotepadUser,
@@ -20,7 +21,7 @@ router
 
 router
 	.route("/:notepadId/share")
-	.post(validateUserToShareWith, notepadControllers.shareNotepad);
+	.post(validateUserToShareWith, notepadShareControllers.shareNotepad);
 
 router
 	.route("/:notepadId/:itemId")
