@@ -27,7 +27,7 @@ const Error = () => {
 	};
 
 	const modal = ReactDOM.createPortal(
-		<Modal errorHandler={errorHandler} header={isError.header}>
+		<Modal clickHandler={errorHandler} header={isError.header}>
 			<p className={classes.message}>{isError.message}</p>
 			<div className={classes["btn-container"]}>
 				<Button className={classes.button} clickHandler={errorHandler}>
