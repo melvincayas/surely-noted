@@ -15,6 +15,8 @@ router
 	.put(notepadControllers.editNotepad)
 	.post(validateNotepadUser, notepadItemControllers.newNotepadItem);
 
+router.route("/:notepadId/share").post(notepadControllers.shareNotepad);
+
 router
 	.route("/:notepadId/:itemId")
 	.delete(validateNotepadUser, notepadItemControllers.deleteNotepadItem)
