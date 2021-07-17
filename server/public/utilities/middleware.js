@@ -20,18 +20,36 @@ module.exports.validateNotepadUser = catchAsync(async (req, res, next) => {
 });
 
 module.exports.validateUserToShareWith = catchAsync(async (req, res, next) => {
+	const { user_id } = req.session;
 	const { notepadId } = req.params;
 	const { enteredEmail } = req.body;
 
-	const notepadToShare = await Notepad.findById(notepadId).populate("creator");
-	const [foundUserToShareWith] = await User.find({ email: enteredEmail });
+	const userSharingNotepad = await User.findById(user_id);
+	const notepad = await Notepad.findById(notepadId).populate("creator");
+	const [userToShareWith] = await User.find({ email: enteredEmail });
 
-	if (enteredEmail === notepadToShare.creator.email) {
+	const userEnteredTheirOwnEmail = userSharingNotepad.email === enteredEmail;
+
+	if (userEnteredTheirOwnEmail) {
 		return next(new ErrorHandler(400, "You own this notepad!", "share"));
 	}
 
-	if (!foundUserToShareWith) {
+	if (!userToShareWith) {
 		return next(new ErrorHandler(400, "That e-mail doesn't exist!", "share"));
+	}
+
+	const foundUserInSharedGroup = notepad.shared.find(
+		user => user._id.toString() === userToShareWith._id.toString()
+	);
+
+	if (foundUserInSharedGroup) {
+		return next(
+			new ErrorHandler(
+				400,
+				"Notepad is already being shared with that user!",
+				"share"
+			)
+		);
 	}
 
 	next();
