@@ -36,7 +36,7 @@ export const editOneNotepad = (editedNotepad, id) => {
 	});
 };
 
-export const shareOneNotepad = (notepadId, enteredEmail) => {
+export const shareOneNotepad = (notepadId, enteredEmail, toggleShareModal) => {
 	return handleAsyncErrors(async dispatch => {
 		const request = { notepadId, enteredEmail };
 		const response = await fetchData(
@@ -44,6 +44,7 @@ export const shareOneNotepad = (notepadId, enteredEmail) => {
 			"POST",
 			request
 		);
+		toggleShareModal(prevState => !prevState);
 		dispatch(notepadActions.loadAllNotepads({ notepads: response.notepads }));
 	});
 };

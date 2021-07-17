@@ -10,10 +10,6 @@ import btnClasses from "../styles/UI/Button.module.css";
 import useInputValidation from "./useInputValidation";
 import inputStyles from "../styles/UI/Input.module.css";
 
-// make dispatch action on Share button on modal
-// create route in backend
-// make mongo enter shared users into shared category
-
 const useShare = notepadId => {
 	const [isShowingShareModal, setIsShowingShareModal] = useState(false);
 	const {
@@ -31,7 +27,7 @@ const useShare = notepadId => {
 	};
 
 	const onShareConfirm = () => {
-		dispatch(shareOneNotepad(notepadId, enteredEmail));
+		dispatch(shareOneNotepad(notepadId, enteredEmail, setIsShowingShareModal));
 	};
 
 	const shareModal = ReactDOM.createPortal(
