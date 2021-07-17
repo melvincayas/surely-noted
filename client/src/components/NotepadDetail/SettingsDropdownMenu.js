@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
+import { useSelector } from "react-redux";
 import useEdit from "../../hooks/useEdit";
 import useDelete from "../../hooks/useDelete";
 import useShare from "../../hooks/useShare";
@@ -7,16 +7,20 @@ import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
 
-const SettingsDropdownMenu = ({ id, title, category }) => {
+const SettingsDropdownMenu = ({ id, creator, title, category }) => {
 	const dropdownRef = useRef();
+	const userData = useSelector(state => state.user.userData);
+
 	const { areSettingsActive, setAreSettingsActive, settingsHandler } =
 		useDropdownMenu(dropdownRef);
+
 	const { isEditing, editStatusHandler } = useEdit({
 		title,
 		category,
 	});
 	const { deleteClickHandler, isShowingDeleteConfirm, confirmDeleteModal } =
 		useDelete(id);
+
 	const { isShowingShareModal, shareClickHandler, shareModal } = useShare(id);
 
 	const toggleEditModal = () => {
@@ -40,6 +44,8 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 
 	const dropdownMenuClass = areSettingsActive ? classes.active : "";
 
+	const userOwnsNotepad = creator.toString() === userData._id.toString();
+
 	return (
 		<Fragment>
 			{isEditing && (
@@ -62,10 +68,15 @@ const SettingsDropdownMenu = ({ id, title, category }) => {
 							<button onClick={toggleEditModal}>Edit</button>
 						</li>
 						<li>
-							<button onClick={toggleShareModal}>Share</button>
+							{userOwnsNotepad && (
+								<button onClick={toggleShareModal}>Share</button>
+							)}
+							{!userOwnsNotepad && <button>Unshare</button>}
 						</li>
 						<li>
-							<button onClick={toggleDeleteConfirmModal}>Delete</button>
+							{userOwnsNotepad && (
+								<button onClick={toggleDeleteConfirmModal}>Delete</button>
+							)}
 						</li>
 					</ul>
 				</nav>

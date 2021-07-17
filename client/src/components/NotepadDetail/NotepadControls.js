@@ -3,6 +3,7 @@ import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 
 const NotepadControls = ({
 	id,
+	creator,
 	title,
 	category,
 	addTaskHandler,
@@ -13,7 +14,12 @@ const NotepadControls = ({
 			<button className="notepad-action-btn" onClick={addTaskHandler}>
 				<i className={addTaskBtnClass}></i>
 			</button>
-			<SettingsDropdownMenu id={id} title={title} category={category} />
+			<SettingsDropdownMenu
+				id={id}
+				creator={creator}
+				title={title}
+				category={category}
+			/>
 		</div>
 	);
 };

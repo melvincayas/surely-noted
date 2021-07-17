@@ -19,6 +19,7 @@ const NotepadLayout = props => {
 				<NotepadName title={props.title} category={props.category} />
 				<NotepadControls
 					id={props.id}
+					creator={props.creator}
 					title={props.title}
 					category={props.category}
 					addTaskHandler={addTaskHandler}
