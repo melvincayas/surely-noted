@@ -38,6 +38,15 @@
 	height: 100%;
 }
 
+.shared-notepad-badge:hover {
+	background-color: #7cb6d8;
+	cursor: pointer;
+}
+
+.shared-notepad-badge:active {
+	transform: scale(0.98);
+}
+
 .notepad-action-btns-container {
 	display: flex;
 }
