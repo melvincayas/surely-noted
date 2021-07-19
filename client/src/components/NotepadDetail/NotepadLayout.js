@@ -16,7 +16,11 @@ const NotepadLayout = props => {
 	return (
 		<div className={`${classes.notepad} ${props.className}`}>
 			<div className={classes.header}>
-				<NotepadName title={props.title} category={props.category} />
+				<NotepadName
+					title={props.title}
+					category={props.category}
+					shared={props.shared}
+				/>
 				<NotepadControls
 					id={props.id}
 					creator={props.creator}

@@ -29,6 +29,7 @@ const NotepadDetail = () => {
 				creator={selectedNotepad.creator}
 				title={selectedNotepad.title}
 				category={selectedNotepad.category}
+				shared={selectedNotepad.shared}
 			>
 				{selectedNotepad.items.length === 0 && emptyText}
 				{selectedNotepad.items.map(item => (
