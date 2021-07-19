@@ -21,7 +21,7 @@ module.exports.newNotepadItem = catchAsync(async (req, res, next) => {
 
 	const userNotepads = await Notepad.find({
 		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
-	});
+	}).populate("shared");
 
 	res
 		.status(200)
@@ -39,7 +39,7 @@ module.exports.deleteNotepadItem = catchAsync(async (req, res, next) => {
 
 	const userNotepads = await Notepad.find({
 		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
-	});
+	}).populate("shared");
 
 	res
 		.status(200)
@@ -65,7 +65,7 @@ module.exports.editNotepadItem = catchAsync(async (req, res, next) => {
 	);
 	const userNotepads = await Notepad.find({
 		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
-	});
+	}).populate("shared");
 
 	res
 		.status(200)
@@ -92,7 +92,7 @@ module.exports.updateCompletionStatus = catchAsync(async (req, res, next) => {
 
 	const userNotepads = await Notepad.find({
 		$or: [{ creator: user_id }, { shared: { $in: [user_id] } }],
-	});
+	}).populate("shared");
 
 	res
 		.status(200)
