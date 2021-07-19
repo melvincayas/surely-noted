@@ -18,9 +18,24 @@
 	justify-content: space-between;
 }
 
+.title-container {
+	display: flex;
+	align-items: center;
+}
+
 .title {
 	font-size: 1.5em;
 	font-weight: bold;
+}
+
+.shared-notepad-badge {
+	background-color: #87c6eb;
+	border: 1px solid #000;
+	border-radius: 10px;
+	margin-left: 0.5em;
+	font-weight: bold;
+	font-size: 1em;
+	height: 100%;
 }
 
 .notepad-action-btns-container {
