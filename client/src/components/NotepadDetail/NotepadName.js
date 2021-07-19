@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
+import modalClasses from "../../styles/UI/Modal.module.css";
+import btnClasses from "../../styles/UI/Button.module.css";
 
 const NotepadName = ({ title, category, shared }) => {
 	const [sharedUsersModalOpen, setSharedUsersModalOpen] = useState(false);
@@ -23,7 +25,22 @@ const NotepadName = ({ title, category, shared }) => {
 
 	const sharedUsersModal = ReactDOM.createPortal(
 		<Modal clickHandler={toggleSharedUsersModal} header="Shared Users">
-			Test
+			<p className={modalClasses.message}>
+				Sharing <strong>{title}</strong> with:
+			</p>
+			{shared.map(user => (
+				<p key={user._id} className={modalClasses.message}>
+					{user.name} ({user.email})
+				</p>
+			))}
+			<div className={modalClasses["btn-container"]}>
+				<Button
+					className={btnClasses.cancel}
+					clickHandler={toggleSharedUsersModal}
+				>
+					Close
+				</Button>
+			</div>
 		</Modal>,
 		document.getElementById("root")
 	);
