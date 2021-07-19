@@ -6,6 +6,7 @@ import useShare from "../../hooks/useShare";
 import EditNotepad from "./EditNotepad";
 import useDropdownMenu from "../../hooks/useDropdownMenu";
 import classes from "../../styles/NotepadDetail/SettingsDropdownMenu.module.css";
+import React from "react";
 
 const SettingsDropdownMenu = ({ id, creator, title, category }) => {
 	const dropdownRef = useRef();
@@ -46,6 +47,17 @@ const SettingsDropdownMenu = ({ id, creator, title, category }) => {
 
 	const userOwnsNotepad = creator.toString() === userData._id.toString();
 
+	const buttonsForNotepadOwner = (
+		<Fragment>
+			<li>
+				<button onClick={toggleShareModal}>Share</button>
+			</li>
+			<li>
+				<button onClick={toggleDeleteConfirmModal}>Delete</button>
+			</li>
+		</Fragment>
+	);
+
 	return (
 		<Fragment>
 			{isEditing && (
@@ -67,17 +79,7 @@ const SettingsDropdownMenu = ({ id, creator, title, category }) => {
 						<li>
 							<button onClick={toggleEditModal}>Edit</button>
 						</li>
-						<li>
-							{userOwnsNotepad && (
-								<button onClick={toggleShareModal}>Share</button>
-							)}
-							{!userOwnsNotepad && <button>Unshare</button>}
-						</li>
-						<li>
-							{userOwnsNotepad && (
-								<button onClick={toggleDeleteConfirmModal}>Delete</button>
-							)}
-						</li>
+						{userOwnsNotepad && buttonsForNotepadOwner}
 					</ul>
 				</nav>
 			</div>
