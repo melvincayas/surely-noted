@@ -8,6 +8,7 @@ import btnClasses from "../../styles/UI/Button.module.css";
 
 const NotepadName = ({ title, creator, category, shared }) => {
 	const [sharedUsersModalOpen, setSharedUsersModalOpen] = useState(false);
+
 	const isSharedNotepad = shared.length > 0;
 
 	const toggleSharedUsersModal = () => {
@@ -26,7 +27,10 @@ const NotepadName = ({ title, creator, category, shared }) => {
 	const sharedUsersModal = ReactDOM.createPortal(
 		<Modal clickHandler={toggleSharedUsersModal} header="Shared Users">
 			<p className={modalClasses.message}>
-				Sharing <strong>{title}</strong> with:
+				Everyone sharing <strong>{title}</strong>:
+			</p>
+			<p className={modalClasses.message}>
+				{creator.name} ({creator.email}) - <em>Owner</em>
 			</p>
 			{shared.map(user => (
 				<p key={user._id} className={modalClasses.message}>
