@@ -18,6 +18,7 @@ const NotepadLayout = props => {
 			<div className={classes.header}>
 				<NotepadName
 					title={props.title}
+					creator={props.creator}
 					category={props.category}
 					shared={props.shared}
 				/>

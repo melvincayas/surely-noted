@@ -6,7 +6,7 @@ import classes from "../../styles/NotepadDetail/NotepadLayout.module.css";
 import modalClasses from "../../styles/UI/Modal.module.css";
 import btnClasses from "../../styles/UI/Button.module.css";
 
-const NotepadName = ({ title, category, shared }) => {
+const NotepadName = ({ title, creator, category, shared }) => {
 	const [sharedUsersModalOpen, setSharedUsersModalOpen] = useState(false);
 	const isSharedNotepad = shared.length > 0;
 
