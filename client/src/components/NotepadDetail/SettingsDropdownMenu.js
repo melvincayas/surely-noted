@@ -45,7 +45,7 @@ const SettingsDropdownMenu = ({ id, creator, title, category }) => {
 
 	const dropdownMenuClass = areSettingsActive ? classes.active : "";
 
-	const userOwnsNotepad = creator.toString() === userData._id.toString();
+	const userOwnsNotepad = creator._id.toString() === userData._id.toString();
 
 	const buttonsForNotepadOwner = (
 		<Fragment>
