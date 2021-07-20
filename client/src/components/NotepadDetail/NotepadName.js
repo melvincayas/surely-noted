@@ -33,9 +33,12 @@ const NotepadName = ({ title, creator, category, shared }) => {
 				{creator.name} ({creator.email}) - <em>Owner</em>
 			</p>
 			{shared.map(user => (
-				<p key={user._id} className={modalClasses.message}>
-					{user.name} ({user.email})
-				</p>
+				<div>
+					<p key={user._id} className={modalClasses.message}>
+						{user.name} ({user.email})
+					</p>
+					<button>Remove</button>
+				</div>
 			))}
 			<div className={modalClasses["btn-container"]}>
 				<Button
